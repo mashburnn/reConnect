@@ -1,2 +1,2 @@
 # EzThreads
-A social Media Website Clone
+A social Media Website Clone / Web Application
