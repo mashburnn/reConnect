@@ -56,4 +56,5 @@
   Languages: Javacript, HTML, CSS 
   
   Framework: Node.js
-  Database: 
+  
+  Database: SQLite
