@@ -3,22 +3,22 @@
 ## Description
 
 ### Objective
-  The goal of this project is to develop a Full-stack  social media web app for developers.
+  The goal of this project is to develop a full-stack social media web app for developers.
   In version 1.0, users will be able to log in, log out, post timeline updates, send/accept friend requests, and like, comment on, and share the posts of their friends.
 
-### Features
-1. Account Creation
-    - Users will be able to create an account by choosing a unique (username) and registering with an e-mail address, password, and first and last names.
+### Requirements
+1. Create an Account
+    - Users will be able to create an account by choosing a username and password.
 2. Log in / Log out
     - A user will be able to log in to the website by correctly entering his or her username and password.
     - A user will also be able to log out of his or her account.
-3. Posting a Bark
+3. Posting a "Snippit"
    - Users can post a block of text called a "snippitz" to their timelines.
-   - They will also be able to edit the content of their barks.
+   - They will also be able to edit the content of their snippitz after posting.
 4. Social Interaction
-   - A user can send a (friend request) to another user to add that user to their (friend's list).
-   - Users within a poster's pack will be able to see that account's snippitz and interact with them.
-     - Bark interaction includes: giving the (giving it a like), posting a (comment) on the snippitz, and sharing.
+   - A user can send a friend request to another user to add that user to their friends list.
+   - Users within a friend's timeline will be able to see that account's snippitz and interact with them.
+   - Possible snippit interactions: liking, commenting, and sharing.
        
 
 ## Team Members
@@ -38,21 +38,21 @@
     - Github: jadethomp
     - NetID: jet475
     - Github E-mail: jadethompson285@gmail.com
-    - Role: Frontend
+    - Role: Backend
     
 4. Evan Coats 
     - Github: EvanC545
     - NetID: ejc304
     - Github E-mail: evancoats20@gmail.com
-    - Role: Backend
+    - Role: Frontend
     
 5. Trip Chapman 
-    - Github: 
+    - Github: TChaps52
     - NetID: rcc385
     - Github E-mail: tripchapman52@gmail.com
     - Role: Backend
 
-## Languages & Techniques
+## Languages, Frameworks, and Databases
   Languages: Javacript, HTML, CSS 
   
   Framework: Node.js
