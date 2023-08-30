@@ -44,7 +44,7 @@
     - Github: EvanC545
     - NetID: ejc304
     - Github E-mail: evancoats20@gmail.com
-    - Role: Frontend
+    - Role: Frontend, Group Therapist
     
 5. Trip Chapman 
     - Github: TChaps52
