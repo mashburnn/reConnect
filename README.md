@@ -31,7 +31,7 @@ NetID: jet475
 Github E-mail: jadethompson285@gmail.com
 
 Evan Coats
-Github: 
+Github: EvanC545
 NetID: ejc304
 Github E-mail: evancoats20@gmail.com
 
