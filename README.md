@@ -1,21 +1,32 @@
 # ReConnect
 
 ## Description
+  ReConnect is a social media platform that is geared towards software developers. With functionality similar to popular, generic social media platforms such as FaceBook, ReConnect allows a more close-knit setting for  developers to interact, share ideas, and make connections with like-minded individuals.
 
 ### Objective
   The goal of this project is to develop a full-stack social media web app for developers.
-  In version 1.0, users will be able to log in, log out, post timeline updates, send/accept friend requests, and like, comment on, and share the posts of their friends.
+  Upon completion of the first version, users will be able to create an account, log in and log out with this account, post onto their personal timeline, send/accept friend requests, and like, comment on, and share the posts, or "snippitz", of their friends.
 
 ### Requirements
 1. Create an Account
     - Users will be able to create an account by choosing a username and password.
 2. Log in / Log out
-    - A user will be able to log in to the website by correctly entering his or her username and password.
-    - A user will also be able to log out of his or her account.
-3. Posting a "Snippit"
-   - Users can post a block of text called a "snippitz" to their timelines.
-   - They will also be able to edit the content of their snippitz after posting.
-4. Social Interaction
+    - Users will be able to log in to the website by correctly entering his or her username and password.
+    - Users will also be able to log out of his or her account.
+3. Create and Post a "Snippit"
+   - Users can create a post, called a "snippit", and post it to their personal timeline.
+   - This "snippit" will appear on the homepage of users who are friends with the poster.
+   - Users will also be able to edit the content of their snippitz after posting.
+4. View "Snippitz" on a Homepage
+   - Users can view a homepage.
+   - The homepage displays recent "snippitz" made by friends.
+5. Send and Accept Friend Requests
+   - Users can send friend requests to other users.
+   - Users can accept pending friend requests from other users.
+6. View Friends' "Snippitz" on a User Timeline
+   - Users can view the profile of another user.
+   - "Snippitz" posted by users are visible on their profile.
+7. Interaction with "Snippitz"
    - A user can send a friend request to another user to add that user to their friends list.
    - Users within a friend's timeline will be able to see that account's snippitz and interact with them.
    - Possible snippit interactions: liking, commenting, and sharing.
