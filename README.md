@@ -30,7 +30,7 @@ NetID: mk1684
 Github E-mail: manish.kansana.24@gmail.com
 
 William Scherer
-Github: 
+Github: samshamrock12
 NetID: wjs271
 Github E-mail: samshamrock12@gmail.com
 
