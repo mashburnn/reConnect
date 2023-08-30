@@ -36,6 +36,6 @@ NetID: ejc304
 Github E-mail: evancoats20@gmail.com
 
 Trip Chapman
-Github:
+Github: TChaps52
 NetID: rcc385
 Github E-mail: tripchapman52@gmail.com
