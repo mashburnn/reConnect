@@ -35,7 +35,7 @@
 ## Team Members
 1. ManishKansana 
    - Github: ManishKansana
-   - NetID: jkn143
+   - NetID: mk1684
    - Github E-mail: manish.kansana.24@gmail.com
    - Role: Backend
      
@@ -49,7 +49,7 @@
     - Github: jadethomp
     - NetID: jet475
     - Github E-mail: jadethompson285@gmail.com
-    - Role: Backend
+    - Role: Backend, Database
     
 4. Evan Coats 
     - Github: EvanC545
