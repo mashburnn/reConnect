@@ -1,0 +1,23 @@
+This is an adaptation of our team's official SRS document. This file gives a brief overview of our application's requirements.
+
+3.1 Create an Account
+- This feature will allow users to create an account for use on the ReConnect platform. Users will do this using a unique username and a password.
+
+3.2 Log In and Log Out
+- This feature will allow users to log in or log out of the ReConnect platform using a previously created account.
+
+3.3
+
+3.4
+
+3.5
+
+3.6
+
+3.7
+
+3.8
+
+3.9
+
+3.10
