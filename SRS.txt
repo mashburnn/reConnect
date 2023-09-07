@@ -8,9 +8,11 @@ This is an adaptation of our team's official SRS document. This file gives a bri
 
 3.4
 
-3.5
+3.5 Send and Accept Friend Requests
+- This feature allows users to send and accept friend requests, enabling them to connect on the platform and access each other's timelines.
 
-3.6
+3.6 View a Friend’s “snippitz” on their Timeline
+- This feature allows users to view snippitz posted by their friends on their timelines.
 
 3.7
 
