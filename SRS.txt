@@ -20,6 +20,8 @@ This is an adaptation of our team's official SRS document. This file gives a bri
 
 3.8
 
-3.9
+3.9 Interact with any "Snippet" by Sharing
+- Users can press a button under a snippit to send that specific snippit to another user on their friends list.
 
-3.10
+3.10 Search For Users
+- Users will be able to search for another user by username. A list of similar usernames will pop up that will redirect to their profiles where you can interact with them from there.
