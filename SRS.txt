@@ -1,8 +1,10 @@
 This is an adaptation of our team's official SRS document. This file gives a brief overview of our application's requirements.
 
-3.1
+3.1 Create an Account
+- This feature will allow users to create an account for use on the ReConnect platform. Users will do this using a unique username and a password.
 
-3.2
+3.2 Log In and Log Out
+- This feature will allow users to log in or log out of the ReConnect platform using a previously created account.
 
 3.3 - Create Snippitz
 - This feature will allow users to create snippitz from the ReConnect platform. The  user must have an account created within the platform and be logged in to create snippitz.
@@ -10,14 +12,20 @@ This is an adaptation of our team's official SRS document. This file gives a bri
 3.4 - View Snippitz from Home Page
 - This feature will allow snippitz to be visible from the home page of the website/application. Users must be signed in to view their personalized home page.
 
-3.5
+3.5 Send and Accept Friend Requests
+- This feature allows users to send and accept friend requests, enabling them to connect on the platform and access each other's timelines.
 
-3.6
+3.6 View a Friend’s “snippitz” on their Timeline
+- This feature allows users to view snippitz posted by their friends on their timelines.
 
-3.7
+3.7 Interact with any “snippit” by liking
+ - Users will be able to like and unlike a snippit by pressing on a like button beneath a user’s snippit. After liking it, the displayed count will be updated to show anyone else viewing it how many other people liked it.
 
-3.8
+3.8 Interact with any “snippit” by commenting
+ - A user will be able to press a button under any snippit to leave a response that can be viewed by anyone seeing the snippit.
 
-3.9
+3.9 Interact with any "Snippet" by Sharing
+- Users can press a button under a snippit to send that specific snippit to another user on their friends list.
 
-3.10
+3.10 Search For Users
+- Users will be able to search for another user by username. A list of similar usernames will pop up that will redirect to their profiles where you can interact with them from there.
