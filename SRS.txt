@@ -6,9 +6,11 @@ This is an adaptation of our team's official SRS document. This file gives a bri
 3.2 Log In and Log Out
 - This feature will allow users to log in or log out of the ReConnect platform using a previously created account.
 
-3.3
+3.3 - Create Snippitz
+- This feature will allow users to create snippitz from the ReConnect platform. The  user must have an account created within the platform and be logged in to create snippitz.
 
-3.4
+3.4 - View Snippitz from Home Page
+- This feature will allow snippitz to be visible from the home page of the website/application. Users must be signed in to view their personalized home page.
 
 3.5 Send and Accept Friend Requests
 - This feature allows users to send and accept friend requests, enabling them to connect on the platform and access each other's timelines.
