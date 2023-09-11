@@ -16,9 +16,11 @@ This is an adaptation of our team's official SRS document. This file gives a bri
 3.6 View a Friend’s “snippitz” on their Timeline
 - This feature allows users to view snippitz posted by their friends on their timelines.
 
-3.7
+3.7 Interact with any “snippit” by liking
+ - Users will be able to like and unlike a snippit by pressing on a like button beneath a user’s snippit. After liking it, the displayed count will be updated to show anyone else viewing it how many other people liked it.
 
-3.8
+3.8 Interact with any “snippit” by commenting
+ - A user will be able to press a button under any snippit to leave a response that can be viewed by anyone seeing the snippit.
 
 3.9 Interact with any "Snippet" by Sharing
 - Users can press a button under a snippit to send that specific snippit to another user on their friends list.
