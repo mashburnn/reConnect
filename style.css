@@ -3,7 +3,32 @@
 body{
     background-color: paleturquoise;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
     /* etc etc */
+}
+.topBanner {
+    background-color: #f1f1f1;
+    padding: 30px 40px;
+    text-align: center;
+    font-size: 30px;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.topBanner:hover {
+    background-color: #ddd;
+    color: black;
+}
+.topBanner p {
+    font-size: 20px;
+    font-weight: 300;
+    color: black;
+    font-family: 'Roboto', sans-serif;
 }
 
 /* pro tip: use flexbox whenever possible to protect your sanity */
