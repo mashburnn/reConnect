@@ -1,0 +1,9 @@
+/* here, you can use the id names made in the html to easily give styles to certain things */
+
+body{
+    background-color: paleturquoise;
+    display: flex;
+    /* etc etc */
+}
+
+/* pro tip: use flexbox whenever possible to protect your sanity */
