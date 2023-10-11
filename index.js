@@ -3,7 +3,7 @@
 // then just run "node index.js"
 // might need to install any non-native modules also?
 
-const sqlite = require('sqlite3').verbose();
+const sqlite3 = require('sqlite3').verbose();
 const http = require('http');
 const express = require('express');
 const sio = require('socket.io');
@@ -52,7 +52,7 @@ var Posts = new Array();
 // load posts from database into array
 let loadPosts = function() {
     db.each(`SELECT userID userID, postID postID, postContent postContent, likeCount likeCount, shareCount shareCount, 
-    postVisibility postVisibility, commentCount commentCount FROM posts`, [], (err, row)=>{
+    postVisibility postVisibility FROM posts`, [], (err, row)=>{
         let tmp = new Post();
         let tmpComments = new Array();
 
@@ -63,7 +63,6 @@ let loadPosts = function() {
         tmp.setShares(row.shareCount);
         tmp.setPostVisibility(row.postVisibility);
 
-        // may not actually need comment count? will just be size of the comments array
         db.each(`SELECT comment comment, commentID commentID FROM comments WHERE postID = ?`, [row.postID], (err, row)=>{
             // may not need comment ID? not sure where it would go
             tmpComments.push(row.comment);
@@ -76,10 +75,7 @@ let loadPosts = function() {
 
 // backup current program state (users and posts) to database -- called upon exit
 let backupDB = function() {
-    // TODO: needs to differentiate between posts that already existed and new posts
-    // also: delete ones from the DB that shouldn't exist anymore
-
-    // first let's backup users
+    /* USER BACKUP */
     // let's see who all is here!
     let userIDs = Array();
     for(let i = 0; i < Users.length; i++){
@@ -91,8 +87,8 @@ let backupDB = function() {
         db.each(`SELECT username username FROM users WHERE userID = ?`, [userIDs[i]], (err, row)=>{
             // this might need to be the string "null" -- TODO: test it!
             if(row.username == null){
-                // add user to the database
-                // add their friends
+                // add user to the database ###
+                // add their friends ###
             }
             // if user is in the database already, update their stuff
             else{
@@ -104,13 +100,16 @@ let backupDB = function() {
                     db.run(`SELECT friendID friendID FROM friends WHERE userID = ?, friendID = ?`, [Users[i].getUserID(), Users[i].getFriends()[i]], (err, row)=>{
                         // if not in database
                         if(row.friendID == null){
-                            // add the friend
+                            // add the friend ###
                         }
                     });
                 }
                 db.each(`SELECT friendID friendID FROM friends WHERE userID = ?`, [Users[i].getUserID()], (err, row)=>{
                     if(!Users[i].getFriends().includes(row.friendID)){
                         // delete friend from database
+                        db.run(`DELETE FROM friends WHERE friendID = ?`, [row.friendID], (err, row)=>{
+                            // deleted!
+                        });
                     }
                 });
                 // update their friend requests too
@@ -118,35 +117,82 @@ let backupDB = function() {
                     db.run(`SELECT friendRequesting friendRequesting FROM friendRequests WHERE userID = ?, friendRequesting = ?`, [Users[i].getUserID(), Users[i].getIncomingFriendRequests()[i]], (err, row)=>{
                         // if not in database
                         if(row.friendRequesting == null){
-                            // add the friend request
+                            // add the friend request ###
                         }
                     });
                 }
                 db.each(`SELECT friendRequesting friendRequesting FROM friendRequests WHERE userID = ?`, [Users[i].getUserID()], (err, row)=>{
                     if(!Users[i].getIncomingFriendRequests().includes(row.friendRequesting)){
-                        // delete friend from database
+                        // delete friend request from database
+                        db.run(`DELETE FROM friendRequests WHERE friendRequesting = ?`, [row.friendRequesting], (err, row)=>{
+                            // deleted!
+                        });
                     }
                 });
             }
         });
     }
 
-    // delete the gone folks
+    // delete the non-existent users from db
     db.each(`SELECT userID userID FROM users`, [], (err, row)=>{
         if(!userIDs.includes(row.userID)){
             // delete user from database
+            db.run(`DELETE FROM users WHERE userID = ?`, [row.userID], (err, row)=>{
+
+            });
             // delete their friends & requests too
             db.each(`SELECT friendID friendID FROM friends WHERE userID = ?`, [row.userID], (err, row)=>{
-                // delete em all
+                db.run(`DELETE FROM friends WHERE friendID = ?`, [row.friendID], (err, row)=>{
+
+                });
             });
             db.each(`SELECT friendRequesting friendRequesting FROM friendRequests WHERE userID = ?`, [row.userID], (err, row)=>{
-                // delete em all
+                db.run(`DELETE FROM friendRequests WHERE friendRequesting = ?`, [row.friendRequesting], (err, row)=>{
+
+                });
             });
         }
     });
     
-
-    // TODO: post back up!!!
+    /* POST BACKUP */
+    let postIDs = Array();
+    for(let i = 0; i < Posts.length; i++){
+        postIDs.push(Posts[i].getPostID());
+    }
+    for(let i = 0; i < postIDs.length; i++){
+        db.each(`SELECT userID userID FROM posts WHERE postID = ?`, [postIDs[i]], (err, row)=>{
+            // this might need to be the string "null" -- TODO: test it!
+            if(row.userID == null){
+                // add post to the database ###
+            }
+            // if post is in the database already, update the stats jic
+            else{
+                db.run(`UPDATE posts SET postContent = ?, likeCount = ?, shareCount = ?, postVisibility = ? WHERE postID = ?`, 
+                [Posts[i].getPostContent(), Posts[i].getLikeCount(), Posts[i].getShareCount(), Posts[i].getPostVisibility()], (err, row)=>{
+                    // good job!
+                });
+                // update comments too
+                for(let i = 0; i < Posts[i].getComments().length; i++){
+                    // this should maybe be db.get?
+                    db.run(`SELECT comment comment FROM comments WHERE postID = ?, comment = ?`, 
+                    [Posts[i].getPostID(), Posts[i].getComments()[i]], (err, row)=>{
+                        // if not in database
+                        if(row.comment == null){
+                            // add the comment to the database ###
+                        }
+                    });
+                }
+                db.each(`SELECT comment comment FROM comments WHERE postID = ?`, [Posts[i].getPostID()], (err, row)=>{
+                    if(!Posts[i].getComments().includes(row.comment)){
+                        // delete comment from database
+                        db.run(`DELETE FROM comments WHERE comment = ?`, [row.comment], (err, row)=>{
+                            // deleted!
+                        });
+                    }
+                });
+            }
+        });
+    }
 };
 
 // note: to access the interface (once we have one), use this URL in your browser after running index.js:
