@@ -1,33 +1,23 @@
-// to run:
-// make sure node.js is installed in your terminal
-// then just run "node index.js"
+const express = require('express')
+const app = express()
+const port = 8080;
+const path = require("path");
 
-const sqlite = require('sqlite3');
-const http = require('http');
-const express = require('express');
-const sio = require('socket.io');
-const path = require('path');
+app.use("/static", express.static("static", { extensions: ["js"] }));
 
-// will need to import classes here once made (User.js and Post.js files)
+app.get('/', (req, res) => {
+  const filePath = path.join(__dirname, "./static/index.html");
+  res.sendFile(filePath);
+})
 
-var app = express();
-var server = http.Server(app);
-var io = sio(server);
+app.get('/postCard', (req, res)=> {
+    res.sendFile(path.join(__dirname, "./static/postCard.js"));
+})
 
-let htmlDirectory = path.resolve(__dirname);
-app.use(express.static(htmlDirectory));
-server.listen(412401);
+app.get('/style.css', (req, res) => {
+  res.sendFile(path.join(__dirname, './static/style.css')); // Serve your CSS file
+});
 
-// note: to access the interface (once we have one), use this URL in your browser after running index.js:
-// localhost:412401
-
-// interfacing with front end
-io.on('connection', (socket)=>{
-    // handlers for messages from the front end go inside here
-
-    // for example:
-    socket.on('test', (data)=>{ // 'test' is the message from the front end, data is also from frontend
-        // do something with data here, etc etc
-        console.log("test signal received\n");
-    });
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 })
