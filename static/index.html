@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8"/>
+      <title>ReConnect</title>
+     <link href="https://fonts.googleapis.com/css?family=FontName&display=swap" rel="stylesheet">
+      <link href="style.css" type="text/css" rel="stylesheet"/>
+   </head>
+  
+
+   <body>
+    <div id="thread-container">
+        <!-- Thread cards will be appended here -->
+    </div>
+
+     <script src= "/postCard"></script>
+     <script>const threadData1 = {
+       author: 'Jane Smith',
+       content: "I am Jane Smith, I've been in the tech industry for over a decade, working on various projects and technologies.",
+       likes: 5,
+       comments: [
+         { author: 'Eve', content: 'Comment 3' },
+         { author: 'Charlie', content: 'Comment 4' },
+       ],
+       isComment: true,
+     };
+
+     const threadData2 = {
+       author: 'Jane Smith',
+       content: "I am John Doe, a software engineer with a passion for coding and problem-solving. I've been in the tech industry for over a decade, working on various projects and technologies.",
+       likes: 5,
+       comments: [
+         { author: 'Eve', content: 'Comment 3' },
+         { author: 'Charlie', content: 'Comment 4' },
+       ],
+       isComment: true,
+     };
+
+     const threadData3 = {
+       author: 'Jane Smith',
+       content: "I am amnish Doe, a software engineer with a passion for coding and problem-solving. I've been in the tech industry for over a decade, working on various projects and technologies.",
+       likes: 5,
+       comments: [],
+       isComment: true,
+     };
+
+     const threadData4 = {
+       author: 'Jane Smith',
+       content: "Your content here",
+       likes: 5,
+       comments: [
+         { author: 'Eve', content: 'Comment 1' },
+         { author: 'Charlie', content: 'Comment 2' },
+       ],
+       isComment: true,
+     };
+
+     const threadCards = [];
+
+     // Create PostCard instances and push them into the array
+     for (let i = 1; i <= 4; i++) {
+       const threadData = eval(`threadData${i}`);
+       const threadCard = new PostCard(
+         threadData.author,
+         threadData.content,
+         threadData.likes,
+         threadData.comments,
+         threadData.isComment
+       );
+       threadCards.push(threadCard);
+     }
+
+     // Append all the thread card elements to a container in your HTML document
+     const container = document.getElementById('thread-container');
+
+     threadCards.forEach((threadCard) => {
+       container.appendChild(threadCard.render());
+     });
+</script>
+   </body>
+</html>
