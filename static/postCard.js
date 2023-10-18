@@ -1,10 +1,78 @@
 class PostCard {
-  constructor(author, content, likes, comments, isComment) {
+    comments = new Array();
+  
+  constructor(id, PosterID ,author, content, likes, shares, comments) {
+    this.ID = id;
+    this.PosterID = PosterID;
     this.author = author;
     this.content = content;
     this.likes = likes;
+    this.shares = shares;
     this.comments = comments;
-    this.isComment = isComment;
+  }
+
+  get ID() {
+    return this._ID;
+  }
+
+  set ID(newID) {
+    this._ID = newID;
+  }
+
+  get PosterID() {
+    return this._PosterID;
+  }
+
+  set PosterID(newPosterID) {
+    this._PosterID = newPosterID;
+  }
+
+  get author() {
+    return this._author;
+  }
+
+  set author(newAuthor) {
+    this._author = newAuthor;
+  }
+
+  get content() {
+    return this._content;
+  }
+
+  set content(newContent) {
+    this._content = newContent;
+  }
+
+  get likes() {
+    return this._likes;
+  }
+
+  set likes(newLikes) {
+    this._likes = newLikes;
+  }
+
+  get shares() {
+    return this._shares;
+  }
+
+  set shares(newShares) {
+    this._shares = newShares;
+  }
+
+  set comments(newComments) {
+    if (Array.isArray(newComments) && newComments.every(comment => typeof comment === 'string')) {
+      this.comments = newComments;
+    } else {
+      throw new Error('Comments must be an array of strings');
+    }
+  }
+
+  addComment(comment) {
+    if (typeof comment === 'string') {
+      this.comments.push(comment);
+    } else {
+      throw new Error('Comment must be a string');
+    }
   }
 
   // Function to render comments if present
@@ -27,7 +95,7 @@ class PostCard {
 
   // Render method to generate the post card HTML
   render() {
-    const commentsHtml = this.isComment ? this.renderComments(this.comments) : '';
+    const commentsHtml = this.comments ? this.renderComments(this.comments) : '';
 
     const cardHtml = `
       <div class="thread-container">
@@ -49,4 +117,7 @@ class PostCard {
     return cardElement;
   }
 }
+module.exports = PostCard;
+// Create a new Post object
+
 
