@@ -3,9 +3,9 @@ class User {
         this.userID = userID; //integer
         this.username = username; //string
         this.password = password; //string
-        this.friends = []; //array of userID
-        this.incomingFriendRequest = []; //array of userID
-        this.postID = []; //array of postID's
+        this.friends = []; //int array for userID
+        this.incomingFriendRequest = []; //int array for userID
+        this.postID = []; //int array for postID's
     }
 
     getUserID() {
@@ -50,16 +50,18 @@ class User {
 
     augmentSnippet(add, postID){
         ind = 0;
-        //add
+
+        //Add
         if(add){
         this.postID.push(postID);
         }
-        //remove
+
+        //Remove
         else{
             while(1){    
                 if(ind == (this.postID.length - 1))
                 {
-                    return 1;                
+                    return 1;     //postID not found
                 }   
                 else if(this.postID[ind] == postID)
                 {
@@ -79,18 +81,18 @@ class User {
     augmentFriend(add, userID) {
         ind = 0;
 
-        //Adding
+        //Add
         if(add){
             this.friends.push(userID);
             return 0;
         }
-        //Removing
+        //Remove
         else{
             //Find userID in incomingFriendRequest[] then splice()
             while(1){    
                 if(ind == (this.incomingFriendRequest.length - 1))
                 {
-                    return 1; //User not in incomingFriendRequest                    
+                    return 1;   //User not in incomingFriendRequest                    
                 }   
                 else if(this.incomingFriendRequest[ind] == userID)
                 {
