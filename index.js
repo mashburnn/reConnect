@@ -10,8 +10,8 @@ const sio = require('socket.io');
 const path = require('path');
 
 // import classes
-const User = require('./User');
-const PostCard = require('./PostCard');
+const User = require('./static/User');
+const PostCard = require('./static/PostCard');
 
 var app = express();
 var server = http.Server(app);
