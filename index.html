@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
-    <title>ReConnect</title>
+    <title>Social Media Website</title>
 </head>
 <body>
     <!--nav bar-->
@@ -31,29 +31,66 @@
       </div>
     </div>
 
-    <!--I wonder what goes here!-->
-    <div class="posts-container">
-      <div class="post">
-        <h2>Post ID: <%= post.ID %></h2>
-        <p>Author: <%= post.author %></p>
-        <p>Content: <%= post.content %></p>
-        <p>Likes: <%= post.likes %></p>
-        <p>Shares: <%= post.shares %></p>
-        <div class="comments">
-          <h3>Comments</h3>
-          <ul>
-              <% post.comments.forEach(comment => { %>
-                <li><%= comment %></li>
-            <% }); %>
-          </ul>
-        </div>
+    <div class="wrapper">
+      <div class="left-sidebar">
+
+      </div>
+
+      <div class="middle-section">
+        
+        <div class="posts-container">
+            <div class="post">
+              <h2>Post ID: <%= post.ID %></h2>
+              <p>Author: <%= post.author %></p>
+              <p>Content: <%= post.content %></p>
+              <p>Likes: <%= post.likes %></p>
+              <p>Shares: <%= post.shares %></p>
+                <div class="comments">
+                  <h3>Comments</h3>
+                  <ul>
+                    <% post.comments.forEach(comment => { %>
+                        <li><%= comment %></li>
+                    <% }); %>
+                  </ul>
+                </div>
+            </div>
+            <div class="post">
+              <h2>Post ID: <%= 1 %></h2>
+              <p>Author: <%= post.author %></p>
+              <p>Content: <%= post.content %></p>
+              <p>Likes: <%= post.likes %></p>
+              <p>Shares: <%= post.shares %></p>
+                <div class="comments">
+                  <h3>Comments</h3>
+                  <ul>
+                    <% post.comments.forEach(comment => { %>
+                        <li><%= comment %></li>
+                    <% }); %>
+                  </ul>
+                </div>
+            </div>
+            <div class="post">
+              <h2>Post ID: <%= post.ID %></h2>
+              <p>Author: <%= post.author %></p>
+              <p>Content: <%= post.content %></p>
+              <p>Likes: <%= post.likes %></p>
+              <p>Shares: <%= post.shares %></p>
+                <div class="comments">
+                  <h3>Comments</h3>
+                  <ul>
+                    <% post.comments.forEach(comment => { %>
+                        <li><%= comment %></li>
+                    <% }); %>
+                  </ul>
+                </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="right-sidebar">
+        
       </div>
     </div>
-    
-
-
-
-    <!-- Stuff goes here ig -->
 
     <script src="index.js"></script>
 </body>
