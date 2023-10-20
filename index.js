@@ -9,7 +9,7 @@ const express = require('express');
 const sio = require('socket.io');
 const path = require('path');
 
-// will need to import classes here once made (User.js and Post.js files)
+// import classes
 const User = require('./User');
 const PostCard = require('./PostCard');
 
@@ -17,9 +17,54 @@ var app = express();
 var server = http.Server(app);
 var io = sio(server);
 
-let htmlDirectory = path.resolve(__dirname);
+let htmlDirectory = path.resolve(__dirname+'/static');
 app.use(express.static(htmlDirectory));
 server.listen(412401);
+
+// global for whether a user is logged in -- will need another to denote *which* user probably
+var loggedIn = false;
+
+app.get('/postCard', (req, res)=> {
+    res.sendFile(path.join(__dirname, "./static/postCard.js"));
+});
+
+app.get('/style.css', (req, res) => {
+  res.sendFile(path.join(__dirname, './static/style.css')); // Serve your CSS file
+});
+
+// need to test the conditionals for these three gets
+app.get('/', (req, res) => {
+  if(loggedIn){
+    const filePath = path.join(__dirname, "./static/index.html");
+    res.sendFile(filePath);
+  }
+  else{
+    const filePath = path.join(__dirname, "./static/Onboarding.html");
+    res.sendFile(filePath);
+  }
+});
+
+app.get('/login', (req, res) => {
+  if(loggedIn){
+    const filePath = path.join(__dirname, "./static/index.html");
+    res.sendFile(filePath);
+  }
+  else{
+    const filePath = path.join(__dirname, "./static/Onboarding.html");
+    res.sendFile(filePath);
+  }
+});
+
+app.get('/home', (req, res) => {
+  if(loggedIn){
+    const filePath = path.join(__dirname, "./static/index.html");
+    res.sendFile(filePath);
+  }
+  else{
+    const filePath = path.join(__dirname, "./static/Onboarding.html");
+    res.sendFile(filePath);
+  }
+});
 
 /* functions/functionalities to write */
 /* these could be functions or could just be implemented in the socket handlers! */
