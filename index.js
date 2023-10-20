@@ -69,17 +69,35 @@ app.get('/home', (req, res) => {
 /* functions/functionalities to write */
 /* these could be functions or could just be implemented in the socket handlers! */
 
-// search by username -- maybe start with exact matches? TRIP
+// search by username, exact matches TRIP
+function searchUser(userID) {
+    for (let i = 0; i < Users.length - 1; i++) {
+        if (Users[i].getUserID() == userID) {
+            return i; // Found
+        }
+    }
+    
+    return 0; // Not Found
+}
 
-// like a post
+// like a post TRIP
 
-// comment on a post
+// comment on a post TRIP
 
 // share a post
 
 // create a post
 
 // create a user TRIP
+function usercreate(userID, username, password) {
+    let tempUser = new User();
+
+    tempUser.setUserID(userID);
+    tempUser.setUsername(username);
+    tempUser.setPassword(password);
+
+    Users.push(temp);
+}
 
 // check user credentials
 
