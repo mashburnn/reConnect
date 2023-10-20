@@ -1,45 +1,60 @@
 <!DOCTYPE html>
-<html>
-   <head>
-      <meta charset="utf-8"/>
-      <title>ReConnect</title>
-      <link href="style.css" type="text/css" rel="stylesheet"/>
-   </head>
-
-   <!-- <body> is where the actual website goes -->
-   <body>
-      <!-- lots of stuff will probably go into its own divs (top banner, main section, etc) -->
-
-      <!-- for example: -->
-      <!-- P.S. assigning a class is mainly for styling, you can apply certain formatting to entire classes within style.css -->
-      <div class="topBanner"> 
-         <!-- here's an example button -->
-         <button class="btn" id="myButtonID">Click Me!</button>
-         <p>
-            <!-- here's an example text box -->
-            <input type="text" id="myTextBoxID" placeholder="Hallo!"/>
-         </p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
+    <title>Social Media Website</title>
+</head>
+<body>
+    <!--nav bar-->
+    <div class="navbar">
+      <div class="left">
+        <img src="bolt.svg" alt="bolt">
+        <a href="#" class="brand">ReConnect</a>
       </div>
-   </body>
+      <div class="center">
+          <input type="text" placeholder="Search...">
+          
+      </div>
+      <div class="right">
+          <img src="add.svg" alt="add">
+          <div class="notification">
+            <img src="bell.svg" alt="bell">
+          </div>
+          <a href="#">Friends</a>
+          <a href="#">Profile</a>
+          
+      </div>
+    </div>
 
-   <!-- ok below is the scripting woo -->
+    <!--I wonder what goes here!-->
+    <div class="posts-container">
+      <div class="post">
+        <h2>Post ID: <%= post.ID %></h2>
+        <p>Author: <%= post.author %></p>
+        <p>Content: <%= post.content %></p>
+        <p>Likes: <%= post.likes %></p>
+        <p>Shares: <%= post.shares %></p>
+        <div class="comments">
+          <h3>Comments</h3>
+          <ul>
+              <% post.comments.forEach(comment => { %>
+                <li><%= comment %></li>
+            <% }); %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
 
-   <!-- this is just an include -->
-   <script src="/socket.io/socket.io.js"></script>
-   
-   <!-- here's where we code - everything in this follows javascript syntax -->
 
-      // now we're cooking
-      let socket = io();
 
-      // using the id we gave the button in the HTML, we can access it within the script
-      let testButton = getElementById("buttonid");
+    <!-- Stuff goes here ig -->
 
-      // this is how you would communicate something to index.js upon a button press
-      testButton.addEventListener("click",(evt)=>{
-         socket.emit('test', 'example data');
-         // anything can go in these handlers
-      });
-   </script>
-
+    <script src="index.js"></script>
+</body>
 </html>
