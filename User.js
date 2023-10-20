@@ -1,10 +1,10 @@
 class User {
-    constructor() {
+    constructor(userID, username, password, friends, incoming) {
         this.userID = userID; //integer
         this.username = username; //string
         this.password = password; //string
-        this.friends = []; //int array for userID
-        this.incomingFriendRequest = []; //int array for userID
+        this.friends = friends; //int array for userID
+        this.incomingFriendRequest = incoming; //int array for userID
         this.postID = []; //int array for postID's
     }
 
@@ -105,3 +105,4 @@ class User {
         }
     }
 } 
+module.exports = User;
