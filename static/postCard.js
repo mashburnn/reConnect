@@ -67,6 +67,11 @@ class PostCard {
     }
   }
 
+// added by Jade
+  get comments() {
+    return this._comments;
+  }
+
   addComment(comment) {
     if (typeof comment === 'string') {
       this.comments.push(comment);
