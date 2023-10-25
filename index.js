@@ -67,6 +67,28 @@ app.get('/home', (req, res) => {
   }
 });
 
+app.get('/profile', (req, res)=>{
+    if(!loggedIn){
+        const filePath = path.join(__dirname, "./static/Onboarding.html");
+        res.sendFile(filePath);
+    }
+    else{
+        const filePath = path.join(__dirname, "./static/profile.html");
+        res.sendFile(filePath);
+    }
+});
+
+app.get('/friends', (req, res)=>{
+    if(!loggedIn){
+        const filePath = path.join(__dirname, "./static/Onboarding.html");
+        res.sendFile(filePath);
+    }
+    else{
+        const filePath = path.join(__dirname, "./static/search.html");
+        res.sendFile(filePath);
+    }
+});
+
 /* functions/functionalities to write */
 /* these could be functions or could just be implemented in the socket handlers! */
 
@@ -298,11 +320,16 @@ io.on('connection', (socket)=>{
     // this might be funky for now?
     socket.on("need posts", (data)=>{
         // use current user value to determine what posts to show
+        return;
         let index = -1;
         for(let i = 0; i < Users.length; i++){
             if(currentUser == Users[i].getUserID()){
                 index = i;
                 break;
+            }
+            if(i == Users.length-1){
+                console.log("couldn't find current user");
+                return;
             }
         }
 

@@ -14,19 +14,19 @@
     <div class="navbar">
       <div class="left">
         <img src="bolt.svg" alt="bolt">
-        <a href="#" class="brand">ReConnect</a>
+        <a href="/home" class="brand">ReConnect</a>
       </div>
       <div class="center">
           <input type="text" placeholder="Search...">
           
       </div>
       <div class="right">
-          <img src="add.svg" alt="add">
+          <img id="createButton" src="add.svg" alt="add">
           <div class="notification">
-            <img src="bell.svg" alt="bell">
+            <img id="notifBell" src="bell.svg" alt="bell">
           </div>
           <a href="#">Friends</a>
-          <a href="#">Profile</a>
+          <a href="/profile">Profile</a>
           
       </div>
     </div>
@@ -98,6 +98,19 @@
       let socket = io();
 
       // variable init
+
+
+      // button handlers
+      let notifButton = document.getElementById("notifBell");
+      let createButton = document.getElementById("createButton");
+
+      notifButton.addEventListener("click", (evt)=>{
+        // popup
+      });
+
+      createButton.addEventListener("click", (evt)=>{
+        // popup
+      });
 
 
       // bring in the posts!
