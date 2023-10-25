@@ -1,0 +1,189 @@
+body {
+  font-family: 'Raleway', sans-serif;
+  margin: 0;
+  height: 100%;
+}
+:root {
+  --primary-color: #83faec;
+  --secondary-color: #5e9eff;
+  --text-background-color: #f2f2f2;
+  --background-color: #161e34;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: var(--background-color);
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  z-index: 9999;
+  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+}
+
+.brand, .right img:not(.notification) {
+  color: var(--text-background-color);
+  text-decoration: none;
+  font-size: 30px;
+  aspect-ratio: auto;
+}
+
+.left img {
+  filter: invert(100%);
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+  transition: transform 0.4s, width 0.4s;
+}
+
+.left, .right {
+  display: flex;
+  align-items: center;
+}
+
+.center {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.center input[type="text"] {
+  width: 50%;
+  padding: 10px;
+  border:  2px var(--secondary-color) solid;
+  border-radius: 12px;
+  font-size: 15px;
+  margin-right: 10px;
+  background-color: var(--text-background-color);
+}
+
+.center input[type="text"]:focus {
+  outline: var(--primary-color) auto 5px;;
+}
+
+.right a {
+  color: var(--text-background-color);
+  text-decoration: none;
+  margin-left: 10px;
+  margin-right: 20px;
+  font-size: 25px;
+}
+
+.right a:hover {
+  color: var(--primary-color);
+}
+
+.right img:not(.notification) {
+  filter: invert(100%);
+  width: 40px;
+  height: auto;
+  margin-right: 20px;
+  transition: transform 0.2s, width 0.2s;
+}
+
+.right img:hover, .left img:hover {
+  color: var(--primary-color);
+  transform: scale(1.5);
+}
+
+.notification img {
+  width: 40px;
+  height: auto;
+  align-items: right;
+  aspect-ratio: auto;
+  transition: transform 0.2s, width 0.2s;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+/* Animation for bell svg, not implemented yet */
+@keyframes shake {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+}
+
+/* Post stuff */
+
+.posts-container {
+  max-width: 1200px;
+  
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+}
+#posts-container {
+  visibility: hidden;
+
+}
+.post {
+  border: 5px solid var(--secondary-color);
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Sectioned stuff */
+
+.wrapper {
+  display: flex;
+}
+
+.left-sidebar, .right-sidebar {
+  width: 25%;
+  background-color: var(--secondary-color);
+  color: var(--text-background-color);
+  position: relative;
+}
+
+.middle-section {
+  flex-grow: 1;
+  position: relative;
+}
+
+.vertical-bar {
+  position: absolute;
+  top: 100%;
+  bottom: 0%;
+  width: 10px;
+  background-color: var(--secondary-color);
+}
+
+.left-sidebar::before {
+  right: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  background: linear-gradient(to right, var(--primary-color), var(--text-background-color));
+}
+.right-sidebar::before {
+  left: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  background: linear-gradient(to left, var(--primary-color), var(--text-background-color));
+}
+
+
+.left-vertical-bar {
+  left: 0;
+  border-right: 2px solid var(--primary-color);
+  position: absolute;
+}
+.right-vertical-bar {
+  right: 0;
+  border-left: 2px solid var(--primary-color);
+  position: absolute;
+  
+}

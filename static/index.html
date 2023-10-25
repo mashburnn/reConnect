@@ -1,120 +1,102 @@
 <!DOCTYPE html>
-<html>
-   <head>
-      <meta charset="utf-8"/>
-      <title>reConnect</title>
-      <link href="styles.css" type="text/css" rel="stylesheet"/>
-      <script src="https://kit.fontawesome.com/a6b00ff3ef.js" crossorigin="anonymous"></script>
-   </head>
-
-   <!-- <body> is where the actual website goes -->
-   <body>
-    <div class="wrapper">
-      <div class="sidebar">
-          <h2>reConnect</h2>
-          <u1>
-              <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
-              <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i> Search</a></li>
-              <li><a href="#"><i class="fa-solid fa-circle-user"></i> Profile</a></li>
-          </u1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
+    <title>Social Media Website</title>
+</head>
+<body>
+    <!--nav bar-->
+    <div class="navbar">
+      <div class="left">
+        <img src="bolt.svg" alt="bolt">
+        <a href="#" class="brand">ReConnect</a>
       </div>
-      <div class="main_content">
-          <div class="header">
-
+      <div class="center">
+          <input type="text" placeholder="Search...">
+          
+      </div>
+      <div class="right">
+          <img src="add.svg" alt="add">
+          <div class="notification">
+            <img src="bell.svg" alt="bell">
           </div>
-          <div class="info">
-              <div id="thread-container">
-        <!-- Thread cards will be appended here -->
-              </div>
-          </div>
+          <a href="#">Friends</a>
+          <a href="#">Profile</a>
+          
       </div>
     </div>
-   </body>
 
-   <!-- ok below is the scripting woo -->
+    <div class="wrapper">
+      <div class="left-sidebar">
 
-   <!-- this is just an include -->
-   <script src="/socket.io/socket.io.js"></script>
-   
-   <!-- here's where we code - everything in this follows javascript syntax -->
-   <script type="text/javascript">
-      // now we're cooking
+      </div>
+
+      <div class="middle-section">
+        
+        <div class="posts-container">
+            <div class="post">
+              <h2>Post ID: <%= post.ID %></h2>
+              <p>Author: <%= post.author %></p>
+              <p>Content: <%= post.content %></p>
+              <p>Likes: <%= post.likes %></p>
+              <p>Shares: <%= post.shares %></p>
+                <div class="comments">
+                  <h3>Comments</h3>
+                  <ul>
+                    <% post.comments.forEach(comment => { %>
+                        <li><%= comment %></li>
+                    <% }); %>
+                  </ul>
+                </div>
+            </div>
+            <div class="post">
+              <h2>Post ID: <%= 1 %></h2>
+              <p>Author: <%= post.author %></p>
+              <p>Content: <%= post.content %></p>
+              <p>Likes: <%= post.likes %></p>
+              <p>Shares: <%= post.shares %></p>
+                <div class="comments">
+                  <h3>Comments</h3>
+                  <ul>
+                    <% post.comments.forEach(comment => { %>
+                        <li><%= comment %></li>
+                    <% }); %>
+                  </ul>
+                </div>
+            </div>
+            <div class="post">
+              <h2>Post ID: <%= post.ID %></h2>
+              <p>Author: <%= post.author %></p>
+              <p>Content: <%= post.content %></p>
+              <p>Likes: <%= post.likes %></p>
+              <p>Shares: <%= post.shares %></p>
+                <div class="comments">
+                  <h3>Comments</h3>
+                  <ul>
+                    <% post.comments.forEach(comment => { %>
+                        <li><%= comment %></li>
+                    <% }); %>
+                  </ul>
+                </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="right-sidebar">
+        
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
       let socket = io();
-
-      // using the id we gave the button in the HTML, we can access it within the script
-      let testButton = getElementById("buttonid");
-
-      // this is how you would communicate something to index.js upon a button press
-      testButton.addEventListener("click",(evt)=>{
-         socket.emit('test', 'example data');
-         // anything can go in these handlers
-      });
-   </script>
-   
-  <!-- post card generation -->
-   <script src= "/postCard"></script>
-   <script>const threadData1 = {
-     author: 'Jane Smith',
-     content: "I am Jane Smith, I've been in the tech industry for over a decade, working on various projects and technologies.",
-     likes: 5,
-     comments: [
-       { author: 'Eve', content: 'Comment 3' },
-       { author: 'Charlie', content: 'Comment 4' },
-     ],
-     isComment: true,
-   };
-
-   const threadData2 = {
-     author: 'Jane Smith',
-     content: "I am John Doe, a software engineer with a passion for coding and problem-solving. I've been in the tech industry for over a decade, working on various projects and technologies.",
-     likes: 5,
-     comments: [
-       { author: 'Eve', content: 'Comment 3' },
-       { author: 'Charlie', content: 'Comment 4' },
-     ],
-     isComment: true,
-   };
-
-   const threadData3 = {
-     author: 'Jane Smith',
-     content: "I am amnish Doe, a software engineer with a passion for coding and problem-solving. I've been in the tech industry for over a decade, working on various projects and technologies.",
-     likes: 5,
-     comments: [],
-     isComment: true,
-   };
-
-   const threadData4 = {
-     author: 'Jane Smith',
-     content: "Your content here",
-     likes: 5,
-     comments: [
-       { author: 'Eve', content: 'Comment 1' },
-       { author: 'Charlie', content: 'Comment 2' },
-     ],
-     isComment: true,
-   };
-
-   const threadCards = [];
-
-   // Create PostCard instances and push them into the array
-   for (let i = 1; i <= 4; i++) {
-     const threadData = eval(`threadData${i}`);
-     const threadCard = new PostCard(
-       threadData.author,
-       threadData.content,
-       threadData.likes,
-       threadData.comments,
-       threadData.isComment
-     );
-     threadCards.push(threadCard);
-   }
-
-   // Append all the thread card elements to a container in your HTML document
-   const container = document.getElementById('thread-container');
-
-   threadCards.forEach((threadCard) => {
-     container.appendChild(threadCard.render());
-   });
-</script>
+      // everything else goes here
+    </script>
+</body>
 
 </html>
