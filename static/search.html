@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="searchstyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Social Media Website</title>
+</head>
+<body>
+    <!--nav bar-->
+    <div class="navbar">
+      <div class="left">
+        <img src="bolt.svg" alt="bolt">
+        <a href="#" class="brand">ReConnect</a>
+      </div>
+      <div class="center">
+          <input type="text" placeholder="Search...">
+          
+      </div>
+      <div class="right">
+          <img src="add.svg" alt="add">
+          <a href="#">Friends</a>
+          <a href="#">Profile</a>
+          
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div class="left-sidebar">
+
+      </div>
+
+      <div class="middle-section">
+        <div class= "search-information">
+          <div class="user">
+            <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
+            <h2>Username: <%= User.username><h2>
+          </div>
+          <div class="user">
+            <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
+            <h2>Username: <%= User.username><h2>
+          </div>
+          <div class="user">
+            <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
+            <h2>Username: <%= User.username><h2>
+          </div>
+          <div class="user">
+            <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
+            <h2>Username: <%= User.username><h2>
+          </div>
+          <div class="user">
+            <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
+            <h2>Username: <%= User.username><h2>
+          </div>
+          <div class="user">
+            <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
+            <h2>Username: <%= User.username><h2>
+          </div>
+          <div class="user">
+            <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
+            <h2>Username: <%= User.username><h2>
+          </div>
+          <div class="user">
+            <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
+            <h2>Username: <%= User.username><h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-sidebar">
+        
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+      let socket = io();
+      // everything else goes here
+    </script>
+</body>
+</html>
