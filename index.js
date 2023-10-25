@@ -19,10 +19,11 @@ var io = sio(server);
 
 let htmlDirectory = path.resolve(__dirname+'/static');
 app.use(express.static(htmlDirectory));
-server.listen(412401);
+server.listen(4124);
 
 // global for whether a user is logged in -- will need another to denote *which* user probably
 var loggedIn = false;
+var currentUser = -1;
 
 app.get('/postCard', (req, res)=> {
     res.sendFile(path.join(__dirname, "./static/postCard.js"));
@@ -35,11 +36,11 @@ app.get('/style.css', (req, res) => {
 // need to test the conditionals for these three gets
 app.get('/', (req, res) => {
   if(loggedIn){
-    const filePath = path.join(__dirname, "./static/index.html");
+    let filePath = path.join(__dirname, "./static/index.html");
     res.sendFile(filePath);
   }
   else{
-    const filePath = path.join(__dirname, "./static/Onboarding.html");
+    let filePath = path.join(__dirname, "./static/Onboarding.html");
     res.sendFile(filePath);
   }
 });
@@ -264,14 +265,9 @@ let backupDB = function() {
 // localhost:412401
 
 /* FRONTEND HANDLERS */
-// i added some more for funsies
 io.on('connection', (socket)=>{
-    // handlers for messages from the front end go inside here
-
-    // for example:
-    socket.on('test', (data)=>{ // 'test' is the message from the front end, data is also from frontend
-        // do something with data here, etc etc
-        console.log("test signal received\n");
+    socket.on('test', (data)=>{
+        console.log("test signal received");
     });
 
     socket.on('search', (data)=>{
@@ -281,8 +277,67 @@ io.on('connection', (socket)=>{
         // --> maybe something like `socket.emit("results", [user1, user2, user3]);`
     });
 
-    socket.on('', (data)=>{
+    socket.on('login attempt', (data)=>{
+        // for now...
+        loggedIn = true;
+        socket.emit('loginAttemptResults', 'true');
+        console.log("set loggedIn to true");
+        // TODO: set currentUser
+    });
 
+    socket.on('registration attempt', (data)=>{
+        // for now...
+        socket.emit('registerAttemptResults', 'true');
+        console.log("new user registered");
+    });
+
+    socket.on("empty values", (data)=>{
+        console.log("empty values");
+    });
+
+    // this might be funky for now?
+    socket.on("need posts", (data)=>{
+        // use current user value to determine what posts to show
+        let index = -1;
+        for(let i = 0; i < Users.length; i++){
+            if(currentUser == Users[i].getUserID()){
+                index = i;
+                break;
+            }
+        }
+
+        let friendIDs = new Array();
+        // get the user IDs of every friend
+        for(let i = 0; i < Users[index].getFriends().length; i++){
+            friendIDs.push(Users[index].getFriends()[i]);
+        }
+
+        // TODO test this
+        // now cycle through our mega array of all posts, grab ones that belong to a friend (go backwards to get newest) (up to 15 for now)
+        let postsToSend = new Array();
+        let posterID = -1;
+        let cnt = 0;
+        for(let i = Posts.length-1; i >= 0; i--){
+            posterID = Posts[i].PosterID;
+            if(friendIDs.includes(posterID)){
+                let postInfo = new Array();
+                postInfo.push(Posts[i].ID);
+                postInfo.push(Posts[i].username);
+                postInfo.push(Posts[i].content);
+                postInfo.push(Posts[i].likes);
+                postInfo.push(Posts[i].shares);
+                // comments too
+                postsToSend.push(postInfo);
+                postsToSend.push(Posts[i].comments);
+                // empty array
+                postInfo.length = 0;
+                cnt++;
+            }
+            if(cnt == 15){
+                break;
+            }
+        }
+        socket.emit("herePosts", {posts: postsToSend})
     });
 
     socket.on('exit', (data)=>{

@@ -92,11 +92,121 @@
       </div>
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript">
+<script src="/socket.io/socket.io.js"></script>
+   <script type="text/javascript">
+      // now we're cooking
       let socket = io();
-      // everything else goes here
-    </script>
+
+      // variable init
+
+
+      // bring in the posts!
+      socket.emit('need posts', '');
+
+      // socket handlers -- TODO this is still unfinished
+      socket.on("herePosts", (data)=>{
+        var commentsHtml;
+        for(let i = 0; i < data.posts.length; i+=2){
+        // render comments
+          if(data.posts[i+1].length == 0){ // if no comments
+            commentsHtml = ``;
+          }
+          else{
+            commentsHtml = data.posts[i+1].map(comment => `
+            <div class="comment">
+            ${comment}
+            </div>
+            `).join('');
+          }
+          let allComments =  `
+            <div class="comments">
+            <h4>Comments:</h4>
+            ${commentsHtml}
+            </div>
+            `;
+          // render rest of post
+          let postCardHtml = `
+            <div class="thread-container">
+              <div class="thread-card">
+                <div class="thread-info">
+                  <div class="name" id="${data.posts[i][0]}"><strong>${data.posts[i][1]}</strong></div>
+                  <div class="snippet">${data.posts[i][2]}</div>
+                  <div class="tag"><strong>${data.posts[i][3]} 🖤 </strong></div> 
+                </div>
+                ${allComments}
+              </div>
+            </div>
+          `;
+        }
+      });
+
+   </script>
+   
+  <!-- post card generation -->
+   <script src= "/postCard"></script>
+   <script>const threadData1 = {
+     author: 'Jane Smith',
+     content: "I am Jane Smith, I've been in the tech industry for over a decade, working on various projects and technologies.",
+     likes: 5,
+     comments: [
+       { author: 'Eve', content: 'Comment 3' },
+       { author: 'Charlie', content: 'Comment 4' },
+     ],
+     isComment: true,
+   };
+
+   const threadData2 = {
+     author: 'Jane Smith',
+     content: "I am John Doe, a software engineer with a passion for coding and problem-solving. I've been in the tech industry for over a decade, working on various projects and technologies.",
+     likes: 5,
+     comments: [
+       { author: 'Eve', content: 'Comment 3' },
+       { author: 'Charlie', content: 'Comment 4' },
+     ],
+     isComment: true,
+   };
+
+   const threadData3 = {
+     author: 'Jane Smith',
+     content: "I am amnish Doe, a software engineer with a passion for coding and problem-solving. I've been in the tech industry for over a decade, working on various projects and technologies.",
+     likes: 5,
+     comments: [],
+     isComment: true,
+   };
+
+   const threadData4 = {
+     author: 'Jane Smith',
+     content: "Your content here",
+     likes: 5,
+     comments: [
+       { author: 'Eve', content: 'Comment 1' },
+       { author: 'Charlie', content: 'Comment 2' },
+     ],
+     isComment: true,
+   };
+
+   const threadCards = [];
+
+   // Create PostCard instances and push them into the array
+   for (let i = 1; i <= 4; i++) {
+     const threadData = eval(`threadData${i}`);
+     const threadCard = new PostCard(
+       threadData.author,
+       threadData.content,
+       threadData.likes,
+       threadData.comments,
+       threadData.isComment
+     );
+     threadCards.push(threadCard);
+   }
+
+   // Append all the thread card elements to a container in your HTML document
+   const container = document.getElementById('thread-container');
+
+   threadCards.forEach((threadCard) => {
+     container.appendChild(threadCard.render());
+   });
+</script>
 </body>
 
 </html>

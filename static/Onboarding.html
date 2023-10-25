@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>onboarding</title>
+  <title>Log In</title>
   <link href="styles.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -12,47 +12,78 @@
 <div class="login-container">
   <div class="login-form">
     <div class="login-form-inner" id="login-form-inner">
-      <div class="logo"><svg height="512" viewBox="0 0 192 192" width="512" xmlns="http://www.w3.org/2000/svg">
-          <path d="m155.109 74.028a4 4 0 0 0 -3.48-2.028h-52.4l8.785-67.123a4.023 4.023 0 0 0 -7.373-2.614l-63.724 111.642a4 4 0 0 0 3.407 6.095h51.617l-6.962 67.224a4.024 4.024 0 0 0 7.411 2.461l62.671-111.63a4 4 0 0 0 .048-4.027z" />
-        </svg></div>
       <h1>Login</h1>
-
+      <h3 id="registrationSuccess">Account successfully registered!</h3>
       <div class="login-form-group">
         <label for="username">Username </label>
-        <input type="text" id="username">
+        <input type="text" id="username" required>
       </div>      
       <div class="login-form-group">
         <label for="pwd">Password </label>
-        <input autocomplete="off" type="text" placeholder="Minimum 8 characters" id="pwd">
+        <input autocomplete="off" type="text" id="pwd" required>
+      </div>
+      <div id="error-chunk">
+        <p id="error-message">Invalid credentials. Please try again.</p>
       </div>
 
-      <a href="#" class="rounded-button login-cta">Login</a>
+      <!-- <a href="/home" class="rounded-button login-cta" id="loginButton">Login</a> -->
+      <button id="loginButton" href="/home">Login</button>
 
-      <div class="register-div" id="register-div">Not registered yet? <a href="#" class="link create-account" -link>Create an account ?</a></div>
+
+
+    <div class="register-div" id="register-div">Not registered yet? <a href="#" class="link create-account" -link>Create an account ?</a></div>
     </div>
+    <!-- this gets displayed instead of the section above if you choose to sign up -->
     <div class="login-form-inner" id="signUp-form-inner">
-      <div class="logo"><svg height="512" viewBox="0 0 192 192" width="512" xmlns="http://www.w3.org/2000/svg">
-          <path d="m155.109 74.028a4 4 0 0 0 -3.48-2.028h-52.4l8.785-67.123a4.023 4.023 0 0 0 -7.373-2.614l-63.724 111.642a4 4 0 0 0 3.407 6.095h51.617l-6.962 67.224a4.024 4.024 0 0 0 7.411 2.461l62.671-111.63a4 4 0 0 0 .048-4.027z" />
-        </svg></div>
       <h1>Sign Up</h1>
 
       <div class="login-form-group">
-        <label for="email">Username </label>
-          <input type="text" id="username">
+        <label for="createUsername">Username </label>
+          <input type="text" id="createUsername">
       </div>
       <div class="login-form-group">
-        <label for="pwd">Password </label>
-        <input autocomplete="off" type="text" placeholder="Minimum 8 characters" id="pwd">
+        <label for="createPwd">Password </label>
+        <input autocomplete="off" type="text" placeholder="Minimum 8 characters" id="createPwd">
       </div>
+      <p id="createError">Username or password invalid.</p>
 
-      <a href="#" class="rounded-button login-cta">Register</a>
+      <button id="registerButton" href="/home">Register</button>
 
       <div class="login-div" id="login-div">Already Have an Account ? <a href="#" class="link create-account" -link> Login? </a></div>
     </div>
 
   </div>
- <script>
-  // Get the register-div element
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript">
+  let socket = io();
+
+  // init misc variables
+  let loggedIn = 0;
+
+  // socket handlers (incoming from backend)
+  socket.on('loginAttemptResults', (data)=>{
+    if(data == "true"){
+      loggedIn = 1;
+      // window.location.replace("localhost:4124/home");
+      document.location.reload(true); // will reload to actual home page
+    }
+    else{
+      errorMessage.style.display = "block";
+    }
+  });
+
+  socket.on('registerAttemptResults', (data)=>{
+    if(data == "true"){
+      loginFormInner.style.display = "block";
+      SignUpFormInner.style.display = "none";
+      registerSuccess.style.display = "block";
+    }
+    else{
+      newErrorMessage.style.display = "block";
+    }
+  });
+  
+  // toggles between login and register displays
   var registerDiv = document.getElementById("register-div");
   var loginDiv = document.getElementById("login-div");
    
@@ -61,7 +92,7 @@
   SignUpFormInner.style.display = "none";
 
   registerDiv.addEventListener("click", function() {
-     loginFormInner.style.display = "none";
+    loginFormInner.style.display = "none";
     SignUpFormInner.style.display = "block";
   });
 
@@ -71,8 +102,47 @@
       SignUpFormInner.style.display = "none";
      });
   };
-   
-</script>
-        </body>
 
+  // handles login attempts
+  let loginButton = document.getElementById("loginButton");
+  let usernameInput = document.getElementById("username").value;
+  let passwordInput = document.getElementById("pwd").value;
+  let errorMessage = document.getElementById("error-message");
+  errorMessage.style.display = "none"; // doesn't display by default
+  let registerSuccess = document.getElementById("registrationSuccess");
+  registerSuccess.style.display = "none"; // doesn't display by default
+
+  loginButton.addEventListener("click", function() {
+    usernameInput = document.getElementById("username").value;
+    passwordInput = document.getElementById("pwd").value;
+    // socket.emit("empty values", "true");
+    if(usernameInput == "" || passwordInput == ""){
+      socket.emit("empty values", "true");
+      console.log("empty values");
+      errorMessage.style.display = "block";
+    }
+    else{
+      socket.emit("login attempt", {username: usernameInput, password: passwordInput});
+    } 
+  });
+   
+  // handles register attempts
+  let registerButton = document.getElementById("registerButton");
+  let newUsernameInput = document.getElementById("createUsername");
+  let newPasswordInput = document.getElementById("createPwd");
+  let newErrorMessage = document.getElementById("createError");
+  newErrorMessage.style.display = "none";
+
+  registerButton.addEventListener("click", function(){
+    if(newUsernameInput == "" || newPasswordInput == ""){
+      errorMessage.style.display = "block";
+    }
+    else{
+      socket.emit("registration attempt", {username: newUsernameInput, password: newPasswordInput});
+    }
+  });
+
+</script>
+
+</body>
 </html>
