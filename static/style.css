@@ -4,10 +4,10 @@ body {
   height: 100%;
 }
 :root {
-  --primary-color: #83faec;
-  --secondary-color: #5e9eff;
+  --primary-color: #3b1cc3;
+  --secondary-color: #071325;
   --text-background-color: #f2f2f2;
-  --background-color: #161e34;
+  --background-color: #507fff;
 }
 
 .navbar {
@@ -31,11 +31,14 @@ body {
 }
 
 .left img {
-  filter: invert(100%);
+  filter: invert(100%) contrast(200%);
   width: 40px;
   height: auto;
   margin-right: 10px;
-  transition: transform 0.4s, width 0.4s;
+  transition: transform 0.1s, width 0.1s;
+}
+.left img:hover {
+  filter: invert(100%) saturate(10000%);
 }
 
 .left, .right {
@@ -44,12 +47,15 @@ body {
 }
 
 .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-grow: 1;
   text-align: center;
 }
 
 .center input[type="text"] {
-  width: 50%;
+  width: 60%;
   padding: 10px;
   border:  2px var(--secondary-color) solid;
   border-radius: 12px;
@@ -61,6 +67,14 @@ body {
 .center input[type="text"]:focus {
   outline: var(--primary-color) auto 5px;;
 }
+.center img {
+  filter: invert(100%);
+  width: 40px;
+  height: auto;
+  aspect-ratio: auto;
+  margin-right: 10px;
+  transition: transform 0.3s, width 0.3s;
+}
 
 .right a {
   color: var(--text-background-color);
@@ -70,43 +84,45 @@ body {
   font-size: 25px;
 }
 
-.right a:hover {
-  color: var(--primary-color);
+.right a:hover, .brand:hover {
+  color: var(--background-color);
 }
 
 .right img:not(.notification) {
-  filter: invert(100%);
   width: 40px;
+  filter: invert(100%) contrast(200%); 
   height: auto;
   margin-right: 20px;
   transition: transform 0.2s, width 0.2s;
 }
 
-.right img:hover, .left img:hover {
+.right img:hover, .left img:hover, .center img:hover {
   color: var(--primary-color);
-  transform: scale(1.5);
+  transform: scale(1.4);
 }
 
 .notification img {
+  will-change: transform;
   width: 40px;
   height: auto;
   align-items: right;
   aspect-ratio: auto;
-  transition: transform 0.2s, width 0.2s;
+  transition: transform .2s, width .2s;
   margin-right: 20px;
   margin-left: 10px;
 }
 
-/* Animation for bell svg, not implemented yet */
+
+/* Animation for bell svg */
 @keyframes shake {
   0%, 100% {
     transform: rotate(0);
   }
   25% {
-    transform: rotate(10deg);
+    transform: rotate(180 deg);
   }
   75% {
-    transform: rotate(-10deg);
+    transform: rotate(-180 deg);
   }
 }
 

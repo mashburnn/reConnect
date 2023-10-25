@@ -7,18 +7,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
-    <title>Social Media Website</title>
+    <title>reConnect</title>
 </head>
 <body>
     <!--nav bar-->
     <div class="navbar">
       <div class="left">
-        <img src="bolt.svg" alt="bolt">
-        <a href="#" class="brand">ReConnect</a>
+        <img src="bolt.svg">
+        <a href="#" class="brand">reConnect</a>
       </div>
       <div class="center">
           <input type="text" placeholder="Search...">
-          
+          <img src="magnifier.svg" alt="magnifier">
       </div>
       <div class="right">
           <img src="add.svg" alt="add">
@@ -91,6 +91,32 @@
         
       </div>
     </div>
+
+
+
+    <!--pop ups for notifications, posts, friends list, etc-->
+    <div class="popup">
+      <div class="popup-content">
+        <div class="popup-header">
+          <h2>Post</h2>
+          <span class="close">&times;</span>
+        </div>
+        <div class="popup-body">
+          <form action="/create-post">
+            <input type="text" name="author" placeholder="Author">
+            <textarea name="content" placeholder="Content"></textarea>
+            <input type="submit" value="Create Post">
+          </form>
+        </div>
+        <form action="/create-comment">
+          <input type="text" name="author" placeholder="Author">
+          <textarea name="content" placeholder="Content"></textarea>
+          <input type="submit" value="Create Comment">
+        </form>
+      </div>
+    </div>
+    <!--end of pop ups-->
+    
 
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">

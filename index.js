@@ -19,7 +19,7 @@ var io = sio(server);
 
 let htmlDirectory = path.resolve(__dirname+'/static');
 app.use(express.static(htmlDirectory));
-server.listen(412401);
+server.listen(5500);
 
 // global for whether a user is logged in -- will need another to denote *which* user probably
 var loggedIn = false;
