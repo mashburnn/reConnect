@@ -11,7 +11,7 @@ const path = require('path');
 
 // import classes
 const User = require('./static/User');
-const PostCard = require('./static/PostCard');
+const PostCard = require('./static/postCard');
 
 var app = express();
 var server = http.Server(app);
@@ -19,7 +19,7 @@ var io = sio(server);
 
 let htmlDirectory = path.resolve(__dirname+'/static');
 app.use(express.static(htmlDirectory));
-server.listen(412401);
+server.listen(8080);
 
 // global for whether a user is logged in -- will need another to denote *which* user probably
 var loggedIn = false;
@@ -73,11 +73,18 @@ app.get('/home', (req, res) => {
 
 // like a post
 
+
 // comment on a post
 
 // share a post
 
 // create a post
+function createNewPost(posterID, author, content ,comments) {
+  const ID = Math.floor(Math.random() * (100)) + 1;
+  let newPost = new PostCard(ID, posterID, author, content, 0, 0, comments);
+  Post.push(newPost);
+
+}
 
 // create a user TRIP
 
