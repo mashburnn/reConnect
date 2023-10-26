@@ -82,7 +82,7 @@ app.get('/home', (req, res) => {
 function createNewPost(posterID, author, content ,comments) {
   const ID = Math.floor(Math.random() * (100)) + 1;
   let newPost = new PostCard(ID, posterID, author, content, 0, 0, comments);
-  Post.push(newPost);
+  Posts.push(newPost);
 
 }
 
