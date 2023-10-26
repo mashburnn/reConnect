@@ -80,7 +80,16 @@ app.get('/home', (req, res) => {
 
 // create a post
 function createNewPost(posterID, author, content ,comments) {
-  const ID = Math.floor(Math.random() * (100)) + 1;
+  while(true){
+    let ID = Math.floor(Math.random() * (100)) + 1;
+    for(let i = 0; i < Posts.size(); i++ ){
+      if(Posts.get(i).ID == ID){
+        ID = Math.floor(Math.random() * (100)) + 1;
+      }
+    }
+    break;
+  }
+  
   let newPost = new PostCard(ID, posterID, author, content, 0, 0, comments);
   Posts.push(newPost);
 
