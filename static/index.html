@@ -13,21 +13,39 @@
     <!--nav bar-->
     <div class="navbar">
       <div class="left">
-        <img src="bolt.svg">
+        <!--home button -->
+        <!--TODO: Add home button functionality-->
+        <button id="home-button" class="icon-button">
+          <img src="bolt.svg" alt="home">
+        </button>
+
         <a href="#" class="brand">reConnect</a>
       </div>
       <div class="center">
+        <!--search bar-->
+        <!--TODO: Add search bar functionality-->
           <input type="text" placeholder="Search...">
-          <img src="magnifier.svg" alt="magnifier">
+          <div class="search">
+            <button id="search-button" class="icon-button">
+              <img src="magnifier.svg" alt="magnifier">
+            </button>
+
+          </div>
       </div>
       <div class="right">
+        <!--post button-->
+        <button id="post-button" class="icon-button">
           <img src="add.svg" alt="add">
+        </button>
+        <!--notification button-->
+        <!--TODO: Add notification dropdown-->
           <div class="notification">
-            <img src="bell.svg" alt="bell">
+            <button id="notification-button" class="icon-button">
+              <img src="bell.svg" alt="bell">
+
           </div>
           <a href="#">Friends</a>
           <a href="#">Profile</a>
-          
       </div>
     </div>
 
@@ -39,51 +57,7 @@
       <div class="middle-section">
         
         <div class="posts-container">
-            <div class="post">
-              <h2>Post ID: <%= post.ID %></h2>
-              <p>Author: <%= post.author %></p>
-              <p>Content: <%= post.content %></p>
-              <p>Likes: <%= post.likes %></p>
-              <p>Shares: <%= post.shares %></p>
-                <div class="comments">
-                  <h3>Comments</h3>
-                  <ul>
-                    <% post.comments.forEach(comment => { %>
-                        <li><%= comment %></li>
-                    <% }); %>
-                  </ul>
-                </div>
-            </div>
-            <div class="post">
-              <h2>Post ID: <%= 1 %></h2>
-              <p>Author: <%= post.author %></p>
-              <p>Content: <%= post.content %></p>
-              <p>Likes: <%= post.likes %></p>
-              <p>Shares: <%= post.shares %></p>
-                <div class="comments">
-                  <h3>Comments</h3>
-                  <ul>
-                    <% post.comments.forEach(comment => { %>
-                        <li><%= comment %></li>
-                    <% }); %>
-                  </ul>
-                </div>
-            </div>
-            <div class="post">
-              <h2>Post ID: <%= post.ID %></h2>
-              <p>Author: <%= post.author %></p>
-              <p>Content: <%= post.content %></p>
-              <p>Likes: <%= post.likes %></p>
-              <p>Shares: <%= post.shares %></p>
-                <div class="comments">
-                  <h3>Comments</h3>
-                  <ul>
-                    <% post.comments.forEach(comment => { %>
-                        <li><%= comment %></li>
-                    <% }); %>
-                  </ul>
-                </div>
-            </div>
+            
          </div>
       </div>
 
@@ -95,6 +69,7 @@
 
 
     <!--pop ups for notifications, posts, friends list, etc-->
+    <!-- Not used yet
     <div class="popup">
       <div class="popup-content">
         <div class="popup-header">
@@ -115,8 +90,9 @@
         </form>
       </div>
     </div>
+     -->
     <!--end of pop ups-->
-    
+
 
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
