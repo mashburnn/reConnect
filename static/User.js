@@ -6,6 +6,7 @@ class User {
         this.friends = friends; //int array for userID
         this.incomingFriendRequest = incoming; //int array for userID
         this.postID = []; //int array for postID's
+        this.notifications = []; // array of notif strings (?) maybe do userIDs of requesting people
     }
 
     getUserID() {
