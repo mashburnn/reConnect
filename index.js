@@ -25,6 +25,7 @@ server.listen(4124);
 var loggedIn = false;
 var currentUser = -1;
 var profileToSend = -1;
+var resultsToSend = -1;
 
 app.get('/postCard', (req, res)=> {
     res.sendFile(path.join(__dirname, "./static/postCard.js"));
@@ -80,6 +81,17 @@ app.get('/profile', (req, res)=>{
 });
 
 app.get('/friends', (req, res)=>{
+    if(!loggedIn){
+        const filePath = path.join(__dirname, "./static/Onboarding.html");
+        res.sendFile(filePath);
+    }
+    else{
+        const filePath = path.join(__dirname, "./static/search.html");
+        res.sendFile(filePath);
+    }
+});
+
+app.get('/results', (req, res)=>{
     if(!loggedIn){
         const filePath = path.join(__dirname, "./static/Onboarding.html");
         res.sendFile(filePath);
@@ -323,13 +335,69 @@ io.on('connection', (socket)=>{
     });
 
     socket.on('search request', (data)=>{
-        let index = searchUser(data);
-        if(index == -1){
-            socket.emit('search result', 'none');
+        if(data == "friends"){
+            let index = -1;
+            // get to the current user instance
+            for(let i = 0; i < Users.length; i++){
+                if(Users[i].getUserID() == currentUser){
+                    index = i;
+                    break;
+                }
+                if(i == Users.length-1){
+                    console.log("profile not found");
+                    return;
+                }
+            }
+            // get all the friend IDs
+            let friendIDs = new Array();
+            setTimeout(()=>{
+                if(Users[index].getFriends().length == 0){
+                    resultsToSend = "none";
+                    return;
+                }
+                for(let i = 0; i < Users[index].getFriends().length; i++){
+                    friendIDs.push(Users[index].getFriends()[i]);
+                }
+            }, 150);
+            // get all the friend instances
+            let friendsToSend = new Array();
+            setTimeout(()=>{
+                for(let i = 0; i < friendIDs.length; i++){
+                    let tmpFriend = new Array();
+                    tmpFriend[0] = friendIDs[i];
+                    for(let j = 0; j < Users.length; j++){
+                        if(Users[j].getUserID() == friendIDs[i]){
+                            tmpFriend[1] = Users[j].getUsername();
+                            break;
+                        }
+                    }
+                    setTimeout(()=>{
+                        friendsToSend.push(tmpFriend);
+                    }, 100)
+                }
+            }, 300);
+            setTimeout(()=>{
+                resultsToSend = friendsToSend;
+            }, 500);
         }
         else{
-            socket.emit('search result', [Users[index].getUserID(), Users[index].getUsername()]);
+            console.log("received", data);
+            let index = searchUser(data);
+            if(index == -1){
+                resultsToSend = "none";
+            }
+            else{
+                resultsToSend = [[Users[index].getUserID(), Users[index].getUsername()]];
+            }
         }
+    });
+
+    socket.on("need results", (data)=>{
+        // time out to give the previous handler time to set
+        setTimeout(()=>{
+            console.log("sending", resultsToSend);
+            socket.emit("here results", resultsToSend);
+        }, 500);
     });
 
     socket.on("nextProfile", (data)=>{
@@ -346,12 +414,15 @@ io.on('connection', (socket)=>{
 
     socket.on("need profile", (data)=>{
         let index = -1;
+        let myIndex = -1;
         for(let i = 0; i < Users.length; i++){
             if(Users[i].getUserID() == profileToSend){
                 index = i;
-                break;
             }
-            if(i == Users.length-1){
+            else if(Users[i].getUserID() == currentUser){
+                myIndex = i;
+            }
+            if(i == Users.length-1 && index == -1){
                 console.log("profile not found");
                 return;
             }
@@ -359,20 +430,21 @@ io.on('connection', (socket)=>{
         let userToSend = new Array();
         // woo race condition
         setTimeout(()=>{
-            userToSend.push(profileToSend);
-            userToSend.push(Users[index].getUsername());
+            // console.log("curr user is", Users[index].getUsername(), "and to send is", profileToSend);
+            userToSend[0] = profileToSend;
+            userToSend[1] = Users[index].getUsername();
             // -1 means self, 0 means not friends, 1 means request pending, 2 means friends
             if(profileToSend == currentUser){
-                userToSend.push(-1);
+                userToSend[2] = -1;
             }
-            else if(Users[index].getIncomingFriendRequest().includes(profileToSend)){
-                userToSend.push(1);
+            else if(Users[myIndex].getIncomingFriendRequest().includes(profileToSend)){
+                userToSend[2] = 1;
             }
-            else if(Users[index].getFriends().includes(profileToSend)){
-                userToSend.push(2);
+            else if(Users[myIndex].getFriends().includes(profileToSend)){
+                userToSend[2] = 2;
             }
             else{
-                userToSend.push(0);
+                userToSend[2] = 0;
             }
         }, 500);
         // now get all the posts from that user
@@ -393,13 +465,14 @@ io.on('connection', (socket)=>{
         }
         setTimeout(()=>{
             socket.emit("here profile", [userToSend, postsToSend]);
-            console.log("all profile posts:", [userToSend, postsToSend]);
+            // console.log("all profile posts:", [userToSend, postsToSend]);
         }, 1000);
             
     });
     
     socket.on('login attempt', (data)=>{
         let index = -1;
+        // console.log(data.username)
         for(let i = 0; i < Users.length; i++){
             if(data.username == Users[i].getUsername()){
                 index = i;
@@ -407,12 +480,14 @@ io.on('connection', (socket)=>{
             }
             if(i == Users.length-1){
                 console.log("username not found");
+                socket.emit('loginAttemptResults', 'false');
                 return;
             }
         }
         setTimeout(()=>{
             if(Users[index].getPassword() == data.password){
                 loggedIn = true;
+                // console.log(data.username)
                 socket.emit('loginAttemptResults', 'true');
                 console.log("set loggedIn to true");
                 currentUser = Users[index].getUserID();
@@ -435,14 +510,17 @@ io.on('connection', (socket)=>{
             tmpUsernames.push(Users[i].getUsername());
         }
         setTimeout(()=>{
+            // console.log(tmpUsernames);
+            console.log(data.username);
             if(tmpUsernames.includes(data.username)){
+                console.log("username already exists");
                 socket.emit('registerAttemptResults', 'false');
             }
             else{
                 // TODO add new user function here
                 socket.emit('registerAttemptResults', 'true');
             }
-        }, 100)
+        }, 500)
     });
 
     socket.on("empty values", (data)=>{
@@ -480,7 +558,6 @@ io.on('connection', (socket)=>{
                     if(friendIDs.includes(posterID)){
                         let postInfo = new Array();
                         postInfo[0] = Posts[i].ID;
-                        console.log(Posts[i].ID);
                         for(let j = 0; j < Users.length; j++){
                             if(Users[j].getUserID() == Posts[i].PosterID){
                                 postInfo[1] = Users[j].getUsername();
@@ -506,10 +583,8 @@ io.on('connection', (socket)=>{
             // [1, 2, 3, 4], 5], ["wow this is cool!", "i love this lol!"]];
             setTimeout(()=>{
                 socket.emit("herePosts", {posts: postsToSend});
-                console.log("all posts:", postsToSend);
-            }, 200)
-            // console.log("just emitted", postsToSend.length/2, "posts");
-            // console.log("post 1 was from", postsToSend[0][0]);
+                // console.log("all posts:", postsToSend);
+            }, 200);
         }, 100);    
     });
 
@@ -592,16 +667,22 @@ io.on('connection', (socket)=>{
     });
 
     socket.on('exit', (data)=>{
-        console.log("Exiting...");
         exitProgram();
     });
 });
 
 /* MISC FUNCTIONS? */
 let exitProgram = function() {
-    backupDB();
+    // backupDB(); //.. leaving out until i fix it
     db.close();
+    console.log("Exiting...");
+    server.close();
+    setTimeout(()=>{
+        process.exit();
+    }, 100);
 }
+
+process.on('SIGINT', exitProgram);
 
 /* INIT FUNCTION CALLS */
 loadUsers();
