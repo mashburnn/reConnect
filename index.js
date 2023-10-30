@@ -79,20 +79,19 @@ app.get('/home', (req, res) => {
 // share a post
 
 // create a post
-function createNewPost(posterID, author, content ,comments) {
+function createNewPost(posterID, content) {
   while(true){
-    let ID = Math.floor(Math.random() * (100)) + 1;
-    for(let i = 0; i < Posts.size(); i++ ){
-      if(Posts.get(i).ID == ID){
-        ID = Math.floor(Math.random() * (100)) + 1;
+    let newID = Math.floor(Math.random() * (100)) + 1;
+    for(let i = 0; i < Posts.length; i++){
+      if(Posts[i].ID == newID){
+        break;
       }
     }
     break;
   }
   
-  let newPost = new PostCard(ID, posterID, author, content, 0, 0, comments);
+  let newPost = new PostCard(newID, posterID, "deprecated", content, [], 0, []);
   Posts.push(newPost);
-
 }
 
 // create a user TRIP
