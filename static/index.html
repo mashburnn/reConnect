@@ -62,36 +62,42 @@
       </div>
 
       <div class="right-sidebar">
-        
+        <div class="popup-content">
+          <div class="popup-header">
+            <h2>Post</h2>
+            <span class="close">&times;</span>
+          </div>
+          <!-- Notifications -->
+          <div class="noti-menu">
+            <ul>
+              <li><a href="#">Notification 1</a></li>
+              <li><a href="#">Notification 2</a></li>
+              <li><a href="#">Notification 3</a></li>
+              <li><a href="#">Notification 4</a></li>
+              <li><a href="#">Notification 5</a></li>
+            </ul>
+          </div>
+  
+          <div class="popup-body">
+            <form action="/create-post">
+              <input type="text" name="author" placeholder="Author">
+              <textarea name="content" placeholder="Content"></textarea>
+              <input type="submit" value="Create Post">
+            </form>
+          </div>
+          <form action="/create-comment">
+                <input type="text" name="author" placeholder="Author">
+                <textarea name="content" placeholder="Content"></textarea>
+                <input type="submit" value="Create Comment">
+            </form>
+        </div>
+      </div>
       </div>
     </div>
-
-
 
     <!--pop ups for notifications, posts, friends list, etc-->
-    <!-- Not used yet
-    <div class="popup">
-      <div class="popup-content">
-        <div class="popup-header">
-          <h2>Post</h2>
-          <span class="close">&times;</span>
-        </div>
-        <div class="popup-body">
-          <form action="/create-post">
-            <input type="text" name="author" placeholder="Author">
-            <textarea name="content" placeholder="Content"></textarea>
-            <input type="submit" value="Create Post">
-          </form>
-        </div>
-        <form action="/create-comment">
-          <input type="text" name="author" placeholder="Author">
-          <textarea name="content" placeholder="Content"></textarea>
-          <input type="submit" value="Create Comment">
-        </form>
-      </div>
-    </div>
-     -->
-    <!--end of pop ups-->
+    
+    
 
 
     <script src="/socket.io/socket.io.js"></script>

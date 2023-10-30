@@ -23,6 +23,16 @@ html, body {
   background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
 }
 
+.brand {
+  font-family: 'Raleway', sans-serif;
+  font-size: 30px;
+  color: var(--text-background-color);
+  text-decoration: none;
+  margin-left: 20px;
+  margin-right: 20px;
+  transition: color 0.2s;
+}
+
 .brand, .right img:not(.notification) {
   color: var(--text-background-color);
   text-decoration: none;
@@ -245,5 +255,21 @@ html, body {
   right: 0;
   border-left: 2px solid var(--primary-color);
   position: absolute;
-  
+}
+
+/* Pop-up stuff */
+.popup-content {
+  background-color: #f2f2f2;
+  color: inherit;
+  height: 60%;
+  margin: 10px;
+  border: 10px;
+  border-radius: 10px;
+}
+
+.popup-content form {
+  margin: 10px;
+  margin-bottom: 5px;
+  border: 3px solid var(--secondary-color);
+  border-radius: 5px;
 }
