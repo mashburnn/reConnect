@@ -11,7 +11,7 @@ const path = require('path');
 
 // import classes
 const User = require('./static/User');
-const PostCard = require('./static/PostCard');
+const PostCard = require('./static/postCard');
 
 var app = express();
 var server = http.Server(app);
@@ -109,11 +109,26 @@ app.get('/results', (req, res)=>{
 
 // like a post
 
+
 // comment on a post
 
 // share a post
 
 // create a post
+function createNewPost(posterID, content) {
+  while(true){
+    let newID = Math.floor(Math.random() * (100)) + 1;
+    for(let i = 0; i < Posts.length; i++){
+      if(Posts[i].ID == newID){
+        break;
+      }
+    }
+    break;
+  }
+  
+  let newPost = new PostCard(newID, posterID, "deprecated", content, [], 0, []);
+  Posts.push(newPost);
+}
 
 // create a user TRIP
 
