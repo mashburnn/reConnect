@@ -104,7 +104,7 @@ function likePost(postID, userID){
     }
     catch(err)
     {
-        console.out(err)
+        console.log(err);
     }
 
     Posts[loc].likes(userID);
@@ -120,7 +120,7 @@ function commentPost(postID, cmt){
     }
     catch(err)
     {
-        console.out(err)
+        console.log(err);
     }
 
     Posts[loc].addComment(cmt);
@@ -142,7 +142,7 @@ function usercreate(userID, username, password) {
 
     catch(err)
     {
-        console.count(err);
+        console.log(err);
     }
 
     let tempUser = new User(userID, username, password, [], [], tempUID);
