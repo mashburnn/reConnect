@@ -6,24 +6,42 @@
     <link rel="stylesheet" href="searchstyle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <title>Social Media Website</title>
+    <title>reConnect</title>
 </head>
 <body>
     <!--nav bar-->
     <div class="navbar">
       <div class="left">
-        <img src="bolt.svg" alt="bolt">
-        <a href="#" class="brand">ReConnect</a>
+        <!-- <img src="bolt.svg" alt="bolt">
+        <a href="/home" class="brand">ReConnect</a> -->
+        <button id="home-button" class="icon-button" href="/home">
+          <img src="bolt.svg" alt="home">
+        </button>
+        <a href="/home" class="brand">reConnect</a>
       </div>
       <div class="center">
-          <input type="text" placeholder="Search...">
-          
+        <input id="searchBar" type="text" placeholder="Search...">
+        <!-- <img id="searchButton" src="magnifier.svg" alt="magnifier"> -->
+        <div class="search">
+          <button id="search-button" class="icon-button">
+            <img src="magnifier.svg" alt="magnifier">
+          </button>
+        </div>
       </div>
       <div class="right">
+        <!--post button-->
+        <button id="post-button" class="icon-button">
           <img src="add.svg" alt="add">
-          <a href="#">Friends</a>
-          <a href="#">Profile</a>
-          
+        </button>
+        <!--notification button-->
+        <!--TODO: Add notification dropdown-->
+          <div class="notification">
+            <button id="notification-button" class="icon-button">
+              <img src="bell.svg" alt="bell">
+
+          </div>
+          <a href="#" id="friendsButton">Friends</a>
+          <a href="/profile" id="profileButton">Profile</a>
       </div>
     </div>
 
@@ -34,37 +52,25 @@
 
       <div class="middle-section">
         <div class= "search-information">
-          <div class="user">
+          <div class="user" id="card1">
             <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
-            <h2>Username: <%= User.username><h2>
+            <h2><a id="result1" href="/profile">Loading...</a></h2>
           </div>
-          <div class="user">
+          <div class="user" id="card2">
             <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
-            <h2>Username: <%= User.username><h2>
+            <h2><a id="result2" href="/profile">Loading...</a></h2>
           </div>
-          <div class="user">
+          <div class="user" id="card3">
             <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
-            <h2>Username: <%= User.username><h2>
+            <h2><a id="result3" href="/profile">Loading...</a></h2>
           </div>
-          <div class="user">
+          <div class="user" id="card4">
             <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
-            <h2>Username: <%= User.username><h2>
+            <h2><a id="result4" href="/profile">Loading...</a></h2>
           </div>
-          <div class="user">
+          <div class="user" id="card5">
             <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
-            <h2>Username: <%= User.username><h2>
-          </div>
-          <div class="user">
-            <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
-            <h2>Username: <%= User.username><h2>
-          </div>
-          <div class="user">
-            <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
-            <h2>Username: <%= User.username><h2>
-          </div>
-          <div class="user">
-            <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
-            <h2>Username: <%= User.username><h2>
+            <h2><a id="result5" href="/profile">Loading...</a></h2>
           </div>
         </div>
       </div>
@@ -78,6 +84,107 @@
     <script type="text/javascript">
       let socket = io();
       // everything else goes here
+
+      // variable init
+      let profileButton = document.getElementById("profileButton");
+      profileButton.addEventListener("click", (evt)=>{
+        socket.emit("nextProfile", "ownProfile");
+      });
+
+      let searchButton = document.getElementById("search-button");
+      let searchTerm = document.getElementById("searchBar").value;
+      searchButton.addEventListener("click", (evt)=>{
+        searchTerm = document.getElementById("searchBar").value;
+        location.href = "/results";
+        socket.emit("search request", searchTerm);
+      });
+
+      let card1 = document.getElementById("card1");
+      let card2 = document.getElementById("card2");
+      let card3 = document.getElementById("card3");
+      let card4 = document.getElementById("card4");
+      let card5 = document.getElementById("card5");
+      // default to no display (display when we get the actual result ya know)
+      card1.style.display = "none";
+      card2.style.display = "none";
+      card3.style.display = "none";
+      card4.style.display = "none";
+      card5.style.display = "none";
+
+      let result1 = document.getElementById("result1");
+      let result2 = document.getElementById("result2");
+      let result3 = document.getElementById("result3");
+      let result4 = document.getElementById("result4");
+      let result5 = document.getElementById("result5");
+
+      result1.addEventListener("click", (evt)=>{
+        socket.emit("nextProfile", currentResults[0]);
+      });
+      result2.addEventListener("click", (evt)=>{
+        socket.emit("nextProfile", currentResults[1]);
+      });
+      result3.addEventListener("click", (evt)=>{
+        socket.emit("nextProfile", currentResults[2]);
+      });
+      result4.addEventListener("click", (evt)=>{
+        socket.emit("nextProfile", currentResults[3]);
+      });
+      result5.addEventListener("click", (evt)=>{
+        socket.emit("nextProfile", currentResults[4]);
+      });
+
+      // button handlers
+      let notifButton = document.getElementById("notification-button");
+      let createButton = document.getElementById("post-button");
+      let friendsButton = document.getElementById("friendsButton");
+
+      notifButton.addEventListener("click", (evt)=>{
+        // popup
+      });
+
+      createButton.addEventListener("click", (evt)=>{
+        // popup
+      });
+
+      friendsButton.addEventListener("click", (evt)=>{
+        socket.emit("search request", "friends");
+        location.href = "/friends";
+      });
+
+      let currentResults = new Array();
+
+      // last page will have already given the search term to the backend, it will be stored for this request!
+      socket.emit("need results")
+
+      socket.on("here results", (data)=>{
+        // data probably sent as [[userID, username], [userID, username]...] and so on
+        for(let i = 0; i < data.length; i++){
+          // keep track of current displayed users with their IDs
+          currentResults.push(data[i][0]);
+          // display results (top 5 for now)
+          if(i == 0){
+            result1.innerText = data[i][1];
+            card1.style.display = "block";
+          }
+          else if(i == 1){
+            result2.innerText = data[i][1];
+            card2.style.display = "block";
+          }
+          else if(i == 2){
+            result3.innerText = data[i][1];
+            card3.style.display = "block";
+          }
+          else if(i == 3){
+            result4.innerText = data[i][1];
+            card4.style.display = "block";
+          }
+          else if(i == 4){
+            result5.innerText = data[i][1];
+            card5.style.display = "block";
+          }
+          
+        }
+      });
     </script>
 </body>
 </html>
