@@ -1,13 +1,13 @@
-body {
+html, body {
   font-family: 'Raleway', sans-serif;
   margin: 0;
   height: 100%;
 }
 :root {
-  --primary-color: #83faec;
-  --secondary-color: #5e9eff;
+  --primary-color: #3b1cc3;
+  --secondary-color: #071325;
   --text-background-color: #f2f2f2;
-  --background-color: #161e34;
+  --background-color: #507fff;
 }
 
 .navbar {
@@ -31,11 +31,14 @@ body {
 }
 
 .left img {
-  filter: invert(100%);
+  filter: invert(100%) contrast(200%);
   width: 40px;
   height: auto;
   margin-right: 10px;
-  transition: transform 0.4s, width 0.4s;
+  transition: transform 0.1s, width 0.1s;
+}
+.left img:hover {
+  filter: invert(100%) saturate(10000%);
 }
 
 .left, .right {
@@ -44,12 +47,15 @@ body {
 }
 
 .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-grow: 1;
   text-align: center;
 }
 
 .center input[type="text"] {
-  width: 50%;
+  width: 60%;
   padding: 10px;
   border:  2px var(--secondary-color) solid;
   border-radius: 12px;
@@ -61,6 +67,14 @@ body {
 .center input[type="text"]:focus {
   outline: var(--primary-color) auto 5px;;
 }
+.center img {
+  filter: invert(100%);
+  width: 40px;
+  height: auto;
+  aspect-ratio: auto;
+  margin-right: 10px;
+  transition: transform 0.3s, width 0.3s;
+}
 
 .right a {
   color: var(--text-background-color);
@@ -70,54 +84,98 @@ body {
   font-size: 25px;
 }
 
-.right a:hover {
-  color: var(--primary-color);
+.right a:hover, .brand:hover {
+  color: var(--background-color);
 }
 
 .right img:not(.notification) {
-  filter: invert(100%);
   width: 40px;
+  filter: invert(100%) contrast(200%); 
   height: auto;
   margin-right: 20px;
   transition: transform 0.2s, width 0.2s;
 }
 
-.right img:hover, .left img:hover {
+.right img:hover, .left img:hover, .center img:hover {
   color: var(--primary-color);
-  transform: scale(1.5);
+  transform: scale(1.4);
 }
 
 .notification img {
+  will-change: transform;
   width: 40px;
   height: auto;
   align-items: right;
   aspect-ratio: auto;
-  transition: transform 0.2s, width 0.2s;
+  transition: transform .2s, width .2s;
   margin-right: 20px;
   margin-left: 10px;
 }
 
-/* Animation for bell svg, not implemented yet */
-@keyframes shake {
-  0%, 100% {
-    transform: rotate(0);
-  }
-  25% {
-    transform: rotate(10deg);
-  }
-  75% {
-    transform: rotate(-10deg);
-  }
+.icon-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+.icon-button:focus {
+  outline: none;
+}
+
+/* Dropdown stuff */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropbtn {
+  background-color: var(--background-color);
+  color: var(--text-background-color);
+  font-family: 'Raleway', sans-serif;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  margin-right: 10px;
+  transition: background-color 0.2s;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--text-background-color);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-radius: 12px;
+  z-index: 1;
+}
+.dropdown-content a {
+  color: var(--secondary-color);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.2s;
+}
+.dropdown-content a:hover {
+  background-color: var(--primary-color);
+} 
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 /* Post stuff */
 
+.wrapper {
+  display: flex;
+  height: 100%;
+}
+
 .posts-container {
+  box-sizing: border-box;
   max-width: 1200px;
-  
-  margin: 0 auto;
+  height: 0 auto;
+  margin: 20px;
   padding: 20px;
-  display: grid;
 }
 #posts-container {
   visibility: hidden;
@@ -141,11 +199,14 @@ body {
   background-color: var(--secondary-color);
   color: var(--text-background-color);
   position: relative;
+  flex-flow: column;
 }
 
 .middle-section {
   flex-grow: 1;
   position: relative;
+  flex-shrink: 0;
+  overflow-y: auto;
 }
 
 .vertical-bar {
@@ -174,7 +235,6 @@ body {
   width: 10px;
   background: linear-gradient(to left, var(--primary-color), var(--text-background-color));
 }
-
 
 .left-vertical-bar {
   left: 0;
