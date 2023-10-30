@@ -1,11 +1,11 @@
 class User {
-    constructor(userID, username, password, friends, incoming) {
+    constructor(userID, username, password, friends, incoming, postID) {
         this.userID = userID; //integer
         this.username = username; //string
         this.password = password; //string
         this.friends = friends; //int array for userID
         this.incomingFriendRequest = incoming; //int array for userID
-        this.postID = []; //int array for postID's
+        this.postID = postID; //int array for postID's
     }
 
     getUserID() {

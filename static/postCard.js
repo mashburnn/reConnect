@@ -6,7 +6,7 @@ class PostCard {
     this.PosterID = PosterID;
     this.author = author;
     this.content = content;
-    this.likes = likes;
+    this.likes = likes; //Array for storing userID's
     this.shares = shares;
     this.comments = comments;
   }
@@ -48,7 +48,7 @@ class PostCard {
   }
 
   set likes(newLikes) {
-    this._likes = newLikes;
+    this._likes.push(newLikes);
   }
 
   get shares() {
