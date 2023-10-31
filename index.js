@@ -261,9 +261,11 @@ let loadUsers = function() {
             // add friend request (requesting person's user ID) to vector
             tmpRequests.push(row.friendRequesting);
         });
-
-        let tmp = new User(row.userID, row.username, row.password, tmpFriends, tmpRequests);
-        Users.push(tmp);
+        setTimeout(()=>{
+            // console.log(tmpRequests);
+            let tmp = new User(row.userID, row.username, row.password, tmpFriends, tmpRequests);
+            Users.push(tmp);
+        }, 100);
         // console.log("pushed a user");
     });
 };
@@ -283,8 +285,10 @@ let loadPosts = function() {
                 tmpLikes.push(row.userID);
             });
 
-            let tmp = new PostCard(row.postID, row.userID, "deprecated", row.postContent, tmpLikes, row.shareCount, tmpComments);
-            Posts.push(tmp);
+            setTimeout(()=>{
+                let tmp = new PostCard(row.postID, row.userID, "deprecated", row.postContent, tmpLikes, row.shareCount, tmpComments);
+                Posts.push(tmp);
+            }, 100);
             // console.log("pushed a post");
         }
     });
@@ -823,6 +827,7 @@ io.on('connection', (socket)=>{
     });
 
     socket.on("need notifications", (data)=>{
+        console.log("you need notifications");
         let index = -1;
         // get to the current user instance
         for(let i = 0; i < Users.length; i++){
@@ -839,11 +844,13 @@ io.on('connection', (socket)=>{
         setTimeout(()=>{
             for(let i = 0; i < Users[index].getIncomingFriendRequest().length; i++){
                 requestIDs[i] = Users[index].getIncomingFriendRequest()[i];
+                // console.log("pushed");
             }
         }, 50);
 
         let requests = new Array();
         setTimeout(()=>{
+            // console.log(requestIDs.length);
             for(let i = 0; i < requestIDs.length; i++){
                 let tmpRequest = new Array();
                 tmpRequest[0] = requestIDs[i];
@@ -854,10 +861,14 @@ io.on('connection', (socket)=>{
                     }
                 }
                 setTimeout(()=>{
-                    requests.push(tmpFriend);
+                    requests.push(tmpRequest);
                 }, 100)
             }
         }, 100);
+        
+        setTimeout(()=>{
+            socket.emit("here notifications", requests);
+        }, 300);
     });
 
     socket.on("accept request", (data)=>{
@@ -877,7 +888,7 @@ io.on('connection', (socket)=>{
         let friendIndex = -1;
         for(let i = 0; i < Users.length; i++){
             if(Users[i].getUserID() == data){
-                index = i;
+                friendIndex = i;
                 break;
             }
             if(i == Users.length-1 && index == -1){
@@ -890,7 +901,7 @@ io.on('connection', (socket)=>{
             Users[index].augmentFriend(1, data);
             Users[friendIndex].augmentFriend(1, currentUser);
             socket.emit("accept request result", "true");
-        }, 50);
+        }, 200);
     });
 
     socket.on("decline request", (data)=>{

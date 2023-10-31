@@ -480,26 +480,31 @@
         socket.emit("accept request", currentNotifs[0]);
         notificationsMenu.style.display = "none";
         popupBackground.style.display = "none";
+        document.location.reload(true);
       });
       acceptRequest2.addEventListener("click", (evt)=>{
         socket.emit("accept request", currentNotifs[1]);
         notificationsMenu.style.display = "none";
         popupBackground.style.display = "none";
+        document.location.reload(true);
       });
       acceptRequest3.addEventListener("click", (evt)=>{
         socket.emit("accept request", currentNotifs[2]);
         notificationsMenu.style.display = "none";
         popupBackground.style.display = "none";
+        document.location.reload(true);
       });
       acceptRequest4.addEventListener("click", (evt)=>{
         socket.emit("accept request", currentNotifs[3]);
         notificationsMenu.style.display = "none";
         popupBackground.style.display = "none";
+        document.location.reload(true);
       });
       acceptRequest5.addEventListener("click", (evt)=>{
         socket.emit("accept request", currentNotifs[4]);
         notificationsMenu.style.display = "none";
         popupBackground.style.display = "none";
+        document.location.reload(true);
       });
 
       let declineRequest1 = document.getElementById("declineRequest1");
@@ -512,26 +517,31 @@
         socket.emit("decline request", currentNotifs[0]);
         notificationsMenu.style.display = "none";
         popupBackground.style.display = "none";
+        document.location.reload(true);
       });
       declineRequest2.addEventListener("click", (evt)=>{
         socket.emit("decline request", currentNotifs[1]);
         notificationsMenu.style.display = "none";
         popupBackground.style.display = "none";
+        document.location.reload(true);
       });
       declineRequest3.addEventListener("click", (evt)=>{
         socket.emit("decline request", currentNotifs[2]);
         notificationsMenu.style.display = "none";
         popupBackground.style.display = "none";
+        document.location.reload(true);
       });
       declineRequest4.addEventListener("click", (evt)=>{
         socket.emit("decline request", currentNotifs[3]);
         notificationsMenu.style.display = "none";
         popupBackground.style.display = "none";
+        document.location.reload(true);
       });
       declineRequest5.addEventListener("click", (evt)=>{
         socket.emit("decline request", currentNotifs[4]);
         notificationsMenu.style.display = "none";
         popupBackground.style.display = "none";
+        document.location.reload(true);
       });
 
       createButton.addEventListener("click", (evt)=>{
@@ -893,6 +903,7 @@
 
       socket.on("here notifications", (data)=>{
         for(let i = 0; i < data.length; i++){
+          // data is [[id1, username1], [id2, username2]...]
           // keep track of current displayed users with their IDs
           currentNotifs[i] = data[i][0];
           // display results (top 5 for now)
