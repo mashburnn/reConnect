@@ -1,12 +1,11 @@
 class User {
-    constructor(userID, username, password, friends, incoming) {
+    constructor(userID, username, password, friends, incoming, postID) {
         this.userID = userID; //integer
         this.username = username; //string
         this.password = password; //string
         this.friends = friends; //int array for userID
         this.incomingFriendRequest = incoming; //int array for userID
-        this.postID = []; //int array for postID's
-        this.notifications = []; // array of notif strings (?) maybe do userIDs of requesting people
+        this.postID = postID; //int array for postID's
     }
 
     getUserID() {
@@ -45,16 +44,16 @@ class User {
         this.friends.push(userID);
     }
 
-    setIncomingFriendRequest(userID) {
-        this.incomingFriendRequest.push(userID);
+    setIncomingFriendRequest(uID) {
+        this.incomingFriendRequest.push(uID);
     }
 
-    augmentSnippet(add, postID){
+    augmentSnippet(add, poID){
         ind = 0;
 
         //Add
         if(add){
-        this.postID.push(postID);
+        this.postID.push(poID);
         }
 
         //Remove
@@ -64,7 +63,7 @@ class User {
                 {
                     return 1;     //postID not found
                 }   
-                else if(this.postID[ind] == postID)
+                else if(this.postID[ind] == poID)
                 {
                     this.postID.splice(ind, 1)
                     break;
@@ -75,33 +74,26 @@ class User {
         }
     }
 
-    addIncomingFriendRequest(userID){
-        this.incomingFriendRequest.push(userID);
+    addIncomingFriendRequest(uID){
+        this.incomingFriendRequest.push(uID);
     }
 
-    augmentFriend(add, userID) {
-        ind = 0;
-
-        //Add
-        if(add){
-            this.friends.push(userID);
-            return 0;
-        }
-        //Remove
-        else{
-            //Find userID in incomingFriendRequest[] then splice()
-            while(1){    
-                if(ind == (this.incomingFriendRequest.length - 1))
-                {
-                    return 1;   //User not in incomingFriendRequest                    
-                }   
-                else if(this.incomingFriendRequest[ind] == userID)
-                {
-                    this.incomingFriendRequest.splice(ind, 1)
-                    break;
-                    return 0;
+    augmentFriend(add, uID) {
+        for(let i = 0; i < this.incomingFriendRequest.length; i++){
+            if(uID == (this.incomingFriendRequest[i])){
+                if(add){
+                    this.friends.push(uID);
+                    this.incomingFriendRequest.splice(i, 1)
+                    return 0;   //Added Friend, removed from requests
                 }
-                else{ind++}
+                else{
+                    this.incomingFriendRequest.splice(i, 1)
+                    break;
+                    return 0;   //Removed from requests
+                }                 
+            }   
+            else{
+                return 1;   //User not in incomingFriendRequest  
             }
         }
     }

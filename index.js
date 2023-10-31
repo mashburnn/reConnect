@@ -105,12 +105,61 @@ app.get('/results', (req, res)=>{
 /* functions/functionalities to write */
 /* these could be functions or could just be implemented in the socket handlers! */
 
-// search by username -- maybe start with exact matches? TRIP
+//Search for Post by ID TRIP
+function findPost(postID)
+{
+    for(let i = 0; i < Posts.length - 1; i++)
+    {
+        if (Posts[i].ID() == postID)
+        {
+            return i; //Found
+        }
+    }
 
-// like a post
+    return 0; //Not Found
+}
 
+// search by username -- exact matches TRIP
+function searchUser(userID) {
+    for (let i = 0; i < Users.length - 1; i++) {
+        if (Users[i].getUserID() == userID) {
+            return i; // Found
+        }
+    }
+    
+    return 0; // Not Found
+}
 
-// comment on a post
+// like a post TRIP
+function likePost(postID, userID){
+    let loc = findPost(postID);
+
+    try
+    {
+        if(!loc) throw "PostID does not exist";
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+
+    Posts[loc].likes(userID);
+}
+
+// comment on a post TRIP
+function commentPost(postID, cmt){
+    let loc = findPost(postID);
+    try
+    {
+        if(!loc) throw "PostID does not exist";
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+
+    Posts[loc].addComment(cmt);
+}
 
 // share a post
 
@@ -130,13 +179,40 @@ function createNewPost(posterID, content) {
   Posts.push(newPost);
 }
 
-// create a user TRIP
+// create a user 
+function usercreate(userID, username, password) {
+    
+    let tempUID = (Users.length + 1); // UID is generated as being its place in the Users array
+
+    try
+    {
+        if(searchUser(tempUID)) throw "UserID already exists";
+    }
+
+    catch(err)
+    {
+        console.log(err);
+    }
+
+    let tempUser = new User(userID, username, password, [], [], tempUID);
+    Users.push(tempUser);
+}
 
 // check user credentials
+function checkCred(userN, pass)
+{
+    for(let i = 0; i < User.length - 1; i++)
+    {
+        if(userN == User[i].getUserName() && pass == User[i].getPassword())
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
 
 /* LOADING FROM DATABASE */
 let db = new sqlite3.Database('storage.db');
-
 var Users = new Array();
 // load users from database into array
 let loadUsers = function() {
