@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="searchstyle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
     <link rel="icon" href="/bolt.svg">
     <title>reConnect</title>
 </head>
@@ -41,7 +42,7 @@
               <img src="bell.svg" alt="bell">
 
           </div>
-          <a href="#" id="friendsButton">Friends</a>
+          <a href="/friends" id="friendsButton">Friends</a>
           <a href="/profile" id="profileButton">Profile</a>
       </div>
     </div>
@@ -77,7 +78,37 @@
       </div>
 
       <div class="right-sidebar">
-        
+        <div class="popup-content" id="popupBackground">
+          <!-- Notifications -->
+          <div id="notificationsMenu">
+            <div class="popup-header">
+              <a><h2>Notifications</h2></a>
+              <a class="close" style="align-items: right;" id="notifCloseButton">X</a>
+            </div>
+            <div class="popup-body">
+              <ul>
+                <li id="requestNotif1li"><h3 id="requestNotif1" href="#">Loading...</h3><a>  </a><a id="acceptRequest1" href="#">Accept</a><a>  </a><a id="declineRequest1" href="#">Decline</a></li>
+                <li id="requestNotif2li"><h3 id="requestNotif2" href="#">Loading...</h3><a>  </a><a id="acceptRequest2" href="#">Accept</a><a>  </a><a id="declineRequest2" href="#">Decline</a></li>
+                <li id="requestNotif3li"><h3 id="requestNotif3" href="#">Loading...</h3><a>  </a><a id="acceptRequest3" href="#">Accept</a><a>  </a><a id="declineRequest3" href="#">Decline</a></li>
+                <li id="requestNotif4li"><h3 id="requestNotif4" href="#">Loading...</h3><a>  </a><a id="acceptRequest4" href="#">Accept</a><a>  </a><a id="declineRequest4" href="#">Decline</a></li>
+                <li id="requestNotif5li"><h3 id="requestNotif5" href="#">Loading...</h3><a>  </a><a id="acceptRequest5" href="#">Accept</a><a>  </a><a id="declineRequest5" href="#">Decline</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Create Post -->
+          <div id="createPostMenu">
+            <div class="popup-header">
+              <h2>Create a Post</h2>
+              <a class="close" style="align-items: right;" id="createPostCloseButton">X</a>
+            </div>
+            <div class="popup-body">
+              <textarea id="newPostContent" name="newPostContent" placeholder="Content" cols="40"></textarea>
+              <button id="createPostSubmitButton">Create Post</button>
+            </div> 
+          </div>
+
+        </div>
       </div>
     </div>
 
@@ -85,7 +116,7 @@
     <script type="text/javascript">
       let socket = io();
       // everything else goes here
-
+      let currentNotifs = new Array();
       // variable init
       let profileButton = document.getElementById("profileButton");
       profileButton.addEventListener("click", (evt)=>{
@@ -140,11 +171,118 @@
       let friendsButton = document.getElementById("friendsButton");
 
       notifButton.addEventListener("click", (evt)=>{
-        // popup
+        socket.emit("need notifications");
+        notificationsMenu.style.display = "block";
+        popupBackground.style.display = "block";
+      });
+      let notifCloseButton = document.getElementById("notifCloseButton");
+      notifCloseButton.addEventListener("click", (evt)=>{
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+        workingPost = -1;
+      });
+
+      let requestNotif1 = document.getElementById("requestNotif1");
+      let requestNotif2 = document.getElementById("requestNotif2");
+      let requestNotif3 = document.getElementById("requestNotif3");
+      let requestNotif4 = document.getElementById("requestNotif4");
+      let requestNotif5 = document.getElementById("requestNotif5");
+      let requestNotif1li = document.getElementById("requestNotif1li");
+      let requestNotif2li = document.getElementById("requestNotif2li");
+      let requestNotif3li = document.getElementById("requestNotif3li");
+      let requestNotif4li = document.getElementById("requestNotif4li");
+      let requestNotif5li = document.getElementById("requestNotif5li");
+      requestNotif1li.style.display = "none";
+      requestNotif2li.style.display = "none";
+      requestNotif3li.style.display = "none";
+      requestNotif4li.style.display = "none";
+      requestNotif5li.style.display = "none";
+
+      let acceptRequest1 = document.getElementById("acceptRequest1");
+      let acceptRequest2 = document.getElementById("acceptRequest2");
+      let acceptRequest3 = document.getElementById("acceptRequest3");
+      let acceptRequest4 = document.getElementById("acceptRequest4");
+      let acceptRequest5 = document.getElementById("acceptRequest5");
+
+      acceptRequest1.addEventListener("click", (evt)=>{
+        socket.emit("accept request", currentNotifs[0]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      acceptRequest2.addEventListener("click", (evt)=>{
+        socket.emit("accept request", currentNotifs[1]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      acceptRequest3.addEventListener("click", (evt)=>{
+        socket.emit("accept request", currentNotifs[2]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      acceptRequest4.addEventListener("click", (evt)=>{
+        socket.emit("accept request", currentNotifs[3]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      acceptRequest5.addEventListener("click", (evt)=>{
+        socket.emit("accept request", currentNotifs[4]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+
+      let declineRequest1 = document.getElementById("declineRequest1");
+      let declineRequest2 = document.getElementById("declineRequest2");
+      let declineRequest3 = document.getElementById("declineRequest3");
+      let declineRequest4 = document.getElementById("declineRequest4");
+      let declineRequest5 = document.getElementById("declineRequest5");
+
+      declineRequest1.addEventListener("click", (evt)=>{
+        socket.emit("decline request", currentNotifs[0]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      declineRequest2.addEventListener("click", (evt)=>{
+        socket.emit("decline request", currentNotifs[1]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      declineRequest3.addEventListener("click", (evt)=>{
+        socket.emit("decline request", currentNotifs[2]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      declineRequest4.addEventListener("click", (evt)=>{
+        socket.emit("decline request", currentNotifs[3]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      declineRequest5.addEventListener("click", (evt)=>{
+        socket.emit("decline request", currentNotifs[4]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
       });
 
       createButton.addEventListener("click", (evt)=>{
-        // popup
+        createPostMenu.style.display = "block";
+        popupBackground.style.display = "block";
+      });
+      let createPostCloseButton = document.getElementById("createPostCloseButton");
+      createPostCloseButton.addEventListener("click", (evt)=>{
+        createPostMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+
+      let createPostSubmitButton = document.getElementById("createPostSubmitButton");
+      let newPostContent = document.getElementById("newPostContent").value;
+      createPostSubmitButton.addEventListener("click", (evt)=>{
+        newPostContent = document.getElementById("newPostContent").value;
+        if(newPostContent == ""){
+          // error message, can't have an empty post
+          return;
+        }
+        else{
+          socket.emit("create post request", newPostContent);
+        }
       });
 
       friendsButton.addEventListener("click", (evt)=>{
@@ -154,6 +292,13 @@
 
       let currentResults = new Array();
 
+      let notificationsMenu = document.getElementById("notificationsMenu");
+      notificationsMenu.style.display = "none";
+      let createPostMenu = document.getElementById("createPostMenu");
+      createPostMenu.style.display = "none";
+      let popupBackground = document.getElementById("popupBackground");
+      popupBackground.style.display = "none";
+
       // last page will have already given the search term to the backend, it will be stored for this request!
       socket.emit("need results")
 
@@ -161,7 +306,7 @@
         // data probably sent as [[userID, username], [userID, username]...] and so on
         for(let i = 0; i < data.length; i++){
           // keep track of current displayed users with their IDs
-          currentResults.push(data[i][0]);
+          currentResults[i] = data[i][0];
           // display results (top 5 for now)
           if(i == 0){
             result1.innerText = data[i][1];
@@ -184,6 +329,46 @@
             card5.style.display = "block";
           }
           
+        }
+      });
+
+      socket.on("here notifications", (data)=>{
+        for(let i = 0; i < data.length; i++){
+          // keep track of current displayed users with their IDs
+          currentNotifs[i] = data[i][0];
+          // display results (top 5 for now)
+          if(i == 0){
+            requestNotif1.innerText = data[i][1];
+            requestNotif1li.style.display = "block";
+          }
+          else if(i == 1){
+            requestNotif2.innerText = data[i][1];
+            requestNotif2li.style.display = "block";
+          }
+          else if(i == 2){
+            requestNotif3.innerText = data[i][1];
+            requestNotif3li.style.display = "block";
+          }
+          else if(i == 3){
+            requestNotif4.innerText = data[i][1];
+            requestNotif4li.style.display = "block";
+          }
+          else if(i == 4){
+            requestNotif5.innerText = data[i][1];
+            requestNotif5li.style.display = "block";
+          }
+          
+        }
+      });
+
+      socket.on("create post result", (data)=>{
+        if(data == "true"){
+          createPostMenu.style.display = "none";
+          popupBackground.style.display = "none";
+          // in profile, refresh
+        }
+        else{
+          // error
         }
       });
     </script>

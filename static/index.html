@@ -124,32 +124,68 @@
       </div>
 
       <div class="right-sidebar">
-        
+        <div class="popup-content" id="popupBackground">
+          <!-- Notifications -->
+          <div id="notificationsMenu">
+            <div class="popup-header">
+              <a><h2>Notifications</h2></a>
+              <a class="close" style="align-items: right;" id="notifCloseButton">X</a>
+            </div>
+            <div class="popup-body">
+              <ul>
+                <li id="requestNotif1li"><h3 id="requestNotif1" href="#">Loading...</h3><a>  </a><a id="acceptRequest1" href="#">Accept</a><a>  </a><a id="declineRequest1" href="#">Decline</a></li>
+                <li id="requestNotif2li"><h3 id="requestNotif2" href="#">Loading...</h3><a>  </a><a id="acceptRequest2" href="#">Accept</a><a>  </a><a id="declineRequest2" href="#">Decline</a></li>
+                <li id="requestNotif3li"><h3 id="requestNotif3" href="#">Loading...</h3><a>  </a><a id="acceptRequest3" href="#">Accept</a><a>  </a><a id="declineRequest3" href="#">Decline</a></li>
+                <li id="requestNotif4li"><h3 id="requestNotif4" href="#">Loading...</h3><a>  </a><a id="acceptRequest4" href="#">Accept</a><a>  </a><a id="declineRequest4" href="#">Decline</a></li>
+                <li id="requestNotif5li"><h3 id="requestNotif5" href="#">Loading...</h3><a>  </a><a id="acceptRequest5" href="#">Accept</a><a>  </a><a id="declineRequest5" href="#">Decline</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Create Post -->
+          <div id="createPostMenu">
+            <div class="popup-header">
+              <h2>Create a Post</h2>
+              <a class="close" style="align-items: right;" id="createPostCloseButton">X</a>
+            </div>
+            <div class="popup-body">
+              <textarea id="newPostContent" name="newPostContent" placeholder="Content" cols="40"></textarea>
+              <button id="createPostSubmitButton">Create Post</button>
+            </div> 
+          </div>
+
+          <!-- Create Comment -->
+          <div id="createCommentMenu">
+            <div class="popup-header">
+              <h2>Add a Comment</h2>
+              <a class="close" style="align-items: right;" id="createCommentCloseButton">X</a>
+            </div>
+            <div class="popup-body">
+              <p id="newCommentError">Invalid comment.</p>
+              <textarea id="newCommentContent" name="newCommentContent" placeholder="Comment" cols="40"></textarea>
+              <button id="createCommentSubmitButton">Add Comment</button>
+            </div>
+          </div>
+
+          <!-- Share Post -->
+          <div id="sharePostMenu">
+            <div class="popup-header">
+              <h2>Share a Post</h2>
+              <a class="close" style="align-items: right;" id="sharePostCloseButton">X</a>
+            </div>
+            <div class="popup-body" id="sharePostMenu">
+              <ul>
+                <li id="friend1li"><a id="friend1" href="#">Loading...</a></li>
+                <li id="friend2li"><a id="friend2" href="#">Loading...</a></li>
+                <li id="friend3li"><a id="friend3" href="#">Loading...</a></li>
+                <li id="friend4li"><a id="friend4" href="#">Loading...</a></li>
+                <li id="friend5li"><a id="friend5" href="#">Loading...</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!--pop ups for notifications, posts, friends list, etc-->
-    <!-- <div class="popup">
-      <div class="popup-content">
-        <div class="popup-header">
-          <h2>Post</h2>
-          <span class="close">&times;</span>
-        </div>
-        <div class="popup-body">
-          <form action="/create-post">
-            <input type="text" name="author" placeholder="Author">
-            <textarea name="content" placeholder="Content"></textarea>
-            <input type="submit" value="Create Post">
-          </form>
-        </div>
-        <form action="/create-comment">
-          <input type="text" name="author" placeholder="Author">
-          <textarea name="content" placeholder="Content"></textarea>
-          <input type="submit" value="Create Comment">
-        </form>
-      </div>
-    </div> -->
-    <!--end of pop ups-->
 
 <script src="/socket.io/socket.io.js"></script>
    <script type="text/javascript">
@@ -157,8 +193,11 @@
       let socket = io();
 
       let currentPosts = new Array();
+      let workingPost = -1;
       let currentLikeCounts = new Array();
       let currentShareCounts = new Array();
+      let currentResults = new Array();
+      let currentNotifs = new Array();
 
       // variable init
       let profileButton = document.getElementById("profileButton");
@@ -221,19 +260,79 @@
       let shares5 = document.getElementById("shares5");
 
       shares1.addEventListener("click", (evt)=>{
-        socket.emit("share request", currentPosts[0]);
+        sharePostMenu.style.display = "block";
+        popupBackground.style.display = "block";
+        workingPost = 0;
+        socket.emit("search request", "friends");
+        socket.emit("need to share");
       });
       shares2.addEventListener("click", (evt)=>{
-        socket.emit("share request", currentPosts[1]);
+        sharePostMenu.style.display = "block";
+        popupBackground.style.display = "block";
+        workingPost = 1;
+        socket.emit("search request", "friends");
+        socket.emit("need to share");
       });
       shares3.addEventListener("click", (evt)=>{
-        socket.emit("share request", currentPosts[2]);
+        sharePostMenu.style.display = "block";
+        popupBackground.style.display = "block";
+        workingPost = 2;
+        socket.emit("search request", "friends");
+        socket.emit("need to share");
       });
       shares4.addEventListener("click", (evt)=>{
-        socket.emit("share request", currentPosts[3]);
+        sharePostMenu.style.display = "block";
+        popupBackground.style.display = "block";
+        workingPost = 3;
+        socket.emit("search request", "friends");
+        socket.emit("need to share");
       });
       shares5.addEventListener("click", (evt)=>{
-        socket.emit("share request", currentPosts[4]);
+        sharePostMenu.style.display = "block";
+        popupBackground.style.display = "block";
+        workingPost = 4;
+        socket.emit("search request", "friends");
+        socket.emit("need to share");
+      });
+
+      let sharePostCloseButton = document.getElementById("sharePostCloseButton");
+      sharePostCloseButton.addEventListener("click", (evt)=>{
+        sharePostMenu.style.display = "none";
+        popupBackground.style.display = "none";
+        workingPost = -1;
+      });
+
+      let friend1 = document.getElementById("friend1");
+      let friend2 = document.getElementById("friend2");
+      let friend3 = document.getElementById("friend3");
+      let friend4 = document.getElementById("friend4");
+      let friend5 = document.getElementById("friend5");
+
+      let friend1li = document.getElementById("friend1li");
+      let friend2li = document.getElementById("friend2li");
+      let friend3li = document.getElementById("friend3li");
+      let friend4li = document.getElementById("friend4li");
+      let friend5li = document.getElementById("friend5li");
+      friend1li.style.display = "none";
+      friend2li.style.display = "none";
+      friend3li.style.display = "none";
+      friend4li.style.display = "none";
+      friend5li.style.display = "none";
+
+      friend1.addEventListener("click", (evt)=>{
+        socket.emit("share request", currentPosts[workingPost]);
+      });
+      friend2.addEventListener("click", (evt)=>{
+        socket.emit("share request", currentPosts[workingPost]);
+      });
+      friend3.addEventListener("click", (evt)=>{
+        socket.emit("share request", currentPosts[workingPost]);
+      });
+      friend4.addEventListener("click", (evt)=>{
+        socket.emit("share request", currentPosts[workingPost]);
+      });
+      friend5.addEventListener("click", (evt)=>{
+        socket.emit("share request", currentPosts[workingPost]);
       });
 
       let post1comments = document.getElementById("post1comments");
@@ -249,19 +348,50 @@
       let addCommentButton5 = document.getElementById("addCommentButton5");
 
       addCommentButton1.addEventListener("click", (evt)=>{
-        // popup
+        createCommentMenu.style.display = "block";
+        popupBackground.style.display = "block";
+        workingPost = 0;
       });
       addCommentButton2.addEventListener("click", (evt)=>{
-        // popup
+        createCommentMenu.style.display = "block";
+        popupBackground.style.display = "block";
+        workingPost = 1;
       });
       addCommentButton3.addEventListener("click", (evt)=>{
-        // popup
+        createCommentMenu.style.display = "block";
+        popupBackground.style.display = "block";
+        workingPost = 2;
       });
       addCommentButton4.addEventListener("click", (evt)=>{
-        // popup
+        createCommentMenu.style.display = "block";
+        popupBackground.style.display = "block";
+        workingPost = 3;
       });
       addCommentButton5.addEventListener("click", (evt)=>{
-        // popup
+        createCommentMenu.style.display = "block";
+        popupBackground.style.display = "block";
+        workingPost = 4;
+      });
+
+      let createCommentCloseButton = document.getElementById("createCommentCloseButton");
+      createCommentCloseButton.addEventListener("click", (evt)=>{
+        createCommentMenu.style.display = "none";
+        popupBackground.style.display = "none";
+        workingPost = -1;
+      });
+      let newCommentContent = document.getElementById("newCommentContent").value;
+      let newCommentError = document.getElementById("newCommentError");
+      newCommentError.style.display = "none";
+      let createCommentSubmitButton = document.getElementById("createCommentSubmitButton");
+      createCommentSubmitButton.addEventListener("click", (evt)=>{
+        newCommentContent = document.getElementById("newCommentContent").value;
+        // console.log("clicked");
+        if(newCommentContent == ""){
+          // display error, comment can't be empty
+          newCommentError.style.display = "block";
+          return;
+        }
+        socket.emit("comment request", [currentPosts[workingPost], newCommentContent]);
       });
 
       // button handlers
@@ -270,17 +400,137 @@
       let friendsButton = document.getElementById("friendsButton");
 
       notifButton.addEventListener("click", (evt)=>{
-        // popup
+        socket.emit("need notifications");
+        notificationsMenu.style.display = "block";
+        popupBackground.style.display = "block";
+      });
+      let notifCloseButton = document.getElementById("notifCloseButton");
+      notifCloseButton.addEventListener("click", (evt)=>{
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+        workingPost = -1;
+      });
+
+      let requestNotif1 = document.getElementById("requestNotif1");
+      let requestNotif2 = document.getElementById("requestNotif2");
+      let requestNotif3 = document.getElementById("requestNotif3");
+      let requestNotif4 = document.getElementById("requestNotif4");
+      let requestNotif5 = document.getElementById("requestNotif5");
+      let requestNotif1li = document.getElementById("requestNotif1li");
+      let requestNotif2li = document.getElementById("requestNotif2li");
+      let requestNotif3li = document.getElementById("requestNotif3li");
+      let requestNotif4li = document.getElementById("requestNotif4li");
+      let requestNotif5li = document.getElementById("requestNotif5li");
+      requestNotif1li.style.display = "none";
+      requestNotif2li.style.display = "none";
+      requestNotif3li.style.display = "none";
+      requestNotif4li.style.display = "none";
+      requestNotif5li.style.display = "none";
+
+      let acceptRequest1 = document.getElementById("acceptRequest1");
+      let acceptRequest2 = document.getElementById("acceptRequest2");
+      let acceptRequest3 = document.getElementById("acceptRequest3");
+      let acceptRequest4 = document.getElementById("acceptRequest4");
+      let acceptRequest5 = document.getElementById("acceptRequest5");
+
+      acceptRequest1.addEventListener("click", (evt)=>{
+        socket.emit("accept request", currentNotifs[0]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      acceptRequest2.addEventListener("click", (evt)=>{
+        socket.emit("accept request", currentNotifs[1]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      acceptRequest3.addEventListener("click", (evt)=>{
+        socket.emit("accept request", currentNotifs[2]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      acceptRequest4.addEventListener("click", (evt)=>{
+        socket.emit("accept request", currentNotifs[3]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      acceptRequest5.addEventListener("click", (evt)=>{
+        socket.emit("accept request", currentNotifs[4]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+
+      let declineRequest1 = document.getElementById("declineRequest1");
+      let declineRequest2 = document.getElementById("declineRequest2");
+      let declineRequest3 = document.getElementById("declineRequest3");
+      let declineRequest4 = document.getElementById("declineRequest4");
+      let declineRequest5 = document.getElementById("declineRequest5");
+
+      declineRequest1.addEventListener("click", (evt)=>{
+        socket.emit("decline request", currentNotifs[0]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      declineRequest2.addEventListener("click", (evt)=>{
+        socket.emit("decline request", currentNotifs[1]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      declineRequest3.addEventListener("click", (evt)=>{
+        socket.emit("decline request", currentNotifs[2]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      declineRequest4.addEventListener("click", (evt)=>{
+        socket.emit("decline request", currentNotifs[3]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+      declineRequest5.addEventListener("click", (evt)=>{
+        socket.emit("decline request", currentNotifs[4]);
+        notificationsMenu.style.display = "none";
+        popupBackground.style.display = "none";
       });
 
       createButton.addEventListener("click", (evt)=>{
-        // popup
+        createPostMenu.style.display = "block";
+        popupBackground.style.display = "block";
+      });
+      let createPostCloseButton = document.getElementById("createPostCloseButton");
+      createPostCloseButton.addEventListener("click", (evt)=>{
+        createPostMenu.style.display = "none";
+        popupBackground.style.display = "none";
+      });
+
+      let createPostSubmitButton = document.getElementById("createPostSubmitButton");
+      let newPostContent = document.getElementById("newPostContent").value;
+      createPostSubmitButton.addEventListener("click", (evt)=>{
+        newPostContent = document.getElementById("newPostContent").value;
+        if(newPostContent == ""){
+          // error message, can't have an empty post
+          return;
+        }
+        else{
+          socket.emit("create post request", newPostContent);
+        }
       });
 
       friendsButton.addEventListener("click", (evt)=>{
         socket.emit("search request", "friends");
         location.href = "/friends";
       });
+
+      let notificationsMenu = document.getElementById("notificationsMenu");
+      notificationsMenu.style.display = "none";
+      let createPostMenu = document.getElementById("createPostMenu");
+      createPostMenu.style.display = "none";
+      let createCommentMenu = document.getElementById("createCommentMenu");
+      createCommentMenu.style.display = "none";
+      // let editPostMenu = document.getElementById("editPostMenu");
+      // editPostMenu.style.display = "none";
+      let sharePostMenu = document.getElementById("sharePostMenu");
+      sharePostMenu.style.display = "none";
+      let popupBackground = document.getElementById("popupBackground");
+      popupBackground.style.display = "none";
 
 
       // bring in the posts!
@@ -410,6 +660,9 @@
 
       socket.on("share result", (data)=>{
         if(data[0] == "true"){
+          sharePostMenu.style.display = "none";
+          popupBackground.style.display = "none";
+          workingPost = -1;
           if(data[1] == currentPosts[0]){
             currentShareCounts[0]++;
             shares1.innerText = "Shares: " + currentShareCounts[0];
@@ -439,72 +692,106 @@
         }
       });
 
+      socket.on("comment result", (data)=>{
+        if(data == "true"){
+          let li = document.createElement("li");
+          li.appendChild(document.createTextNode(newCommentContent));
+          if(workingPost == 0){
+            post1comments.appendChild(li);
+          }
+          else if(workingPost == 1){
+            post2comments.appendChild(li);
+          }
+          else if(workingPost == 2){
+            post3comments.appendChild(li);
+          }
+          else if(workingPost == 3){
+            post4comments.appendChild(li);
+          }
+          else if(workingPost == 4){
+            post5comments.appendChild(li);
+          }
+          createCommentMenu.style.display = "none";
+          popupBackground.style.display = "none";
+          setTimeout(()=>{
+            workingPost = 0;
+          }, 15);
+        }
+        else{
+          newCommentError.style.display = "block";
+        }
+      });
+
+      socket.on("here friends", (data)=>{
+        for(let i = 0; i < data.length; i++){
+          // keep track of current displayed users with their IDs
+          currentResults[i] = data[i][0];
+          // display results (top 5 for now)
+          if(i == 0){
+            friend1.innerText = data[i][1];
+            friend1li.style.display = "block";
+          }
+          else if(i == 1){
+            friend2.innerText = data[i][1];
+            friend2li.style.display = "block";
+          }
+          else if(i == 2){
+            friend3.innerText = data[i][1];
+            friend3li.style.display = "block";
+          }
+          else if(i == 3){
+            friend4.innerText = data[i][1];
+            friend4li.style.display = "block";
+          }
+          else if(i == 4){
+            friend5.innerText = data[i][1];
+            friend5li.style.display = "block";
+          }
+          
+        }
+      });
+
+      socket.on("here notifications", (data)=>{
+        for(let i = 0; i < data.length; i++){
+          // keep track of current displayed users with their IDs
+          currentNotifs[i] = data[i][0];
+          // display results (top 5 for now)
+          if(i == 0){
+            requestNotif1.innerText = data[i][1];
+            requestNotif1li.style.display = "block";
+          }
+          else if(i == 1){
+            requestNotif2.innerText = data[i][1];
+            requestNotif2li.style.display = "block";
+          }
+          else if(i == 2){
+            requestNotif3.innerText = data[i][1];
+            requestNotif3li.style.display = "block";
+          }
+          else if(i == 3){
+            requestNotif4.innerText = data[i][1];
+            requestNotif4li.style.display = "block";
+          }
+          else if(i == 4){
+            requestNotif5.innerText = data[i][1];
+            requestNotif5li.style.display = "block";
+          }
+          
+        }
+      });
+
+      socket.on("create post result", (data)=>{
+        if(data == "true"){
+          createPostMenu.style.display = "none";
+          popupBackground.style.display = "none";
+          // in profile, refresh
+        }
+        else{
+          // error
+        }
+      });
+
    </script>
-   
-  <!-- post card generation -->
-   <!-- <script src= "/postCard"></script>
-   <script>const threadData1 = {
-     author: 'Jane Smith',
-     content: "I am Jane Smith, I've been in the tech industry for over a decade, working on various projects and technologies.",
-     likes: 5,
-     comments: [
-       { author: 'Eve', content: 'Comment 3' },
-       { author: 'Charlie', content: 'Comment 4' },
-     ],
-     isComment: true,
-   };
-
-   const threadData2 = {
-     author: 'Jane Smith',
-     content: "I am John Doe, a software engineer with a passion for coding and problem-solving. I've been in the tech industry for over a decade, working on various projects and technologies.",
-     likes: 5,
-     comments: [
-       { author: 'Eve', content: 'Comment 3' },
-       { author: 'Charlie', content: 'Comment 4' },
-     ],
-     isComment: true,
-   };
-
-   const threadData3 = {
-     author: 'Jane Smith',
-     content: "I am amnish Doe, a software engineer with a passion for coding and problem-solving. I've been in the tech industry for over a decade, working on various projects and technologies.",
-     likes: 5,
-     comments: [],
-     isComment: true,
-   };
-
-   const threadData4 = {
-     author: 'Jane Smith',
-     content: "Your content here",
-     likes: 5,
-     comments: [
-       { author: 'Eve', content: 'Comment 1' },
-       { author: 'Charlie', content: 'Comment 2' },
-     ],
-     isComment: true,
-   };
-
-   const threadCards = [];
-
-   // Create PostCard instances and push them into the array
-   for (let i = 1; i <= 4; i++) {
-     const threadData = eval(`threadData${i}`);
-     const threadCard = new PostCard(
-       threadData.author,
-       threadData.content,
-       threadData.likes,
-       threadData.comments,
-       threadData.isComment
-     );
-     threadCards.push(threadCard);
-   }
-
-   // Append all the thread card elements to a container in your HTML document
-   const container = document.getElementById('thread-container');
-
-   threadCards.forEach((threadCard) => {
-     container.appendChild(threadCard.render());
-   }); -->
 </script>
 </body>
 
