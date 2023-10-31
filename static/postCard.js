@@ -48,7 +48,7 @@ class PostCard {
   }
 
   set likes(newLikes) {
-    this._likes.push(newLikes);
+    this._likes = newLikes;
   }
 
   get shares() {

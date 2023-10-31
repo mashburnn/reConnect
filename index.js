@@ -108,9 +108,9 @@ app.get('/results', (req, res)=>{
 //Search for Post by ID TRIP
 function findPost(postID)
 {
-    for(let i = 0; i < Posts.length - 1; i++)
+    for(let i = 0; i < Posts.length; i++)
     {
-        if (Posts[i].ID() == postID)
+        if (Posts[i].ID == postID)
         {
             return i; //Found
         }
@@ -120,14 +120,14 @@ function findPost(postID)
 }
 
 // search by username -- exact matches TRIP
-function searchUser(userID) {
-    for (let i = 0; i < Users.length - 1; i++) {
-        if (Users[i].getUserID() == userID) {
+function searchUser(username) {
+    for (let i = 0; i < Users.length; i++) {
+        if (Users[i].getUsername() == username) {
             return i; // Found
         }
     }
     
-    return 0; // Not Found
+    return -1; // Not Found
 }
 
 // like a post TRIP
@@ -143,7 +143,11 @@ function likePost(postID, userID){
         console.log(err);
     }
 
-    Posts[loc].likes(userID);
+    let currLikes = Posts[loc].likes;
+    currLikes.push(userID);
+    setTimeout(()=>{
+        Posts[loc].likes = currLikes;
+    }, 15);
 }
 
 // comment on a post TRIP
@@ -162,11 +166,21 @@ function commentPost(postID, cmt){
 }
 
 // share a post
+function sharePost(postID){
+    let index = findPost(postID);
+    let currShares = Posts[index].shares;
+    currShares++;
+    setTimeout(()=>{
+        Posts[index].shares = currShares;
+    }, 50);
+    // TODO get it to the friend
+}
 
 // create a post
 function createNewPost(posterID, content) {
-  while(true){
-    let newID = Math.floor(Math.random() * (100)) + 1;
+  let newID = -1;
+    while(true){
+    newID = Math.floor(Math.random() * (100)) + 1;
     for(let i = 0; i < Posts.length; i++){
       if(Posts[i].ID == newID){
         break;
@@ -175,12 +189,27 @@ function createNewPost(posterID, content) {
     break;
   }
   
-  let newPost = new PostCard(newID, posterID, "deprecated", content, [], 0, []);
-  Posts.push(newPost);
+  setTimeout(()=>{
+    let newPost = new PostCard(newID, posterID, "deprecated", content, [], 0, []);
+    Posts.push(newPost);
+    // added -- push new post to its poster class
+    // let index = -1;
+    //     for(let i = 0; i < Users.length; i++){
+    //         if(posterID == Users[i].getUserID()){
+    //             Users[i].addPostID(newID);
+    //             break;
+    //         }
+    //         if(i == Users.length-1 && index == -1){
+    //             console.log("couldn't add post to user");
+    //             return;
+    //         }
+    //     }
+  }, 500);
+  
 }
 
-// create a user 
-function usercreate(userID, username, password) {
+// create a user TODO fix this to create a new ID on duplicate
+function usercreate(username, password) {
     
     let tempUID = (Users.length + 1); // UID is generated as being its place in the Users array
 
@@ -194,21 +223,23 @@ function usercreate(userID, username, password) {
         console.log(err);
     }
 
-    let tempUser = new User(userID, username, password, [], [], tempUID);
-    Users.push(tempUser);
+    setTimeout(()=>{
+        let tempUser = new User(tempUID, username, password, [], []); // not using that last parameter for now oops
+        Users.push(tempUser);
+    }, 100);
 }
 
 // check user credentials
 function checkCred(userN, pass)
 {
-    for(let i = 0; i < User.length - 1; i++)
+    for(let i = 0; i < Users.length; i++)
     {
-        if(userN == User[i].getUserName() && pass == User[i].getPassword())
+        if(userN == Users[i].getUsername() && pass == Users[i].getPassword())
         {
-            return 0;
+            return true;
         }
     }
-    return 1;
+    return false;
 }
 
 /* LOADING FROM DATABASE */
@@ -491,6 +522,12 @@ io.on('connection', (socket)=>{
         }, 500);
     });
 
+    socket.on("need to share", (data)=>{
+        setTimeout(()=>{
+            socket.emit("here friends", resultsToSend);
+        }, 500);
+    });
+
     socket.on("nextProfile", (data)=>{
         // store a user ID to send over to profile.html
         profileToSend = -1;
@@ -569,7 +606,7 @@ io.on('connection', (socket)=>{
                 index = i;
                 break;
             }
-            if(i == Users.length-1){
+            if(i == Users.length-1 && index == -1){
                 console.log("username not found");
                 socket.emit('loginAttemptResults', 'false');
                 return;
@@ -608,7 +645,7 @@ io.on('connection', (socket)=>{
                 socket.emit('registerAttemptResults', 'false');
             }
             else{
-                // TODO add new user function here
+                usercreate(data.username, data.password);
                 socket.emit('registerAttemptResults', 'true');
             }
         }, 500)
@@ -687,7 +724,7 @@ io.on('connection', (socket)=>{
                 index = i;
                 break;
             }
-            if(i == Posts.length-1){
+            if(i == Posts.length-1 && index == -1){
                 console.log("post not found");
                 socket.emit("like result", ["false"]);
                 return;
@@ -696,7 +733,7 @@ io.on('connection', (socket)=>{
 
         setTimeout(()=>{
             if(Posts[index].PosterID != currentUser && !Posts[index].likes.includes(currentUser)){
-                // TODO like post function goes here
+                likePost(data, currentUser);
                 socket.emit("like result", ["true", data]);
             }
             else{
@@ -713,7 +750,7 @@ io.on('connection', (socket)=>{
                 index = i;
                 break;
             }
-            if(i == Posts.length-1){
+            if(i == Posts.length-1 && index == -1){
                 console.log("post not found");
                 socket.emit("share result", ["false"]);
                 return;
@@ -721,7 +758,7 @@ io.on('connection', (socket)=>{
         }
 
         setTimeout(()=>{
-            // TODO share post function goes here
+            sharePost(data);
             socket.emit("share result", ["true", data]);
         }, 50);
     });
@@ -738,7 +775,7 @@ io.on('connection', (socket)=>{
                 index = i;
                 break;
             }
-            if(i == Users.length-1){
+            if(i == Users.length-1 && index == -1){
                 console.log("couldn't find current user");
                 socket.emit("friend request result", "false");
                 return;
@@ -749,6 +786,130 @@ io.on('connection', (socket)=>{
             // check if user already has incoming from this user
             Users[index].setIncomingFriendRequest(currentUser);
             socket.emit("friend request result", "true");
+        }, 50);
+    });
+
+    socket.on("comment request", (data)=>{
+        console.log("got a comment request");
+        commentPost(data[0], data[1]);
+        console.log("added comment to post", data[0], data[1]);
+        socket.emit("comment result", "true");
+    });
+
+    socket.on("need notifications", (data)=>{
+        let index = -1;
+        // get to the current user instance
+        for(let i = 0; i < Users.length; i++){
+            if(Users[i].getUserID() == currentUser){
+                index = i;
+                break;
+            }
+            if(i == Users.length-1 && index == -1){
+                console.log("profile not found");
+                return;
+            }
+        }
+        let requestIDs = new Array();
+        setTimeout(()=>{
+            for(let i = 0; i < Users[index].getIncomingFriendRequest().length; i++){
+                requestIDs[i] = Users[index].getIncomingFriendRequest()[i];
+            }
+        }, 50);
+
+        let requests = new Array();
+        setTimeout(()=>{
+            for(let i = 0; i < requestIDs.length; i++){
+                let tmpRequest = new Array();
+                tmpRequest[0] = requestIDs[i];
+                for(let j = 0; j < Users.length; j++){
+                    if(Users[j].getUserID() == requestIDs[i]){
+                        tmpRequest[1] = Users[j].getUsername();
+                        break;
+                    }
+                }
+                setTimeout(()=>{
+                    requests.push(tmpFriend);
+                }, 100)
+            }
+        }, 100);
+    });
+
+    socket.on("accept request", (data)=>{
+        let index = -1;
+        // get to the current user instance
+        for(let i = 0; i < Users.length; i++){
+            if(Users[i].getUserID() == currentUser){
+                index = i;
+                break;
+            }
+            if(i == Users.length-1 && index == -1){
+                console.log("profile not found");
+                return;
+            }
+        }
+
+        setTimeout(()=>{
+            Users[index].augmentFriend(1, data);
+            socket.emit("accept request result", "true");
+        }, 50);
+    });
+
+    socket.on("decline request", (data)=>{
+        let index = -1;
+        // get to the current user instance
+        for(let i = 0; i < Users.length; i++){
+            if(Users[i].getUserID() == currentUser){
+                index = i;
+                break;
+            }
+            if(i == Users.length-1 && index == -1){
+                console.log("profile not found");
+                return;
+            }
+        }
+
+        setTimeout(()=>{
+            Users[index].augmentFriend(0, data);
+        }, 50);
+    });
+
+    socket.on("create post request", (data)=>{
+        let index = -1;
+        // get to the current user instance
+        for(let i = 0; i < Users.length; i++){
+            if(Users[i].getUserID() == currentUser){
+                index = i;
+                break;
+            }
+            if(i == Users.length-1 && index == -1){
+                console.log("profile not found");
+                return;
+            }
+        }
+
+        setTimeout(()=>{
+            createNewPost(currentUser, data);
+            socket.emit("create post result", "true");
+        }, 50);
+    });
+
+    socket.on("edit post request", (data)=>{
+        let index = -1;
+        // get to the current user instance
+        for(let i = 0; i < Posts.length; i++){
+            if(Posts[i].ID == data[0]){
+                index = i;
+                break;
+            }
+            if(i == Posts.length-1 && index == -1){
+                console.log("post not found");
+                return;
+            }
+        }
+
+        setTimeout(()=>{
+            Posts[index].content = data[1];
+            socket.emit("edit post result", "true");
         }, 50);
     });
 
