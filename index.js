@@ -317,42 +317,55 @@ let backupDB = function() {
             // if user is in the database already, update their stuff
             else{
                 db.run(`UPDATE users SET username = ?, password = ? WHERE userID = ?`, [Users[i].getUsername(), Users[i].getPassword(), userIDs[i]], (err, row)=>{});
+                
                 // update their friends too
-                for(let j = 0; j < Users[i].getFriends().length; j++){
-                    db.each(`SELECT friendID friendID FROM friends WHERE userID = ?, friendID = ?`, [Users[i].getUserID(), Users[i].getFriends()[j]], (err, row)=>{
-                        // console.log(row.userID);
-                        // if not in database
-                        if(row == undefined){
-                            // add the friend
+                let tmpFriendsUpdated = new Array();
+                db.each(`SELECT friendID friendID FROM friends WHERE userID = ?`, [Users[i].getUserID()], (err, row)=>{
+                    // if in database and local
+                    if(Users[i].getFriends().includes(row.friendID)){
+                        tmpFriendsUpdated.push(row.friendID);
+                    }
+                    // if in database but not local
+                    else if(!Users[i].getFriends().includes(row.friendID)){
+                        // delete from database
+                        db.run(`DELETE FROM friends WHERE userID =?, friendID = ?`, [Users[i].getUserID(), row.friendID], (err, row)=>{});
+                    }
+                });
+                setTimeout(()=>{
+                    // add to database from local if not there
+                    for(let j = 0; j < Users[i].getFriends().length; j++){
+                        if(!tmpFriendsUpdated.includes(Users[i].getFriends()[j])){
+                            // add to database
                             db.run(`INSERT INTO friends (userID, friendID) VALUES (?, ?)`, [Users[i].getUserID(), Users[i].getFriends()[j]], (err, row)=>{});
                         }
-                    });
-                }
-                db.each(`SELECT friendID friendID FROM friends WHERE userID = ?`, [Users[i].getUserID()], (err, row)=>{
-                    if(!Users[i].getFriends().includes(row.friendID)){
-                        // delete friend from database
-                        db.run(`DELETE FROM friends WHERE friendID = ?`, [row.friendID], (err, row)=>{});
+                    }
+                }, 200);
+
+                // update their friend requests too
+                let tmpRequestsUpdated = new Array();
+                db.each(`SELECT friendRequesting friendRequesting FROM friendRequests WHERE userID = ?`, [Users[i].getUserID()], (err, row)=>{
+                    // if in database and local
+                    if(Users[i].getIncomingFriendRequest().includes(row.friendRequesting)){
+                        tmpRequestsUpdated.push(row.friendRequesting);
+                    }
+                    // if in database but not local
+                    else if(!Users[i].getIncomingFriendRequest().includes(row.friendRequesting)){
+                        // delete from database
+                        db.run(`DELETE FROM friendRequests WHERE userID =?, friendRequesting = ?`, [Users[i].getUserID(), row.friendRequesting], (err, row)=>{});
                     }
                 });
-                // update their friend requests too
-                for(let j = 0; j < Users[i].getIncomingFriendRequest().length; j++){
-                    db.each(`SELECT friendRequesting friendRequesting FROM friendRequests WHERE userID = ?, friendRequesting = ?`, [Users[i].getUserID(), Users[i].getIncomingFriendRequest()[j]], (err, row)=>{
-                        // if not in database
-                        if(row == undefined){
-                            // add the friend request
+                setTimeout(()=>{
+                    // add to database from local if not there
+                    for(let j = 0; j < Users[i].getIncomingFriendRequest().length; j++){
+                        if(!tmpRequestsUpdated.includes(Users[i].getIncomingFriendRequest()[j])){
+                            // add to database
                             db.run(`INSERT INTO friendRequests (userID, friendRequesting) VALUES (?, ?)`, [Users[i].getUserID(), Users[i].getIncomingFriendRequest()[j]], (err, row)=>{});
                         }
-                    });
-                }
-                db.each(`SELECT friendRequesting friendRequesting FROM friendRequests WHERE userID = ?`, [Users[i].getUserID()], (err, row)=>{
-                    if(!Users[i].getIncomingFriendRequest().includes(row.friendRequesting)){
-                        // delete friend request from database
-                        db.run(`DELETE FROM friendRequests WHERE friendRequesting = ?`, [row.friendRequesting], (err, row)=>{});
                     }
-                });
+                }, 200);
             }
         });
-    }
+    };
 
     // delete the non-existent users from db
     db.each(`SELECT userID userID FROM users`, [], (err, row)=>{
@@ -395,40 +408,52 @@ let backupDB = function() {
             else{
                 db.run(`UPDATE posts SET postContent = ?, shareCount = ? WHERE postID = ?`, 
                 [Posts[i].content, Posts[i].shares], (err, row)=>{});
+
                 // update comments too
-                for(let j = 0; j < Posts[i].comments.length; j++){
-                    db.get(`SELECT comment comment FROM comments WHERE postID = ?, comment = ?`, 
-                    [Posts[i].ID, Posts[i].comments[j]], (err, row)=>{
-                        // if not in database
-                        if(row == undefined){
-                            // add the comment to the database
-                            db.run(`INSERT INTO comments (postID, comment) VALUES (?, ?)`, [Posts[i].ID, Posts[i].comments[j]], (err, row)=>{});
-                        }
-                    });
-                }
-                // update likes too
-                for(let j = 0; j < Posts[i].likes.length; j++){
-                    db.get(`SELECT userID userID FROM likes WHERE postID = ?, userID = ?`, 
-                    [Posts[i].ID, Posts[i].likes[j]], (err, row)=>{
-                        // if not in database
-                        if(row == undefined){
-                            // add the like to the database
-                            db.run(`INSERT INTO likes (postID, userID) VALUES (?, ?)`, [Posts[i].ID, Posts[i].likes[j]], (err, row)=>{});
-                        }
-                    });
-                }
+                let tmpCommentsUpdated = new Array();
                 db.each(`SELECT comment comment FROM comments WHERE postID = ?`, [Posts[i].ID], (err, row)=>{
-                    if(!Posts[i].comments.includes(row.comment)){
+                    // if in database and local
+                    if(Posts[i].comments.includes(row.comment)){
+                        tmpCommentsUpdated.push(row.comment);
+                    }
+                    // if in database but not local
+                    else if(!Posts[i].comments.includes(row.comment)){
                         // delete comment from database
                         db.run(`DELETE FROM comments WHERE comment = ?`, [row.comment], (err, row)=>{});
                     }
                 });
+                setTimeout(()=>{
+                    // add to database from local if not there
+                    for(let j = 0; j < Posts[i].comments.length; j++){
+                        if(!tmpCommentsUpdated.includes(Posts[i].comments[j])){
+                            // add to database
+                            db.run(`INSERT INTO comments (postID, comment) VALUES (?, ?)`, [Posts[i].ID, Posts[i].comments[j]], (err, row)=>{});
+                        }
+                    }
+                }, 200);
+
+                // update likes too
+                let tmpLikesUpdated = new Array();
                 db.each(`SELECT userID userID FROM likes WHERE postID = ?`, [Posts[i].ID], (err, row)=>{
-                    if(!Posts[i].likes.includes(row.userID)){
+                    // if in database and local
+                    if(Posts[i].likes.includes(row.userID)){
+                        tmpLikesUpdated.push(row.userID);
+                    }
+                    // if in database but not local
+                    else if(!Posts[i].likes.includes(row.userID)){
                         // delete like from database
                         db.run(`DELETE FROM likes WHERE userID = ?`, [row.userID], (err, row)=>{});
                     }
                 });
+                setTimeout(()=>{
+                    // add to database from local if not there
+                    for(let j = 0; j < Posts[i].likes.length; j++){
+                        if(!tmpLikesUpdated.includes(Posts[i].likes[j])){
+                            // add to database
+                            db.run(`INSERT INTO likes (postID, userID) VALUES (?, ?)`, [Posts[i].ID, Posts[i].likes[j]], (err, row)=>{});
+                        }
+                    }
+                }, 200);
             }
         });
     }
@@ -444,7 +469,8 @@ let backupDB = function() {
             db.run(`DELETE FROM likes WHERE postID = ?`, [row.postID], (err, row)=>{});
         }
     });
-};
+}
+
 
 
 // note: to access the interface (once we have one), use this URL in your browser after running index.js:
@@ -848,8 +874,21 @@ io.on('connection', (socket)=>{
             }
         }
 
+        let friendIndex = -1;
+        for(let i = 0; i < Users.length; i++){
+            if(Users[i].getUserID() == data){
+                index = i;
+                break;
+            }
+            if(i == Users.length-1 && index == -1){
+                console.log("profile not found");
+                return;
+            }
+        }
+
         setTimeout(()=>{
             Users[index].augmentFriend(1, data);
+            Users[friendIndex].augmentFriend(1, currentUser);
             socket.emit("accept request result", "true");
         }, 50);
     });
@@ -925,7 +964,7 @@ io.on('connection', (socket)=>{
 
 /* MISC FUNCTIONS? */
 let exitProgram = function() {
-    // backupDB(); //.. leaving out until i fix it
+    backupDB();
     db.close();
     console.log("Exiting...");
     server.close();
