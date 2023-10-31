@@ -88,14 +88,13 @@ class User {
                 }
                 else{
                     this.incomingFriendRequest.splice(i, 1)
-                    break;
+                    // break;
                     return 0;   //Removed from requests
                 }                 
             }   
-            else{
-                return 1;   //User not in incomingFriendRequest  
-            }
         }
+        return 1; //User not in requests
     }
+
 } 
 module.exports = User;
