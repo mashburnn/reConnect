@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profstyle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
-    <link rel="icon" href="/bolt.svg"> 
+    <link rel="icon" href="/bolt.svg">
     <title>reConnect</title>
 </head>
 <body>
@@ -42,7 +41,7 @@
               <img src="bell.svg" alt="bell">
 
           </div>
-          <a href="/friends" id="friendsButton">Friends</a>
+          <a href="#" id="friendsButton">Friends</a>
           <a href="/profile" id="profileButton">Profile</a>
       </div>
     </div>
@@ -53,74 +52,81 @@
       </div>
 
       <div class="middle-section">
-        
+        <div class= "profile-information">
+          <div class="userinfo">
+            <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
+            <h2 id="username">Loading...<h2>
+            <button id="friendRequestButton">Send Friend Request</button>
+            <button id="logoutButton" href="/login">Log Out</button>
+          </div>
+        </div>
         <div class="posts-container">
-            <div class="post" id="post1">
-              <!-- <h2>Post ID: <%= post.ID %></h2> -->
-              <h2 id="author1">Loading...</h2>
-              <p id="content1">Loading...</p>
-              <p id="likes1">Loading...</p>
-              <p id="shares1">Loading...</p>
-                <div class="comments">
-                  <h3>Comments <a href="#" id="addCommentButton1"><b>[+]</b></a></h3>
-                  <ul id="post1comments">
-                        <!-- <li><%= comment %></li> -->
-                  </ul>
-                </div>
-            </div>
-            <div class="post" id="post2">
-              <!-- <h2>Post ID: <%= 1 %></h2> -->
-              <h2 id="author2">Loading...</h2>
-              <p id="content2">Loading...</p>
-              <p id="likes2">Loading...</p>
-              <p id="shares2">Loading...</p>
-                <div class="comments">
-                  <h3>Comments <a href="#" id="addCommentButton2"><b>[+]</b></a></h3>
-                  <ul id="post2comments">
-                        <!-- <li><%= comment %></li> -->
-                  </ul>
-                </div>
-            </div>
-            <div class="post" id="post3">
-              <!-- <h2>Post ID: <%= post.ID %></h2> -->
-              <h2 id="author3">Loading...</h2>
-              <p id="content3">Loading...</p>
-              <p id="likes3">Loading...</p>
-              <p id="shares3">Loading...</p>
-                <div class="comments">
-                  <h3>Comments <a href="#" id="addCommentButton3"><b>[+]</b></a></h3>
-                  <ul id="post3comments">
-                        <!-- <li><%= comment %></li> -->
-                  </ul>
-                </div>
-            </div>
-            <div class="post" id="post4">
-              <!-- <h2>Post ID: <%= post.ID %></h2> -->
-              <h2 id="author4">Loading...</h2>
-              <p id="content4">Loading...</p>
-              <p id="likes4">Loading...</p>
-              <p id="shares4">Loading...</p>
-                <div class="comments">
-                  <h3>Comments <a href="#" id="addCommentButton4"><b>[+]</b></a></h3>
-                  <ul id="post4comments">
-                        <!-- <li><%= comment %></li> -->
-                  </ul>
-                </div>
-            </div>
-            <div class="post" id="post5">
-              <!-- <h2>Post ID: <%= post.ID %></h2> -->
-              <h2 id="author5">Loading...</h2>
-              <p id="content5">Loading...</p>
-              <p id="likes5">Loading...</p>
-              <p id="shares5">Loading...</p>
-                <div class="comments">
-                  <h3>Comments <a href="#" id="addCommentButton5"><b>[+]</b></a></h3>
-                  <ul id="post5comments">
-                        <!-- <li><%= comment %></li> -->
-                  </ul>
-                </div>
-            </div>
-         </div>
+          <div class="post" id="post1">
+            <!-- <h2>Post ID: <%= post.ID %></h2> -->
+            <h2 id="author1">Loading...</h2>
+            <p id="content1">Loading...</p>
+            <p id="likes1">Loading...</p>
+            <p id="shares1">Loading...</p>
+              <div class="comments">
+                <h3>Comments <a href="#" id="addCommentButton1"><b>[+]</b></a></h3>
+                <ul id="post1comments">
+                      <!-- <li><%= comment %></li> -->
+                </ul>
+              </div>
+          </div>
+          <div class="post" id="post2">
+            <!-- <h2>Post ID: <%= 1 %></h2> -->
+            <h2 id="author2">Loading...</h2>
+            <p id="content2">Loading...</p>
+            <p id="likes2">Loading...</p>
+            <p id="shares2">Loading...</p>
+              <div class="comments">
+                <h3>Comments <a href="#" id="addCommentButton2"><b>[+]</b></a></h3>
+                <ul id="post2comments">
+                      <!-- <li><%= comment %></li> -->
+                </ul>
+              </div>
+          </div>
+          <div class="post" id="post3">
+            <!-- <h2>Post ID: <%= post.ID %></h2> -->
+            <h2 id="author3">Loading...</h2>
+            <p id="content3">Loading...</p>
+            <p id="likes3">Loading...</p>
+            <p id="shares3">Loading...</p>
+              <div class="comments">
+                <h3>Comments <a href="#" id="addCommentButton3"><b>[+]</b></a></h3>
+                <ul id="post3comments">
+                      <!-- <li><%= comment %></li> -->
+                </ul>
+              </div>
+          </div>
+          <div class="post" id="post4">
+            <!-- <h2>Post ID: <%= post.ID %></h2> -->
+            <h2 id="author4">Loading...</h2>
+            <p id="content4">Loading...</p>
+            <p id="likes4">Loading...</p>
+            <p id="shares4">Loading...</p>
+              <div class="comments">
+                <h3>Comments <a href="#" id="addCommentButton4"><b>[+]</b></a></h3>
+                <ul id="post4comments">
+                      <!-- <li><%= comment %></li> -->
+                </ul>
+              </div>
+          </div>
+          <div class="post" id="post5">
+            <!-- <h2>Post ID: <%= post.ID %></h2> -->
+            <h2 id="author5">Loading...</h2>
+            <p id="content5">Loading...</p>
+            <p id="likes5">Loading...</p>
+            <p id="shares5">Loading...</p>
+              <div class="comments">
+                <h3>Comments <a href="#" id="addCommentButton5"><b>[+]</b></a></h3>
+                <ul id="post5comments">
+                      <!-- <li><%= comment %></li> -->
+                </ul>
+              </div>
+          </div>
+       </div>
       </div>
 
       <div class="right-sidebar">
@@ -128,38 +134,10 @@
       </div>
     </div>
 
-    <!--pop ups for notifications, posts, friends list, etc-->
-    <!-- <div class="popup">
-      <div class="popup-content">
-        <div class="popup-header">
-          <h2>Post</h2>
-          <span class="close">&times;</span>
-        </div>
-        <div class="popup-body">
-          <form action="/create-post">
-            <input type="text" name="author" placeholder="Author">
-            <textarea name="content" placeholder="Content"></textarea>
-            <input type="submit" value="Create Post">
-          </form>
-        </div>
-        <form action="/create-comment">
-          <input type="text" name="author" placeholder="Author">
-          <textarea name="content" placeholder="Content"></textarea>
-          <input type="submit" value="Create Comment">
-        </form>
-      </div>
-    </div> -->
-    <!--end of pop ups-->
-
-<script src="/socket.io/socket.io.js"></script>
-   <script type="text/javascript">
-      // now we're cooking
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
       let socket = io();
-
-      let currentPosts = new Array();
-      let currentLikeCounts = new Array();
-      let currentShareCounts = new Array();
-
+      // everything else goes here
       // variable init
       let profileButton = document.getElementById("profileButton");
       profileButton.addEventListener("click", (evt)=>{
@@ -173,6 +151,10 @@
         location.href = "/results";
         socket.emit("search request", searchTerm);
       });
+
+      let currentPosts = new Array();
+      let currentLikeCounts = new Array();
+      let currentShareCounts = new Array();
 
       let post1 = document.getElementById("post1");
       let post2 = document.getElementById("post2");
@@ -197,6 +179,24 @@
       let likes3 = document.getElementById("likes3");
       let likes4 = document.getElementById("likes4");
       let likes5 = document.getElementById("likes5");
+
+      let friendRequestButton = document.getElementById("friendRequestButton");
+      friendRequestButton.addEventListener("click", (evt)=>{
+        if(friendRequestButton.disabled){
+          return;
+        }
+        socket.emit("friend request", currentUser);
+      });
+
+      friendRequestButton.style.display = "none"; // by default, enabled if needed (hypothetically)
+
+      let logoutButton = document.getElementById("logoutButton");
+      logoutButton.addEventListener("click", (evt)=>{
+        socket.emit("log out", "true");
+        location.href = "/login";
+      });
+
+      logoutButton.style.display = "none"; // by default also
 
       likes1.addEventListener("click", (evt)=>{
         socket.emit("like request", currentPosts[0]);
@@ -282,37 +282,60 @@
         location.href = "/friends";
       });
 
+      let currentUser = -1;
+      let username = document.getElementById("username");
 
-      // bring in the posts!
-      socket.emit('need posts', '');
+      // by default
+      post1.style.display = "none";
+      post2.style.display = "none";
+      post3.style.display = "none";
+      post4.style.display = "none";
+      post5.style.display = "none";
 
-      socket.on("herePosts", (data)=>{
-        // the data you get is in this format:
-        // [[postID, username, content, likes, shares], [comment1, comment2, ...], ...] and so on for each post
+      // backend will handle which profile to send -- front end will tell backend whether the next profile displayed is curr user or a friend?
+      socket.emit("need profile", "");
 
-        // hide posts as default
-        post1.style.display = "none";
-        post2.style.display = "none";
-        post3.style.display = "none";
-        post4.style.display = "none";
-        post5.style.display = "none";
+      socket.on("here profile", (dta)=>{
+        // *** don't know if the frontend actually needs userID?
+        // data in form of [[userID, username, isFriend], [postID, username, content, likes, shares], [comment1, comment2, ...], ...] and so on
 
-        for(let i = 0; i < data.posts.length; i+=2){
+        currentUser = dta[0][0];
+        username.innerText = dta[0][1];
+        if(dta[0][2] == -1){
+          friendRequestButton.style.display = "none";
+          logoutButton.style.display = "block";
+        }
+        else if(dta[0][2] == 0){
+          friendRequestButton.style.display = "block";
+          friendRequestButton.disabled = false;
+        }
+        else if(dta[0][2] == 1){
+          friendRequestButton.style.display = "block";
+          friendRequestButton.disabled = true;
+          friendRequestButton.innerText = "Request Pending";
+        }
+        else if(dta[0][2] == 2){
+          friendRequestButton.style.display = "block";
+          friendRequestButton.disabled = true;
+          friendRequestButton.innerText = "Friends"
+        }
+
+        for(let i = 0; i < dta[1].length; i+=2){
           // grab the post ID
-          currentPosts.push(data.posts[i][0]);
-          currentLikeCounts.push(data.posts[i][3].length);
-          currentShareCounts.push(data.posts[i][4]);
+          currentPosts.push(dta[1][i][0]);
+          currentLikeCounts.push(dta[1][i][3].length);
+          currentShareCounts.push(dta[1][i][4]);
           // first post
           if(i == 0){
             post1.style.display = "block";
-            author1.innerText = data.posts[i][1];
-            content1.innerText = data.posts[i][2];
-            likes1.innerText = "Likes: " + data.posts[i][3].length;
-            shares1.innerText = "Shares: " + data.posts[i][4];
-            for(let j = 0; j < data.posts[i+1].length; j++){
+            author1.innerText = dta[1][i][1];
+            content1.innerText = dta[1][i][2];
+            likes1.innerText = "Likes: " + dta[1][i][3].length;
+            shares1.innerText = "Shares: " + dta[1][i][4];
+            for(let j = 0; j < dta[1][i+1].length; j++){
               // append comments to the div
               let li = document.createElement("li");
-              li.appendChild(document.createTextNode(data.posts[i+1][j]));
+              li.appendChild(document.createTextNode(dta[1][i+1][j]));
               post1comments.appendChild(li);
             }
 
@@ -320,61 +343,61 @@
           // second post
           else if(i == 2){
             post2.style.display = "block";
-            author2.innerText = data.posts[i][1];
-            content2.innerText = data.posts[i][2];
-            likes2.innerText = "Likes: " + data.posts[i][3].length;
-            shares2.innerText = "Shares: " + data.posts[i][4];
-            for(let j = 0; j < data.posts[i+1].length; j++){
+            author2.innerText = dta[1][i][1];
+            content2.innerText = dta[1][i][2];
+            likes2.innerText = "Likes: " + dta[1][i][3].length;
+            shares2.innerText = "Shares: " + dta[1][i][4];
+            for(let j = 0; j < dta[1][i+1].length; j++){
               // append comments to the div
               let li = document.createElement("li");
-              li.appendChild(document.createTextNode(data.posts[i+1][j]));
+              li.appendChild(document.createTextNode(dta[1][i+1][j]));
               post2comments.appendChild(li);
             }
           }
           // third post
           else if(i == 4){
             post3.style.display = "block";
-            author3.innerText = data.posts[i][1];
-            content3.innerText = data.posts[i][2];
-            likes3.innerText = "Likes: " + data.posts[i][3].length;
-            shares3.innerText = "Shares: " + data.posts[i][4];
-            for(let j = 0; j < data.posts[i+1].length; j++){
+            author3.innerText = dta[1][i][1];
+            content3.innerText = dta[1][i][2];
+            likes3.innerText = "Likes: " + dta[1][i][3].length;
+            shares3.innerText = "Shares: " + dta[1][i][4];
+            for(let j = 0; j < dta[1][i+1].length; j++){
               // append comments to the div
               let li = document.createElement("li");
-              li.appendChild(document.createTextNode(data.posts[i+1][j]));
+              li.appendChild(document.createTextNode(dta[1][i+1][j]));
               post3comments.appendChild(li);
             }
           }
           // fourth post
           else if(i == 6){
             post4.style.display = "block";
-            author4.innerText = data.posts[i][1];
-            content4.innerText = data.posts[i][2];
-            likes4.innerText = "Likes: " + data.posts[i][3].length;
-            shares4.innerText = "Shares: " + data.posts[i][4];
-            for(let j = 0; j < data.posts[i+1].length; j++){
+            author4.innerText = dta[1][i][1];
+            content4.innerText = dta[1][i][2];
+            likes4.innerText = "Likes: " + dta[1][i][3].length;
+            shares4.innerText = "Shares: " + dta[1][i][4];
+            for(let j = 0; j < dta[1][i+1].length; j++){
               // append comments to the div
               let li = document.createElement("li");
-              li.appendChild(document.createTextNode(data.posts[i+1][j]));
+              li.appendChild(document.createTextNode(dta[1][i+1][j]));
               post4comments.appendChild(li);
             }
           }
           // fifth post
           else if(i == 8){
             post5.style.display = "block";
-            author5.innerText = data.posts[i][1];
-            content5.innerText = data.posts[i][2];
-            likes5.innerText = "Likes: " + data.posts[i][3].length;
-            shares5.innerText = "Shares: " + data.posts[i][4];
-            for(let j = 0; j < data.posts[i+1].length; j++){
+            author5.innerText = dta[1][i][1];
+            content5.innerText = dta[1][i][2];
+            likes5.innerText = "Likes: " + dta[1][i][3].length;
+            shares5.innerText = "Shares: " + dta[1][i][4];
+            for(let j = 0; j < dta[1][i+1].length; j++){
               // append comments to the div
               let li = document.createElement("li");
-              li.appendChild(document.createTextNode(data.posts[i+1][j]));
+              li.appendChild(document.createTextNode(dta[1][i+1][j]));
               post5comments.appendChild(li);
             }
           }
         }
-        
+
       });
 
       socket.on("like result", (data)=>{
@@ -408,6 +431,7 @@
         }
       });
 
+      // TODO notifications?
       socket.on("share result", (data)=>{
         if(data[0] == "true"){
           if(data[1] == currentPosts[0]){
@@ -439,73 +463,14 @@
         }
       });
 
-   </script>
-   
-  <!-- post card generation -->
-   <!-- <script src= "/postCard"></script>
-   <script>const threadData1 = {
-     author: 'Jane Smith',
-     content: "I am Jane Smith, I've been in the tech industry for over a decade, working on various projects and technologies.",
-     likes: 5,
-     comments: [
-       { author: 'Eve', content: 'Comment 3' },
-       { author: 'Charlie', content: 'Comment 4' },
-     ],
-     isComment: true,
-   };
-
-   const threadData2 = {
-     author: 'Jane Smith',
-     content: "I am John Doe, a software engineer with a passion for coding and problem-solving. I've been in the tech industry for over a decade, working on various projects and technologies.",
-     likes: 5,
-     comments: [
-       { author: 'Eve', content: 'Comment 3' },
-       { author: 'Charlie', content: 'Comment 4' },
-     ],
-     isComment: true,
-   };
-
-   const threadData3 = {
-     author: 'Jane Smith',
-     content: "I am amnish Doe, a software engineer with a passion for coding and problem-solving. I've been in the tech industry for over a decade, working on various projects and technologies.",
-     likes: 5,
-     comments: [],
-     isComment: true,
-   };
-
-   const threadData4 = {
-     author: 'Jane Smith',
-     content: "Your content here",
-     likes: 5,
-     comments: [
-       { author: 'Eve', content: 'Comment 1' },
-       { author: 'Charlie', content: 'Comment 2' },
-     ],
-     isComment: true,
-   };
-
-   const threadCards = [];
-
-   // Create PostCard instances and push them into the array
-   for (let i = 1; i <= 4; i++) {
-     const threadData = eval(`threadData${i}`);
-     const threadCard = new PostCard(
-       threadData.author,
-       threadData.content,
-       threadData.likes,
-       threadData.comments,
-       threadData.isComment
-     );
-     threadCards.push(threadCard);
-   }
-
-   // Append all the thread card elements to a container in your HTML document
-   const container = document.getElementById('thread-container');
-
-   threadCards.forEach((threadCard) => {
-     container.appendChild(threadCard.render());
-   }); -->
-</script>
+      socket.on("friend request result", (data)=>{
+        // data is t/f
+        if(data == "true"){
+          friendRequestButton.disabled = true;
+          friendRequestButton.innerText = "Request Pending";
+        }
+        // else it will stay as is
+      });
+    </script>
 </body>
-
 </html>
