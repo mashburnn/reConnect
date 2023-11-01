@@ -410,7 +410,7 @@ let backupDB = function() {
                 console.log("testing", postIDs[i]);
                 if(row == undefined){
                     // add post to the database
-                    db.run(`INSERT INTO posts (userID, postID, postContent, shareCount) VALUES (?, ?, ?, ?, ?)`, 
+                    db.run(`INSERT INTO posts (userID, postID, postContent, shareCount) VALUES (?, ?, ?, ?)`, 
                     [Posts[i].PosterID, Posts[i].ID, Posts[i].content, Posts[i].shares], (err, row)=>{});
                     // add comments as well
                     for(let j = 0; j < Posts[i].comments.length; j++){
