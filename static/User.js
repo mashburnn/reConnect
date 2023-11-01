@@ -93,6 +93,10 @@ class User {
                 }                 
             }   
         }
+        // adding this so the friendship shows up for both users -- will maybe make a more sophisticated solution later
+        if(add){
+            this.friends.push(uID);
+        }
         return 1; //User not in requests
     }
 

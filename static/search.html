@@ -313,6 +313,10 @@
       socket.emit("need results")
 
       socket.on("here results", (data)=>{
+        if(data == "none"){
+          // no results
+          return;
+        }
         // data probably sent as [[userID, username], [userID, username]...] and so on
         for(let i = 0; i < data.length; i++){
           // keep track of current displayed users with their IDs
