@@ -54,6 +54,9 @@
 
       <div class="middle-section">
         <div class= "search-information">
+          <div style="text-align: center;" id="noResultsMessage">
+            <h2>No Results Found</h2>
+          </div>
           <div class="user" id="card1">
             <img width="100" height="100" src="https://img.icons8.com/ios/100/test-account.png" alt="test-account"/>
             <h2><a id="result1" href="/profile">Loading...</a></h2>
@@ -164,6 +167,9 @@
       result5.addEventListener("click", (evt)=>{
         socket.emit("nextProfile", currentResults[4]);
       });
+
+      let noResultsMessage = document.getElementById("noResultsMessage");
+      noResultsMessage.style.display = "none";
 
       // button handlers
       let notifButton = document.getElementById("notification-button");
@@ -315,6 +321,7 @@
       socket.on("here results", (data)=>{
         if(data == "none"){
           // no results
+          noResultsMessage.style.display = "block";
           return;
         }
         // data probably sent as [[userID, username], [userID, username]...] and so on

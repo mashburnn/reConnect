@@ -18,7 +18,7 @@ var server = http.Server(app);
 var io = sio(server);
 
 let htmlDirectory = path.resolve(__dirname+'/static');
-app.use(express.static(htmlDirectory));
+app.use(express.static(htmlDirectory, {index: 'Onboarding.html'}));
 server.listen(4124);
 
 // globals for whether a user is logged in, which user, which profile needs to be displayed

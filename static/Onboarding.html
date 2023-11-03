@@ -66,7 +66,8 @@
     if(data == "true"){
       loggedIn = 1;
       // window.location.replace("localhost:4124/home");
-      document.location.reload(true); // will reload to actual home page
+      // document.location.reload(true); // will reload to actual home page
+      location.href = "/home";
     }
     else{
       errorMessage.style.display = "block";
