@@ -1,0 +1,22 @@
+{
+  "name": "reconnect",
+  "version": "1.0.0",
+  "description": "This package contains reConnect, a social media project for CSE 4214.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"hello world!\""
+  },
+  "keywords": [
+    "express",
+    "sqlite"
+  ],
+  "author": "Group 5",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "http": "^0.0.1-security",
+    "path": "^0.12.7",
+    "socket.io": "^4.7.2",
+    "sqlite3": "^5.1.6"
+  }
+}
