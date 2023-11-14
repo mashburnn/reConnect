@@ -4,7 +4,6 @@ html, body {
   height: 100%;
 }
 :root {
-  --primary-color: #3b1cc3;
   --secondary-color: #071325;
   --text-background-color: #f2f2f2;
   --background-color: #507fff;
@@ -20,7 +19,6 @@ html, body {
   align-items: center;
   padding: 15px;
   z-index: 9999;
-  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
 }
 
 .brand {
@@ -206,7 +204,6 @@ html, body {
 
 .left-sidebar, .right-sidebar {
   width: 25%;
-  background-color: var(--secondary-color);
   color: var(--text-background-color);
   position: relative;
   flex-flow: column;
@@ -216,7 +213,6 @@ html, body {
   flex-grow: 1;
   position: relative;
   flex-shrink: 0;
-  overflow-y: auto;
 }
 
 .vertical-bar {
@@ -288,4 +284,64 @@ html, body {
   position: absolute;
   top: 25px;
   right: 20px;
+}
+.posts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.post {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #507fff;
+}
+
+p {
+    color: #555;
+}
+
+.likes, .shares, .comments {
+    display: inline-block;
+    margin-right: 20px;
+    color: #777;
+}
+
+.comments a {
+    text-decoration: none;
+    color: #3498db;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+button {
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+
+  font-weight: 600;
+  color: #0077ff;
+  background-color: #e0efff;
+
+  /* Button is inline-block element by default, it need to have block display for margin: 0 auto; to work */
+  margin: 0 auto;
+  display: block;
+
+  /* Button is a clickable element, therefore it should have a pointer cursor */
+  cursor: pointer;
 }

@@ -123,63 +123,67 @@
          </div>
       </div>
 
-      <div class="right-sidebar">
-        <div class="popup-content" id="popupBackground">
+      <div class="right-sidebar" style="margin-right: 30px;">
+        <div class="popup-content" id="popupBackground" style="height: 200px;margin-bottom: 15px;margin-top: 50px;display: block;">
           <!-- Notifications -->
-          <div id="notificationsMenu">
+          <div id="notificationsMenu" style="display: none;">
             <div class="popup-header">
-              <a><h2>Notifications</h2></a>
+              <h2 style="padding-top: 15px;padding-left: 15px;">Notifications</h2>
               <a class="close" style="align-items: right;" id="notifCloseButton">X</a>
             </div>
             <div class="popup-body">
               <ul>
-                <li id="requestNotif1li"><h3 id="requestNotif1" href="#">Loading...</h3><a>  </a><a id="acceptRequest1" href="#">Accept</a><a>  </a><a id="declineRequest1" href="#">Decline</a></li>
-                <li id="requestNotif2li"><h3 id="requestNotif2" href="#">Loading...</h3><a>  </a><a id="acceptRequest2" href="#">Accept</a><a>  </a><a id="declineRequest2" href="#">Decline</a></li>
-                <li id="requestNotif3li"><h3 id="requestNotif3" href="#">Loading...</h3><a>  </a><a id="acceptRequest3" href="#">Accept</a><a>  </a><a id="declineRequest3" href="#">Decline</a></li>
-                <li id="requestNotif4li"><h3 id="requestNotif4" href="#">Loading...</h3><a>  </a><a id="acceptRequest4" href="#">Accept</a><a>  </a><a id="declineRequest4" href="#">Decline</a></li>
-                <li id="requestNotif5li"><h3 id="requestNotif5" href="#">Loading...</h3><a>  </a><a id="acceptRequest5" href="#">Accept</a><a>  </a><a id="declineRequest5" href="#">Decline</a></li>
+                <li id="requestNotif1li" style="display: none;padding-left: 17px;"><h3 id="requestNotif1" href="#">Loading...</h3><a>  </a><a id="acceptRequest1" href="#">Accept</a><a>  </a><a id="declineRequest1" href="#">Decline</a></li>
+                <li id="requestNotif2li" style="display: none;padding-left: 17px;"><h3 id="requestNotif2" href="#">Loading...</h3><a>  </a><a id="acceptRequest2" href="#">Accept</a><a>  </a><a id="declineRequest2" href="#">Decline</a></li>
+                <li id="requestNotif3li" style="display: none;padding-left: 17px;"><h3 id="requestNotif3" href="#">Loading...</h3><a>  </a><a id="acceptRequest3" href="#">Accept</a><a>  </a><a id="declineRequest3" href="#">Decline</a></li>
+                <li id="requestNotif4li" style="display: none;padding-left: 17px;"><h3 id="requestNotif4" href="#">Loading...</h3><a>  </a><a id="acceptRequest4" href="#">Accept</a><a>  </a><a id="declineRequest4" href="#">Decline</a></li>
+                <li id="requestNotif5li" style="display: none;padding-left: 17px;"><h3 id="requestNotif5" href="#">Loading...</h3><a>  </a><a id="acceptRequest5" href="#">Accept</a><a>  </a><a id="declineRequest5" href="#">Decline</a></li>
               </ul>
             </div>
           </div>
 
           <!-- Create Post -->
-          <div id="createPostMenu">
+          <div id="createPostMenu" style="display: block;padding-left: 15px;padding-top: 3px;padding-right: 30px;">
             <div class="popup-header">
-              <h2>Create a Post</h2>
-              <a class="close" style="align-items: right;" id="createPostCloseButton">X</a>
+              <h2>Cook Here</h2>
+              <a class="close" style="align-items: right;margin-top: 52px;" id="createPostCloseButton">X</a>
             </div>
             <div class="popup-body">
-              <textarea id="newPostContent" name="newPostContent" placeholder="Content" cols="40"></textarea>
+              <textarea id="newPostContent" name="newPostContent" placeholder="Content" cols="40" style="
+                    height: 70px;
+                    margin-bottom: 9px;
+                "
+></textarea>
               <button id="createPostSubmitButton">Create Post</button>
             </div> 
           </div>
 
           <!-- Create Comment -->
-          <div id="createCommentMenu">
+          <div id="createCommentMenu" style="display: none;">
             <div class="popup-header">
               <h2>Add a Comment</h2>
               <a class="close" style="align-items: right;" id="createCommentCloseButton">X</a>
             </div>
             <div class="popup-body">
-              <p id="newCommentError">Invalid comment.</p>
+              <p id="newCommentError" style="display: none;">Invalid comment.</p>
               <textarea id="newCommentContent" name="newCommentContent" placeholder="Comment" cols="40"></textarea>
               <button id="createCommentSubmitButton">Add Comment</button>
             </div>
           </div>
 
           <!-- Share Post -->
-          <div id="sharePostMenu">
+          <div id="sharePostMenu" style="display: none;">
             <div class="popup-header">
               <h2>Share a Post</h2>
               <a class="close" style="align-items: right;" id="sharePostCloseButton">X</a>
             </div>
             <div class="popup-body" id="sharePostMenu">
               <ul>
-                <li id="friend1li"><a id="friend1" href="#">Loading...</a></li>
-                <li id="friend2li"><a id="friend2" href="#">Loading...</a></li>
-                <li id="friend3li"><a id="friend3" href="#">Loading...</a></li>
-                <li id="friend4li"><a id="friend4" href="#">Loading...</a></li>
-                <li id="friend5li"><a id="friend5" href="#">Loading...</a></li>
+                <li id="friend1li" style="display: none;"><a id="friend1" href="#">Loading...</a></li>
+                <li id="friend2li" style="display: none;"><a id="friend2" href="#">Loading...</a></li>
+                <li id="friend3li" style="display: none;"><a id="friend3" href="#">Loading...</a></li>
+                <li id="friend4li" style="display: none;"><a id="friend4" href="#">Loading...</a></li>
+                <li id="friend5li" style="display: none;"><a id="friend5" href="#">Loading...</a></li>
               </ul>
             </div>
           </div>
@@ -191,6 +195,7 @@
    <script type="text/javascript">
       // now we're cooking
       let socket = io();
+      var likeIconSvg = '<img src="like.svg" alt="Like Icon" width="16" height="16">';
 
       let currentPosts = new Array();
       let workingPost = -1;
@@ -401,6 +406,7 @@
 
       notifButton.addEventListener("click", (evt)=>{
         socket.emit("need notifications");
+        createPostMenu.style.display = "none";
         notificationsMenu.style.display = "block";
         popupBackground.style.display = "block";
       });
@@ -503,11 +509,14 @@
       });
 
       createButton.addEventListener("click", (evt)=>{
+        
+        notificationsMenu.style.display = "none";
         createPostMenu.style.display = "block";
         popupBackground.style.display = "block";
       });
       let createPostCloseButton = document.getElementById("createPostCloseButton");
       createPostCloseButton.addEventListener("click", (evt)=>{
+        notificationsMenu.style.display = "none";
         createPostMenu.style.display = "none";
         popupBackground.style.display = "none";
       });
@@ -516,6 +525,7 @@
       let newPostContent = document.getElementById("newPostContent").value;
       createPostSubmitButton.addEventListener("click", (evt)=>{
         newPostContent = document.getElementById("newPostContent").value;
+        notificationsMenu.style.display = "none";
         if(newPostContent == ""){
           // error message, can't have an empty post
           return;

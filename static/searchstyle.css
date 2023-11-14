@@ -20,9 +20,7 @@ body {
   align-items: center;
   padding: 15px;
   z-index: 9999;
-  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
 }
-
 .brand, .right img:not(.notification) {
   color: var(--text-background-color);
   text-decoration: none;
@@ -195,8 +193,8 @@ html, body {
   height: 100%;
 }
 :root {
-  --primary-color: #3b1cc3;
-  --secondary-color: #071325;
+  --primary-color: #fff;
+  --secondary-color: #fff;
   --text-background-color: #f2f2f2;
   --background-color: #507fff;
 }
@@ -211,7 +209,6 @@ html, body {
   align-items: center;
   padding: 15px;
   z-index: 9999;
-  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
 }
 
 .brand, .right img:not(.notification) {
