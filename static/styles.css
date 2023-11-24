@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500&display=swap"); 
+  
 *{
     margin: 0;
     padding: 0;
@@ -7,11 +8,28 @@
     list-style: none;
     text-decoration: none;
     font-family: 'Josefin Sans', sans-serif;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+:root, body {
+  --light-color: #fff;
+  --dark-color: #001;
+  --border-shadow-color: #ddd;
+  --primary-color: #83faec;
+  --secondary-color: #5e9eff;
+  --text-background-color: #f2f2f2;
+  --background-color: #1d59fe;
 }
 
-body {
-    background: #f3f5f9;
+body.dark-theme {
+  --light-color: #001;
+  --dark-color: #fff;
+  --border-shadow-color: #222;
+  --primary-color: #2d2d2d;
+  --secondary-color: #141414;
+  --background-color: #161625;
+  background: var(--background-color);
 }
+
 
 .wrapper{
     display: flex;
@@ -163,10 +181,7 @@ h1, h2, h3 {
   
   
   /* onboarding. */
-  @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500&display=swap");
-  
-  @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500&display=swap");
-  
+
   :root {
     --bodybg: #507fff;
     --primary-color: #3b1cc3;

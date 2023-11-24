@@ -1,13 +1,28 @@
-body {
+html, body {
   font-family: 'Raleway', sans-serif;
   margin: 0;
   height: 100%;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
-:root {
+:root, body {
+  --light-color: #fff;
+  --dark-color: #001;
+  --border-shadow-color: #ddd;
   --primary-color: #83faec;
   --secondary-color: #5e9eff;
   --text-background-color: #f2f2f2;
-  --background-color: #161e34;
+  --background-color: #1d59fe;
+  background: var(--light-color);
+}
+
+body.dark-theme {
+  --light-color: #001;
+  --dark-color: #fff;
+  --border-shadow-color: #222;
+  --primary-color: #2d2d2d;
+  --secondary-color: #141414;
+  --background-color: #161625;
+  background: var(--background-color);
 }
 
 .navbar {
@@ -49,7 +64,7 @@ body {
 .center input[type="text"] {
   width: 50%;
   padding: 10px;
-  border:  2px var(--secondary-color) solid;
+  border:  2px var(--light-color) solid;
   border-radius: 12px;
   font-size: 15px;
   margin-right: 10px;
@@ -57,7 +72,7 @@ body {
 }
 
 .center input[type="text"]:focus {
-  outline: var(--primary-color) auto 5px;;
+  outline: var(--light-color) auto 5px;;
 }
 
 .right a {
@@ -69,7 +84,7 @@ body {
 }
 
 .right a:hover {
-  color: var(--primary-color);
+  color: var(--light-color);
 }
 
 .right img:not(.notification) {
@@ -124,6 +139,7 @@ body {
 .middle-section {
   flex-grow: 1;
   position: relative;
+  color: var(--dark-color);
 }
 
 .vertical-bar {
@@ -143,6 +159,7 @@ body {
   width: 10px;
   background: linear-gradient(to right, var(--primary-color), var(--text-background-color));
 }
+
 .right-sidebar::before {
   left: 0;
   content: "";
@@ -178,8 +195,12 @@ body {
   visibility: hidden;
 
 }
+.search-information #noResultsMessage {
+  color: var(--dark-color);
+}
 .user {
   border: 7px solid var(--secondary-color);
+  color: var(--light-color);
   margin: 10px;
   padding: 10px;
   border-radius: 10px;
@@ -191,12 +212,6 @@ html, body {
   font-family: 'Raleway', sans-serif;
   margin: 0;
   height: 100%;
-}
-:root {
-  --primary-color: #fff;
-  --secondary-color: #fff;
-  --text-background-color: #f2f2f2;
-  --background-color: #507fff;
 }
 
 .navbar {
@@ -412,7 +427,7 @@ html, body {
   top: 0;
   bottom: 0;
   width: 10px;
-  background: linear-gradient(to right, var(--primary-color), var(--text-background-color));
+  /* background: linear-gradient(to right, var(--primary-color), var(--text-background-color)); */
 }
 .right-sidebar::before {
   left: 0;
@@ -421,7 +436,7 @@ html, body {
   top: 0;
   bottom: 0;
   width: 10px;
-  background: linear-gradient(to left, var(--primary-color), var(--text-background-color));
+  /* background: linear-gradient(to left, var(--primary-color), var(--text-background-color)); */
 }
 
 .left-vertical-bar {
@@ -465,4 +480,41 @@ html, body {
   position: absolute;
   top: 25px;
   right: 20px;
+}
+
+/* Users in search and friends list */
+
+/* user profile container */
+.user {
+  display: block;
+  align-items: center; 
+  background-color: var(--light-color);
+  border: 1px solid #ddd;
+  padding: 15px; 
+  box-shadow: 0 0 5px var(--dark-color);
+  margin: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+/* profile picture */
+.user img {
+  border: 2px solid var(--light-color);
+  border-radius: 3px;
+  background: #fff;
+  width: 50px;
+  height: auto;
+  aspect-ratio: auto;
+  margin-right: 10px;
+}
+/* container of user profiles in search/friends */
+.user .search-information {
+  font-size: 1.2em;
+  /* Adjust margin for grid items */
+}
+/* username text style*/
+.user h2 {
+  margin: 0px;
+  margin-block-start: auto;
+  margin-block-end: 0em;
+  padding: 0px;
 }

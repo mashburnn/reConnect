@@ -454,6 +454,17 @@
         workingPost = -1;
       });
 
+      let savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.body.classList.add(savedTheme);
+      }
+      let logoButton = document.querySelector("#home-button");
+      logoButton.addEventListener("click", (evt)=> {
+        document.body.classList.toggle("dark-theme");
+        let theme = document.body.classList.contains("dark-theme") ? "dark-theme" : null;
+        localStorage.setItem("theme", theme);
+      });
+
       let requestNotif1 = document.getElementById("requestNotif1");
       let requestNotif2 = document.getElementById("requestNotif2");
       let requestNotif3 = document.getElementById("requestNotif3");

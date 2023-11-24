@@ -16,7 +16,7 @@
       <div class="left">
         <!-- <img src="bolt.svg" alt="bolt">
         <a href="/home" class="brand">ReConnect</a> -->
-        <button id="home-button" class="icon-button" href="/home">
+        <button id="home-button" class="icon-button">
           <img src="bolt.svg" alt="home">
         </button>
         <a href="/home" class="brand">reConnect</a>
@@ -62,6 +62,7 @@
               <p id="likes1">Loading...</p>
               <p id="shares1">Loading...</p>
                 <div class="comments">
+                  <!-- TODO: Comment button -->
                   <h3>Comments <a href="#" id="addCommentButton1"><b>[+]</b></a></h3>
                   <ul id="post1comments">
                         <!-- <li><%= comment %></li> -->
@@ -153,7 +154,7 @@
                     height: 70px;
                     margin-bottom: 9px;
                 "
-></textarea>
+              ></textarea>
               <button id="createPostSubmitButton">Create Post</button>
             </div> 
           </div>
@@ -416,6 +417,19 @@
         popupBackground.style.display = "none";
         workingPost = -1;
       });
+      
+      /* dark mode!!! */
+      let savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.body.classList.add(savedTheme);
+      }
+      let logoButton = document.querySelector("#home-button");
+      logoButton.addEventListener("click", (evt)=> {
+        document.body.classList.toggle("dark-theme");
+        let theme = document.body.classList.contains("dark-theme") ? "dark-theme" : null;
+        localStorage.setItem("theme", theme);
+      });
+
 
       let requestNotif1 = document.getElementById("requestNotif1");
       let requestNotif2 = document.getElementById("requestNotif2");

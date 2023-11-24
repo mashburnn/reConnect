@@ -145,6 +145,10 @@ function likePost(postID, userID){
 
     let currLikes = Posts[loc].likes;
     currLikes.push(userID);
+
+    // Toggle the liked class on the like button
+    //$('#like-' + postID).toggleClass('liked');
+
     setTimeout(()=>{
         Posts[loc].likes = currLikes;
     }, 15);

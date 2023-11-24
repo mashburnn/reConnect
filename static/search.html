@@ -187,6 +187,29 @@
         popupBackground.style.display = "none";
         workingPost = -1;
       });
+      /*
+      // Dark mode toggle
+      let logoButton = document.querySelector("#home-button");
+      logoButton.addEventListener("click", function() {
+        document.body.classList.toggle("dark-theme");
+        localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+      });
+      
+      // On page load, apply saved theme
+      let savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.body.classList.add(savedTheme);
+      } */
+      let savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.body.classList.add(savedTheme);
+      }
+      let logoButton = document.querySelector("#home-button");
+      logoButton.addEventListener("click", (evt)=> {
+        document.body.classList.toggle("dark-theme");
+        let theme = document.body.classList.contains("dark-theme") ? "dark-theme" : null;
+        localStorage.setItem("theme", theme);
+      });
 
       let requestNotif1 = document.getElementById("requestNotif1");
       let requestNotif2 = document.getElementById("requestNotif2");
