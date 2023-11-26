@@ -103,26 +103,26 @@ class PostCard {
     const commentsHtml = this.comments ? this.renderComments(this.comments) : '';
 
     const cardHtml = `
-    <div class="thread-container">
-      <div class="thread-card">
-        <div class="thread-info">
-          <div class="name"><strong>${this.author}</strong></div>
-          <div class="snippet">${this.content}</div>
-          <div class="tag">
-            <button class="like-button">
-               <img src="static/like.svg" alt="like" width="20" height="20">
-            <button>
-            <strong>${this.likes} 🖤 </strong>
-            <button class="share-button">
-              <img src="static/share.svg" alt="share" width="20" height="20">
-            <button>
-            <strong>${this.shares} 🔗 </strong>
-          </div> 
+      <div class="thread-container">
+        <div class="thread-card">
+          <div class="thread-info">
+            <div class="name"><strong>${this.author}</strong></div>
+            <div class="snippet">${this.content}</div>
+            <div class="tag">
+              <button class="like-button">
+                <img src="static/like.svg" alt="like" width="20" height="20">
+              </button>
+              <strong>${this.likes} 🖤 </strong>
+              <button class="share-button">
+                <img src="static/share.svg" alt="share" width="20" height="20">
+              </button>
+              <strong>${this.shares} 🔗 </strong>
+            </div> 
+          </div>
+          ${commentsHtml}
         </div>
-        ${commentsHtml}
       </div>
-    </div>
-  `;
+    `;
 
     // Create a DOM element from the HTML string
     const cardElement = document.createElement('div');
