@@ -487,6 +487,11 @@ html, body {
     justify-content: space-around;
     gap: 20px;
 }
+.posts-container img {
+    width: 100%;
+    height: 20px;
+    border-radius: 5px;
+}
 
 .post {
   background-color: var(--light-color);
@@ -527,3 +532,41 @@ ul li {
     margin-bottom: 10px;
 }
 
+button {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 50px;
+
+  font-weight: 600;
+  background-color: white;
+
+  /* Button is inline-block element by default, it need to have block display for margin: 0 auto; to work */
+  margin: 0 auto;
+  display: inline;
+
+  /* Button is a clickable element, therefore it should have a pointer cursor */
+  cursor: pointer;
+}
+
+/* Unliked button */
+.like-button {
+  background-image: url('like.svg');
+}
+/* Liked button */
+.like-button.liked {
+  background-image: url('liked.svg');
+}
+
+.like-button, .share-button, .comment-button {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* invert button colors in dark mode */
+.dark-mode .like-button img, .dark-mode .share-button img, .dark-mode .comment-button img{
+  filter: invert(1);
+}
+
+.like-button, .share-button {
+  margin-right: 5px;
+}

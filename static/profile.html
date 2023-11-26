@@ -67,10 +67,21 @@
             <h2 id="author1">Loading...</h2>
             <button id="editButton1" href="#">Edit</button>
             <p id="content1">Loading...</p>
-            <p id="likes1">Loading...</p>
-            <p id="shares1">Loading...</p>
+            <div class="buttons">
+              <button class="like-button" id="likeButton1">
+                <img src="like.svg" alt="Like">
+                <span id="likes1">Loading...</span>
+              </button>
+              <button class="comment-button" id="addCommentButton1">
+                <img src="comment.svg" alt="Comment">
+              </button>
+              <button class="share-button" id="shareButton1">
+                <img src="share.svg" alt="Share">
+                <span id="shares1">Loading...</span>
+              </button>
+            </div>
               <div class="comments">
-                <h3>Comments <a href="#" id="addCommentButton1"><b>[+]</b></a></h3>
+                <h3>Comments <a href="#" id="addCommentButton1"></a></h3>
                 <ul id="post1comments">
                       <!-- <li><%= comment %></li> -->
                 </ul>
@@ -81,10 +92,21 @@
             <h2 id="author2">Loading...</h2>
             <button id="editButton2" href="#">Edit</button>
             <p id="content2">Loading...</p>
-            <p id="likes2">Loading...</p>
-            <p id="shares2">Loading...</p>
+            <div class="buttons">
+              <button class="like-button" id="likeButton2">
+                <img src="like.svg" alt="Like">
+                <span id="likes2">Loading...</span>
+              </button>
+              <button class="comment-button" id="addCommentButton2">
+                <img src="comment.svg" alt="Comment">
+              </button>
+              <button class="share-button" id="shareButton2">
+                <img src="share.svg" alt="Share">
+                <span id="shares2">Loading...</span>
+              </button>
+            </div>
               <div class="comments">
-                <h3>Comments <a href="#" id="addCommentButton2"><b>[+]</b></a></h3>
+                <h3>Comments <a href="#" id="addCommentButton2"></a></h3>
                 <ul id="post2comments">
                       <!-- <li><%= comment %></li> -->
                 </ul>
@@ -95,10 +117,21 @@
             <h2 id="author3">Loading...</h2>
             <button id="editButton3" href="#">Edit</button>
             <p id="content3">Loading...</p>
-            <p id="likes3">Loading...</p>
-            <p id="shares3">Loading...</p>
+            <div class="buttons">
+              <button class="like-button" id="likeButton3">
+                <img src="like.svg" alt="Like">
+                <span id="likes3">Loading...</span>
+              </button>
+              <button class="comment-button" id="addCommentButton3">
+                <img src="comment.svg" alt="Comment">
+              </button>
+              <button class="share-button" id="shareButton3">
+                <img src="share.svg" alt="Share">
+                <span id="shares3">Loading...</span>
+              </button>
+            </div>
               <div class="comments">
-                <h3>Comments <a href="#" id="addCommentButton3"><b>[+]</b></a></h3>
+                <h3>Comments <a href="#" id="addCommentButton3"></a></h3>
                 <ul id="post3comments">
                       <!-- <li><%= comment %></li> -->
                 </ul>
@@ -109,10 +142,21 @@
             <h2 id="author4">Loading...</h2>
             <button id="editButton4" href="#">Edit</button>
             <p id="content4">Loading...</p>
-            <p id="likes4">Loading...</p>
-            <p id="shares4">Loading...</p>
+            <div class="buttons">
+              <button class="like-button" id="likeButton4">
+                <img src="like.svg" alt="Like">
+                <span id="likes4">Loading...</span>
+              </button>
+              <button class="comment-button" id="addCommentButton4">
+                <img src="comment.svg" alt="Comment">
+              </button>
+              <button class="share-button" id="shareButton4">
+                <img src="share.svg" alt="Share">
+                <span id="shares4">Loading...</span>
+              </button>
+            </div>
               <div class="comments">
-                <h3>Comments <a href="#" id="addCommentButton4"><b>[+]</b></a></h3>
+                <h3>Comments <a href="#" id="addCommentButton4"></a></h3>
                 <ul id="post4comments">
                       <!-- <li><%= comment %></li> -->
                 </ul>
@@ -123,10 +167,21 @@
             <h2 id="author5">Loading...</h2>
             <button id="editButton5" href="#">Edit</button>
             <p id="content5">Loading...</p>
-            <p id="likes5">Loading...</p>
-            <p id="shares5">Loading...</p>
+            <div class="buttons">
+              <button class="like-button" id="likeButton5">
+                <img src="like.svg" alt="Like">
+                <span id="likes5">Loading...</span>
+              </button>
+              <button class="comment-button" id="addCommentButton5">
+                <img src="comment.svg" alt="Comment">
+              </button>
+              <button class="share-button" id="shareButton5">
+                <img src="share.svg" alt="Share">
+                <span id="shares5">Loading...</span>
+              </button>
+            </div>
               <div class="comments">
-                <h3>Comments <a href="#" id="addCommentButton5"><b>[+]</b></a></h3>
+                <h3>Comments <a href="#" id="addCommentButton5"></a></h3>
                 <ul id="post5comments">
                       <!-- <li><%= comment %></li> -->
                 </ul>
@@ -256,11 +311,11 @@
       let content4 = document.getElementById("content4");
       let content5 = document.getElementById("content5");
 
-      let likes1 = document.getElementById("likes1");
-      let likes2 = document.getElementById("likes2");
-      let likes3 = document.getElementById("likes3");
-      let likes4 = document.getElementById("likes4");
-      let likes5 = document.getElementById("likes5");
+      // let likes1 = document.getElementById("likes1");
+      // let likes2 = document.getElementById("likes2");
+      // let likes3 = document.getElementById("likes3");
+      // let likes4 = document.getElementById("likes4");
+      // let likes5 = document.getElementById("likes5");
 
       let friendRequestButton = document.getElementById("friendRequestButton");
       friendRequestButton.addEventListener("click", (evt)=>{
@@ -280,21 +335,85 @@
 
       logoutButton.style.display = "none"; // by default also
 
-      likes1.addEventListener("click", (evt)=>{
+      // likes1.addEventListener("click", (evt)=>{
+      //   socket.emit("like request", currentPosts[0]);
+      // });
+      // likes2.addEventListener("click", (evt)=>{
+      //   socket.emit("like request", currentPosts[1]);
+      // });
+      // likes3.addEventListener("click", (evt)=>{
+      //   socket.emit("like request", currentPosts[2]);
+      // });
+      // likes4.addEventListener("click", (evt)=>{
+      //   socket.emit("like request", currentPosts[3]);
+      // });
+      // likes5.addEventListener("click", (evt)=>{
+      //   socket.emit("like request", currentPosts[4]);
+      // });
+      let likeButton1 = document.getElementById("likeButton1");
+      let likeButton2 = document.getElementById("likeButton2");
+      let likeButton3 = document.getElementById("likeButton3");
+      let likeButton4 = document.getElementById("likeButton4");
+      let likeButton5 = document.getElementById("likeButton5");
+
+      likeButton1.addEventListener("click", (evt)=>{
         socket.emit("like request", currentPosts[0]);
+        let likeIcon = likes1.querySelector('.like-button');
+        likeIcon.classList.toggle('liked');
       });
-      likes2.addEventListener("click", (evt)=>{
+      likeButton2.addEventListener("click", (evt)=>{
         socket.emit("like request", currentPosts[1]);
+        let likeIcon = likes2.querySelector('.like-button');
+        likeIcon.classList.toggle('liked');
       });
-      likes3.addEventListener("click", (evt)=>{
+      likeButton3.addEventListener("click", (evt)=>{
         socket.emit("like request", currentPosts[2]);
+        let likeIcon = likes3.querySelector('.like-button');
+        likeIcon.classList.toggle('liked');
       });
-      likes4.addEventListener("click", (evt)=>{
+      likeButton4.addEventListener("click", (evt)=>{
         socket.emit("like request", currentPosts[3]);
+        let likeIcon = likes4.querySelector('.like-button');
+        likeIcon.classList.toggle('liked');
       });
-      likes5.addEventListener("click", (evt)=>{
+      likeButton5.addEventListener("click", (evt)=>{
         socket.emit("like request", currentPosts[4]);
+        let likeIcon = likes5.querySelector('.like-button');
+        likeIcon.classList.toggle('liked');
       });
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+      // Retrieve the liked posts from localStorage
+      let likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
+
+      // Get all the like buttons
+      let likeButtons = document.querySelectorAll('.like-button');
+
+      // For each like button...
+      likeButtons.forEach((button, i) => {
+        // If the user has liked this post...
+        if (likedPosts.includes(i)) {
+          // Change the src of the img element to liked.svg
+          let img = button.querySelector('img');
+          img.src = 'liked.svg';
+        }
+
+        // When the button is clicked...
+        button.addEventListener('click', () => {
+          // Toggle the liked state
+          if (likedPosts.includes(i)) {
+            likedPosts = likedPosts.filter(index => index !== i);
+            button.querySelector('img').src = 'like.svg';
+          } else {
+            likedPosts.push(i);
+            button.querySelector('img').src = 'liked.svg';
+          }
+
+          // Store the updated liked posts in localStorage
+          localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+        });
+      });
+  });
 
       let shares1 = document.getElementById("shares1");
       let shares2 = document.getElementById("shares2");
@@ -585,31 +704,31 @@
       let editButton4 = document.getElementById("editButton4");
       let editButton5 = document.getElementById("editButton5");
       editButton1.addEventListener("click", (evt)=>{
-        editPostMenu.style.display = "block";
+        editPostMenu.style.display = "inline";
         popupBackground.style.display = "block";
         // document.getElementById("editedPostContent").value = content1.innerText;
         workingPost = 0;
       });
       editButton2.addEventListener("click", (evt)=>{
-        editPostMenu.style.display = "block";
+        editPostMenu.style.display = "inline";
         popupBackground.style.display = "block";
         // document.getElementById("editedPostContent").value = content2.innerText;
         workingPost = 1;
       });
       editButton3.addEventListener("click", (evt)=>{
-        editPostMenu.style.display = "block";
+        editPostMenu.style.display = "inline";
         popupBackground.style.display = "block";
         // document.getElementById("editedPostContent").value = content3.innerText;
         workingPost = 2;
       });
       editButton4.addEventListener("click", (evt)=>{
-        editPostMenu.style.display = "block";
+        editPostMenu.style.display = "inline";
         popupBackground.style.display = "block";
         // document.getElementById("editedPostContent").value = content4.innerText;
         workingPost = 3;
       });
       editButton5.addEventListener("click", (evt)=>{
-        editPostMenu.style.display = "block";
+        editPostMenu.style.display = "inline";
         popupBackground.style.display = "block";
         // document.getElementById("editedPostContent").value = content5.innerText;
         workingPost = 4;
@@ -676,12 +795,12 @@
         username.innerText = dta[0][1];
         if(dta[0][2] == -1){
           friendRequestButton.style.display = "none";
-          logoutButton.style.display = "block";
-          editButton1.style.display = "block";
-          editButton2.style.display = "block";
-          editButton3.style.display = "block";
-          editButton4.style.display = "block";
-          editButton5.style.display = "block";
+          logoutButton.style.display = "inline";
+          editButton1.style.display = "inline";
+          editButton2.style.display = "inline";
+          editButton3.style.display = "inline";
+          editButton4.style.display = "inline";
+          editButton5.style.display = "inline";
         }
         else if(dta[0][2] == 0){
           friendRequestButton.style.display = "block";
@@ -708,8 +827,8 @@
             post1.style.display = "block";
             author1.innerText = dta[1][i][1];
             content1.innerText = dta[1][i][2];
-            likes1.innerText = "Likes: " + dta[1][i][3].length;
-            shares1.innerText = "Shares: " + dta[1][i][4];
+            likes1.innerText = dta[1][i][3].length;
+            shares1.innerText = dta[1][i][4];
             for(let j = 0; j < dta[1][i+1].length; j++){
               // append comments to the div
               let li = document.createElement("li");
@@ -723,8 +842,8 @@
             post2.style.display = "block";
             author2.innerText = dta[1][i][1];
             content2.innerText = dta[1][i][2];
-            likes2.innerText = "Likes: " + dta[1][i][3].length;
-            shares2.innerText = "Shares: " + dta[1][i][4];
+            likes2.innerText = dta[1][i][3].length;
+            shares2.innerText = dta[1][i][4];
             for(let j = 0; j < dta[1][i+1].length; j++){
               // append comments to the div
               let li = document.createElement("li");
@@ -737,8 +856,8 @@
             post3.style.display = "block";
             author3.innerText = dta[1][i][1];
             content3.innerText = dta[1][i][2];
-            likes3.innerText = "Likes: " + dta[1][i][3].length;
-            shares3.innerText = "Shares: " + dta[1][i][4];
+            likes3.innerText = dta[1][i][3].length;
+            shares3.innerText = dta[1][i][4];
             for(let j = 0; j < dta[1][i+1].length; j++){
               // append comments to the div
               let li = document.createElement("li");
@@ -751,8 +870,8 @@
             post4.style.display = "block";
             author4.innerText = dta[1][i][1];
             content4.innerText = dta[1][i][2];
-            likes4.innerText = "Likes: " + dta[1][i][3].length;
-            shares4.innerText = "Shares: " + dta[1][i][4];
+            likes4.innerText = dta[1][i][3].length;
+            shares4.innerText = dta[1][i][4];
             for(let j = 0; j < dta[1][i+1].length; j++){
               // append comments to the div
               let li = document.createElement("li");
@@ -765,8 +884,8 @@
             post5.style.display = "block";
             author5.innerText = dta[1][i][1];
             content5.innerText = dta[1][i][2];
-            likes5.innerText = "Likes: " + dta[1][i][3].length;
-            shares5.innerText = "Shares: " + dta[1][i][4];
+            likes5.innerText = dta[1][i][3].length;
+            shares5.innerText = dta[1][i][4];
             for(let j = 0; j < dta[1][i+1].length; j++){
               // append comments to the div
               let li = document.createElement("li");
@@ -782,23 +901,23 @@
         if(data[0] == "true"){
           if(data[1] == currentPosts[0]){
             currentLikeCounts[0]++;
-            likes1.innerText = "Likes: " + currentLikeCounts[0];
+            likes1.innerText = currentLikeCounts[0];
           }
           else if(data[1] == currentPosts[1]){
             currentLikeCounts[1]++;
-            likes2.innerText = "Likes: " + currentLikeCounts[1];
+            likes2.innerText = currentLikeCounts[1];
           }
           else if(data[1] == currentPosts[2]){
             currentLikeCounts[2]++;
-            likes3.innerText = "Likes: " + currentLikeCounts[2];
+            likes3.innerText = currentLikeCounts[2];
           }
           else if(data[1] == currentPosts[3]){
             currentLikeCounts[3]++;
-            likes4.innerText = "Likes: " + currentLikeCounts[3];
+            likes4.innerText = currentLikeCounts[3];
           }
           else if(data[1] == currentPosts[4]){
             currentLikeCounts[4]++;
-            likes5.innerText = "Likes: " + currentLikeCounts[4];
+            likes5.innerText = currentLikeCounts[4];
           }
           else{
             console.log("failed to like post");
@@ -817,23 +936,23 @@
           workingPost = -1;
           if(data[1] == currentPosts[0]){
             currentShareCounts[0]++;
-            shares1.innerText = "Shares: " + currentShareCounts[0];
+            shares1.innerText = currentShareCounts[0];
           }
           else if(data[1] == currentPosts[1]){
             currentShareCounts[1]++;
-            shares2.innerText = "Shares: " + currentShareCounts[1];
+            shares2.innerText = currentShareCounts[1];
           }
           else if(data[1] == currentPosts[2]){
             currentShareCounts[2]++;
-            shares3.innerText = "Shares: " + currentShareCounts[2];
+            shares3.innerText = currentShareCounts[2];
           }
           else if(data[1] == currentPosts[3]){
             currentShareCounts[3]++;
-            shares4.innerText = "Shares: " + currentShareCounts[3];
+            shares4.innerText = currentShareCounts[3];
           }
           else if(data[1] == currentPosts[4]){
             currentShareCounts[4]++;
-            shares5.innerText = "Shares: " + currentShareCounts[4];
+            shares5.innerText = currentShareCounts[4];
           }
           else{
             console.log("failed to share post");
