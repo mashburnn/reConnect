@@ -3,6 +3,7 @@ html, body {
   margin: 0;
   height: 100%;
   transition: background-color 0.5s ease, color 0.5s ease;
+  padding: 0;
 }
 :root, body{
   --light-color: #fff;
@@ -13,6 +14,10 @@ html, body {
   --text-background-color: #f2f2f2;
   --background-color: #1d59fe;
   background: var(--light-color);
+}
+
+#container{
+  min-height:100%;
 }
 
 body.dark-theme {
@@ -211,6 +216,12 @@ body.dark-theme .left img {
 
 .wrapper {
   display: flex;
+  height: 150%;
+}
+
+.wrapper.dark-theme {
+  background-color: #161625;
+  display: flex;
   height: 100%;
 }
 
@@ -236,6 +247,7 @@ body.dark-theme .left img {
 
 .wrapper {
   display: flex;
+  /* background-color: var(--background-color); */
 }
 
 .left-sidebar, .right-sidebar {
@@ -318,7 +330,7 @@ body.dark-theme .left img {
 
 .close {
   position: absolute;
-  top: 25px;
+  top: 60px;
   right: 20px;
 }
 .posts-container {

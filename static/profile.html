@@ -36,7 +36,6 @@
           <img src="add.svg" alt="add">
         </button>
         <!--notification button-->
-        <!--TODO: Add notification dropdown-->
           <div class="notification">
             <button id="notification-button" class="icon-button">
               <img src="bell.svg" alt="bell">
@@ -195,7 +194,7 @@
           <!-- Notifications -->
           <div id="notificationsMenu">
             <div class="popup-header">
-              <a><h2>Notifications</h2></a>
+              <a><h2 style="color: black;">Notifications</h2></a>
               <a class="close" style="align-items: right;" id="notifCloseButton">X</a>
             </div>
             <div class="popup-body">
@@ -210,21 +209,25 @@
           </div>
 
           <!-- Create Post -->
-          <div id="createPostMenu">
+          <div id="createPostMenu" style="padding-left: 15px;padding-top: 3px;">
             <div class="popup-header">
-              <h2>Create a Post</h2>
+              <h2 style="color: black;">Create Post</h2>
               <a class="close" style="align-items: right;" id="createPostCloseButton">X</a>
             </div>
             <div class="popup-body">
-              <textarea id="newPostContent" name="newPostContent" placeholder="Content" cols="40"></textarea>
+              <textarea id="newPostContent" name="newPostContent" placeholder="Content" cols="40" style="
+                    height: 70px;
+                    margin-bottom: 9px;
+                "
+              ></textarea>
               <button id="createPostSubmitButton">Create Post</button>
             </div> 
           </div>
 
           <!-- Create Comment -->
-          <div id="createCommentMenu">
+          <div id="createCommentMenu" style="padding-left: 15px;padding-top: 3px;">
             <div class="popup-header">
-              <h2>Add a Comment</h2>
+              <h2 style="color: black;">Add a Comment</h2>
               <a class="close" style="align-items: right;" id="createCommentCloseButton">X</a>
             </div>
             <div class="popup-body">
@@ -235,9 +238,9 @@
           </div>
 
           <!-- Share Post -->
-          <div id="sharePostMenu">
+          <div id="sharePostMenu" style="padding-left: 15px;padding-top: 3px;">
             <div class="popup-header">
-              <h2>Share a Post</h2>
+              <h2 style="color: black;">Share a Post</h2>
               <a class="close" style="align-items: right;" id="sharePostCloseButton">X</a>
             </div>
             <div class="popup-body" id="sharePostMenu">
@@ -252,9 +255,9 @@
           </div>
 
           <!-- Edit Post -->
-          <div id="editPostMenu">
+          <div id="editPostMenu" style="padding-left: 15px;padding-top: 3px;">
             <div class="popup-header">
-              <h2>Edit a Post</h2>
+              <h2 style="color: black;">Edit a Post</h2>
               <a class="close" style="align-items: right;" id="editPostCloseButton">X</a>
             </div>
             <div class="popup-body">
@@ -421,35 +424,41 @@
       let shares4 = document.getElementById("shares4");
       let shares5 = document.getElementById("shares5");
 
-      shares1.addEventListener("click", (evt)=>{
+      let shareButton1 = document.getElementById("shareButton1");
+      let shareButton2 = document.getElementById("shareButton2");
+      let shareButton3 = document.getElementById("shareButton3");
+      let shareButton4 = document.getElementById("shareButton4");
+      let shareButton5 = document.getElementById("shareButton5");
+
+      shareButton1.addEventListener("click", (evt)=>{
         sharePostMenu.style.display = "block";
         popupBackground.style.display = "block";
         workingPost = 0;
         socket.emit("search request", "friends");
         socket.emit("need to share");
       });
-      shares2.addEventListener("click", (evt)=>{
+      shareButton2.addEventListener("click", (evt)=>{
         sharePostMenu.style.display = "block";
         popupBackground.style.display = "block";
         workingPost = 1;
         socket.emit("search request", "friends");
         socket.emit("need to share");
       });
-      shares3.addEventListener("click", (evt)=>{
+      shareButton3.addEventListener("click", (evt)=>{
         sharePostMenu.style.display = "block";
         popupBackground.style.display = "block";
         workingPost = 2;
         socket.emit("search request", "friends");
         socket.emit("need to share");
       });
-      shares4.addEventListener("click", (evt)=>{
+      shareButton4.addEventListener("click", (evt)=>{
         sharePostMenu.style.display = "block";
         popupBackground.style.display = "block";
         workingPost = 3;
         socket.emit("search request", "friends");
         socket.emit("need to share");
       });
-      shares5.addEventListener("click", (evt)=>{
+      shareButton5.addEventListener("click", (evt)=>{
         sharePostMenu.style.display = "block";
         popupBackground.style.display = "block";
         workingPost = 4;
