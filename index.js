@@ -178,16 +178,16 @@ function sharePost(postID){
 
 // create a post
 function createNewPost(posterID, content) {
-  let newID = -1;
-    while(true){
-    newID = Math.floor(Math.random() * (100)) + 1;
-    for(let i = 0; i < Posts.length; i++){
-      if(Posts[i].ID == newID){
-        break;
+    let newID = -1;
+    while(newID == -1) { // changed condition + removed an extra break
+      newID = Math.floor(Math.random() * (100)) + 1;
+      for (let i = 0; i < Posts.length; i++) {
+        if(Posts[i].ID == newID) {
+          newID = -1;
+          break;
+        }
       }
     }
-    break;
-  }
   
   setTimeout(()=>{
     let newPost = new PostCard(newID, posterID, "deprecated", content, [], 0, []);
