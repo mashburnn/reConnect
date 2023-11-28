@@ -44,12 +44,22 @@ body.dark-theme {
 }
 
 .left img {
-  filter: invert(100%);
+  filter: invert(100%) contrast(200%);
   width: 40px;
   height: auto;
   margin-right: 10px;
-  transition: transform 0.4s, width 0.4s;
+  transition: transform 0.1s, width 0.1s;
 }
+
+body:not(.dark-theme) .left img:hover {
+  filter: invert(100%) saturate(10000%);
+}
+
+body.dark-theme .left img {
+  filter: invert(100%) contrast(200%) saturate(10000%);
+}
+
+
 
 .left, .right {
   display: flex;

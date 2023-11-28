@@ -385,7 +385,7 @@
         likeIcon.classList.toggle('liked');
       });
 
-    document.addEventListener('DOMContentLoaded', (event) => {
+      document.addEventListener('DOMContentLoaded', (event) => {
       // Retrieve the liked posts from localStorage
       let likedPosts = JSON.parse(localStorage.getItem('likedPosts')) || [];
 
@@ -399,24 +399,26 @@
           // Change the src of the img element to liked.svg
           let img = button.querySelector('img');
           img.src = 'liked.svg';
+          // Disable the button
+          button.disabled = true;
         }
 
         // When the button is clicked...
         button.addEventListener('click', () => {
-          // Toggle the liked state
+          // If the post has already been liked, do nothing
           if (likedPosts.includes(i)) {
-            likedPosts = likedPosts.filter(index => index !== i);
-            button.querySelector('img').src = 'like.svg';
-          } else {
-            likedPosts.push(i);
-            button.querySelector('img').src = 'liked.svg';
+            return;
           }
+
+          // Toggle the liked state
+          likedPosts.push(i);
+          button.querySelector('img').src = 'liked.svg';
 
           // Store the updated liked posts in localStorage
           localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
         });
       });
-  });
+    });
 
       let shares1 = document.getElementById("shares1");
       let shares2 = document.getElementById("shares2");

@@ -216,11 +216,11 @@ body.dark-theme .left img {
 
 .wrapper {
   display: flex;
-  height: 150%;
+  height: 100%;
 }
 
-.wrapper.dark-theme {
-  background-color: #161625;
+.dark-theme .wrapper{
+  background: var(--background-color);
   display: flex;
   height: 100%;
 }
