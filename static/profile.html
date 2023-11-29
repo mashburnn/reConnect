@@ -398,9 +398,9 @@
         if (likedPosts.includes(i)) {
           // Change the src of the img element to liked.svg
           let img = button.querySelector('img');
-          img.src = 'liked.svg';
+          // img.src = 'liked.svg';
           // Disable the button
-          button.disabled = true;
+          // button.disabled = true;
         }
 
         // When the button is clicked...
@@ -412,7 +412,7 @@
 
           // Toggle the liked state
           likedPosts.push(i);
-          button.querySelector('img').src = 'liked.svg';
+          // button.querySelector('img').src = 'liked.svg';
 
           // Store the updated liked posts in localStorage
           localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
