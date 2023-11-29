@@ -145,6 +145,10 @@ function likePost(postID, userID){
 
     let currLikes = Posts[loc].likes;
     currLikes.push(userID);
+
+    // Toggle the liked class on the like button
+    //$('#like-' + postID).toggleClass('liked');
+
     setTimeout(()=>{
         Posts[loc].likes = currLikes;
     }, 15);
@@ -976,6 +980,10 @@ io.on('connection', (socket)=>{
             Posts[index].content = data[1];
             socket.emit("edit post result", "true");
         }, 50);
+    });
+
+    socket.on("need current user", (data)=>{
+        socket.emit(currentUser);
     });
 
     socket.on('log out', (data)=>{

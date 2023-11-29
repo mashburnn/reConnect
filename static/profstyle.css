@@ -1,15 +1,28 @@
-body {
+html, body {
   font-family: 'Raleway', sans-serif;
   margin: 0;
   height: 100%;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
-:root {
+:root, body {
+  --light-color: #fff;
+  --dark-color: #001;
+  --border-shadow-color: #ddd;
   --primary-color: #83faec;
   --secondary-color: #5e9eff;
   --text-background-color: #f2f2f2;
-  --background-color: #161e34;
+  --background-color: #1d59fe;
 }
 
+body.dark-theme {
+  --light-color: #001;
+  --dark-color: #fff;
+  --border-shadow-color: #222;
+  --primary-color: #2d2d2d;
+  --secondary-color: #141414;
+  --background-color: #161625;
+  background: var(--background-color);
+}
 .navbar {
   overflow: hidden;
   background-color: var(--background-color);
@@ -20,7 +33,6 @@ body {
   align-items: center;
   padding: 15px;
   z-index: 9999;
-  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
 }
 
 .brand, .right img:not(.notification) {
@@ -31,11 +43,19 @@ body {
 }
 
 .left img {
-  filter: invert(100%);
+  filter: invert(100%) contrast(200%);
   width: 40px;
   height: auto;
   margin-right: 10px;
-  transition: transform 0.4s, width 0.4s;
+  transition: transform 0.1s, width 0.1s;
+}
+
+body:not(.dark-theme) .left img:hover {
+  filter: invert(100%) saturate(10000%);
+}
+
+body.dark-theme .left img {
+  filter: invert(100%) contrast(200%) saturate(10000%);
 }
 
 .left, .right {
@@ -202,6 +222,7 @@ body {
 }
 .userinfo {
   border: 7px solid var(--secondary-color);
+  background: var(--primary-color);
   margin: 10px;
   padding: 10px;
   border-radius: 10px;
@@ -214,12 +235,6 @@ html, body {
   margin: 0;
   height: 100%;
 }
-:root {
-  --primary-color: #3b1cc3;
-  --secondary-color: #071325;
-  --text-background-color: #f2f2f2;
-  --background-color: #507fff;
-}
 
 .navbar {
   overflow: hidden;
@@ -231,9 +246,7 @@ html, body {
   align-items: center;
   padding: 15px;
   z-index: 9999;
-  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
 }
-
 .brand, .right img:not(.notification) {
   color: var(--text-background-color);
   text-decoration: none;
@@ -476,16 +489,92 @@ html, body {
   border-radius: 5px;
 }
 
-.flex-container { 
-  display: flex; 
-  /* height:400px;  */
-  flex-flow: column wrap; 
-  /* background-color: green;  */
-  align-content: flex-end; 
-} 
+.posts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+.posts-container img {
+    width: 100%;
+    height: 20px;
+    border-radius: 5px;
+}
 
-.close {
-  position: absolute;
-  top: 25px;
-  right: 20px;
+.post {
+  background-color: var(--light-color);
+  border: 1px solid black;
+  border-radius: 8px;
+  width: 300px;
+  padding: 15px;
+  box-shadow: 0 0 10px var(--dark-color);
+}
+
+h2 {
+  color: var(--dark-color);
+  text-decoration: underline;
+  font-style: bold;
+}
+
+p {
+  color: var(--dark-color);
+}
+
+.likes, .shares, .comments {
+    display: inline-block;
+    margin-right: 20px;
+    color: #777;
+}
+
+.comments a {
+    text-decoration: none;
+    color: #3498db;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+button {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 50px;
+
+  font-weight: 600;
+  background-color: white;
+
+  /* Button is inline-block element by default, it need to have block display for margin: 0 auto; to work */
+  margin: 0 auto;
+  display: inline;
+
+  /* Button is a clickable element, therefore it should have a pointer cursor */
+  cursor: pointer;
+}
+
+/* Unliked button */
+.like-button {
+  background-image: url('like.svg');
+}
+/* Liked button */
+.like-button.liked {
+  background-image: url('liked.svg');
+}
+
+.like-button, .share-button, .comment-button {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* invert button colors in dark mode */
+.dark-mode .like-button img, .dark-mode .share-button img, .dark-mode .comment-button img{
+  filter: invert(1);
+}
+
+.like-button, .share-button {
+  margin-right: 5px;
 }
