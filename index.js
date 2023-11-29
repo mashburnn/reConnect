@@ -982,6 +982,10 @@ io.on('connection', (socket)=>{
         }, 50);
     });
 
+    socket.on("need current user", (data)=>{
+        socket.emit(currentUser);
+    });
+
     socket.on('log out', (data)=>{
         currentUser = -1;
         loggedIn = false;
