@@ -75,9 +75,22 @@ class PostCard {
   addComment(comment) {
     if (typeof comment === 'string') {
       this.comments.push(comment);
+      return this.comments;
     } else {
       throw new Error('Comment must be a string');
     }
+  }
+
+// added by Jade -- for testing purposes because jest doesn't like this variant of setters/getters
+
+  testAddLike(userID) {
+    this.likes.push(userID);
+    return this.likes;
+  }
+
+  testAddShare() {
+    this.shares++;
+    return this.shares;
   }
 
   // Function to render comments if present
